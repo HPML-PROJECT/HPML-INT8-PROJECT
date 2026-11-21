@@ -2,7 +2,7 @@
 
 Why is fused RMSNorm + INT8 quantization slow?
 
-This repo holds the workstreams for that question. Each workstream lives in its own directory. Source, job scripts, and generated results stay in separate folders.
+Each workstream lives in its own directory. Source stays separate from generated results.
 
 ## Layout
 
@@ -10,25 +10,39 @@ This repo holds the workstreams for that question. Each workstream lives in its 
 .
 ├── README.md
 ├── .gitignore
-└── ws2/                          Workstream 2: Nsight profiling toolkit
-    ├── README.md                 how to run the sweep and read the tables
-    ├── run_all.sh                end-to-end driver
-    ├── slurm/job.sbatch          Slurm wrapper
-    ├── scripts/                  counter check, nsys, ncu sweep
-    ├── harness/profile_target.py V0/V1 calls (profile, verify, bench)
-    ├── analysis/                 parse reports and write the bottleneck note
-    ├── reports/                  ncu/ and nsys/ outputs (gitignored)
-    ├── tables/                   generated comparison tables (gitignored)
-    └── logs/                     per-step logs (gitignored)
+├── gpu profling - bottleneck/   Nsight profiling of the fused and unfused kernels
+└── vllm-evaluation/             end-to-end vLLM benchmark and integration notes
+    ├── README.md
+    ├── INTEGRATION_PROPOSAL.md
+    ├── run_all.sh
+    ├── setup_env.sh
+    ├── requirements.txt
+    ├── vllm_eval/               bench, profile, reporting, integration
+    ├── results/                 generated measurements (gitignored)
+    └── logs/                    per-step logs (gitignored)
 ```
 
-## Workstream 2
+## Profiling
 
-Compare the unfused path (V0: `fused_add_rms_norm` then `scaled_int8_quant`) with the fused path (V1: `rms_norm_dynamic_per_token_quant`) using Nsight Systems and Nsight Compute.
+Compare the unfused path (V0) with the fused vLLM kernel (V1) using Nsight Systems and Nsight Compute.
 
-Setup, the sweep, and how to read the tables are in [ws2/README.md](ws2/README.md). From a GPU node:
+Guide: [gpu profling - bottleneck/README.md](<gpu profling - bottleneck/README.md>).
 
 ```bash
-cd ws2
+cd "gpu profling - bottleneck"
 ./run_all.sh
+```
+
+## vLLM evaluation
+
+Measure how much of Qwen3-1.7B inference on an NVIDIA L4 is RMSNorm and activation quantization, bound the end-to-end gain with Amdahl's law, and map where a fused kernel would plug into vLLM.
+
+Guide: [vllm-evaluation/README.md](vllm-evaluation/README.md).
+
+```bash
+cd vllm-evaluation
+VLLM_VERSION=<team-pinned-version> ./setup_env.sh
+source .venv/bin/activate
+python -m vllm_eval.reporting.selftest
+QUICK=1 ./run_all.sh
 ```

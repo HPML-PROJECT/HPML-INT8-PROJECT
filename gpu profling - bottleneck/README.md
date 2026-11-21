@@ -77,7 +77,7 @@ module load cuda                      # whatever provides ncu / nsys
 source ~/venvs/vllm/bin/activate      # your pinned vLLM env
 
 # 3. Go to the toolkit folder and make scripts executable
-cd ws2
+cd "gpu profling - bottleneck"
 chmod +x run_all.sh scripts/*.sh slurm/job.sbatch harness/*.py analysis/*.py
 
 # 4. Confirm the environment
@@ -176,7 +176,7 @@ Writes `tables/bottleneck_analysis.md`: for each GPU, hidden size, cache mode an
 ## 7. Output layout and naming
 
 ```
-ws2/
+gpu profling - bottleneck/
 ├── run_all.sh                 driver
 ├── slurm/job.sbatch
 ├── scripts/                   ncu/nsys sweeps and the counter check
