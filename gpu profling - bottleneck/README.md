@@ -10,6 +10,34 @@ Workstream 2 of the HPML project *"Why Is Fused RMSNorm + INT8 Quantization Slow
 
 ---
 
+## 0. Alignment with Part 1 (WS1 baseline) — read first
+
+This toolkit is set up to measure **exactly what Part 1 benchmarked** (`rmsnorm_int8_bench`, results
+`results_l4_20261121_213823`), so its numbers explain Part 1's results instead of a different workload.
+
+| Setting | Part 1 | This toolkit |
+|---|---|---|
+| Inputs | CPU generator, per-shape seed, seed 1234; x ~ N(0,1), w = 1 + 0.1·N(0,1), residual ~ N(0,1) | **Identical** (same code); `verify` checks bit-identity against Part 1's script if it is in `$PART1_DIR` |
+| dtype / eps / residual | BF16 (main), eps 1e-6, residual add on | Same defaults |
+| Kernels | `torch.ops._C` fused_add_rms_norm + dynamic_scaled_int8_quant (V0); rms_norm_dynamic_per_token_quant (V1) | Same kernels via `vllm._custom_ops` |
+| Reference / tolerances | FP32 with vLLM's rounding points; ≤3 INT8 steps on ≤15%, scales 1.6%, dequant ≤2.5 steps | Same; `verify` **fails the run** if they are not met |
+| GPU / clocks | NVIDIA L4, SM clock locked at 2040 MHz | `run_l4_vm.sh` locks 2040 MHz and runs ncu with `--clock-control none` |
+| Token counts | 1–16384; V1 slower at 128–4096 (warm), faster at ≥ 8192 | Default `8 256 1024 4096 16384`: both sides of the switch |
+| Cold cache | 8×L2 buffer written before each call | ncu `--cache-control all` (flush before each replay) — same intent |
+| Warm cache | back-to-back calls in a CUDA graph | ncu `--cache-control none`; **not identical**: ncu replays each kernel separately, so V0's quant kernel may lose L2 reuse. Check its L2 hit rate and `tables/part1_vs_ncu.md` |
+
+`analysis/compare_part1.py` writes `tables/part1_vs_ncu.md`: Part 1's V1/V0 ratio next to Nsight Compute's for every
+profiled shape, and flags shapes where they point different ways. Report those honestly.
+
+**On the L4 VM (same VM and environment as Part 1):**
+```bash
+cd ~/ws2
+QUICK=1 bash run_l4_vm.sh     # ~10 min setup test (H=2048, T=256 and 16384)
+bash run_l4_vm.sh             # full plan (~1 h); prints the results bundle path at the end
+```
+
+---
+
 ## Contents
 
 1. [What is being profiled](#1-what-is-being-profiled)
@@ -39,7 +67,7 @@ Both variants perform the same work on a `(T tokens x H hidden)` BF16 activation
 | **V0, unfused** | `fused_add_rms_norm(x, residual, w, eps)` then `scaled_int8_quant(x)` | 2 |
 | **V1, vLLM fused** | `rms_norm_dynamic_per_token_quant(x, w, eps, torch.int8, residual=residual)` | 1 |
 
-Shapes: hidden size **2048** (Qwen3-1.7B) and optionally **4096** (8B-class models). Token counts: **8, 1024, 4096** (small, medium, large). The `--no-residual` flag switches both variants to plain RMSNorm + quant.
+Shapes: hidden size **2048** (Qwen3-1.7B) and **4096** (8B-class models). Token counts: **8, 256, 1024, 4096, 16384** (decode, Part 1's slow zone, and the large size where V1 wins). The `--no-residual` flag switches both variants to plain RMSNorm + quant.
 
 Known issue being investigated (vLLM #60499): V1 beats V0 at decode sizes but is up to about 2x slower at prefill sizes on an RTX 4090. This toolkit measures why, on your GPUs.
 
@@ -91,7 +119,7 @@ The last command should list `fused_add_rms_norm`, `rms_norm`, `rms_norm_dynamic
 ## 5. Quick start
 
 ```bash
-# Full plan on the current GPU (hidden 2048 and 4096, tokens 8/1024/4096, cold + warm)
+# Full plan on the current GPU (hidden 2048 and 4096, tokens 8/256/1024/4096/16384, cold + warm)
 ./run_all.sh
 
 # or as a batch job
@@ -201,7 +229,7 @@ Environment variables (set on the command line before the script):
 | Variable | Default | Used by | Meaning |
 |---|---|---|---|
 | `HIDDENS` | `2048 4096` | `run_all.sh` | Hidden sizes to run |
-| `TOKENS` | `8 1024 4096` | all sweeps | Token counts |
+| `TOKENS` | `8 256 1024 4096 16384` | all sweeps | Token counts |
 | `VARIANTS` | `v0 v1` | sweeps | Variants to profile |
 | `CACHES` | `cold warm` | `run_ncu_sweep.sh` | Cache modes |
 | `ONLY` | all steps | `run_all.sh` | Steps to run: `counters verify bench nsys ncu parse analyze` |
@@ -209,8 +237,10 @@ Environment variables (set on the command line before the script):
 | `PY` | `python` | sweeps | Python executable |
 | `OUT` | `reports/ncu` or `reports/nsys` | sweeps | Output folder |
 | `EXTRA` | empty | `run_ncu_sweep.sh` | Extra harness flags, e.g. `EXTRA="--no-residual"` |
+| `CLOCK_CONTROL` | `base` (`none` in `run_l4_vm.sh`) | `run_ncu_sweep.sh` | ncu clock control |
+| `PART1_DIR` | `~/rmsnorm_int8_bench` | harness, `run_l4_vm.sh` | Part 1 folder (input check, venv, results CSV) |
 
-Harness flags (`profile_target.py`): `--variant {v0,v1}`, `--tokens`, `--hidden`, `--dtype {bf16,fp16}`, `--no-residual`, `--mode {profile,verify,bench}`, `--iters` (profiled calls, default 3), `--warmup` (default 5), `--seed`.
+Harness flags (`profile_target.py`): `--variant {v0,v1}`, `--tokens`, `--hidden`, `--dtype {bf16,fp16}`, `--no-residual`, `--mode {profile,verify,bench}`, `--iters` (profiled calls, default 3), `--warmup` (default 5), `--seed` (default 1234, as in Part 1).
 
 ## 9. Cold vs. warm cache
 
@@ -287,7 +317,7 @@ Copy `reports/` between machines if you ran on different nodes with separate fol
 | `parse_ncu.py`: `skip (name)` | A report does not follow the naming pattern. Use the sweep script's names. |
 | Tables have empty or `nan` columns | The metric was not collected. Check the raw report in the GUI and the metric list. |
 | `analyze_bottlenecks.py`: missing tables | Run `parse_ncu.py` first. |
-| Step skipped unexpectedly | A stamp exists for this GPU. Use `FORCE=1`, or delete `.stamps/`. |
+| Step skipped unexpectedly | A stamp exists for this GPU **and this exact configuration** (HIDDENS/TOKENS/VARIANTS/CACHES/CLOCK_CONTROL/EXTRA). Use `FORCE=1`, or delete `.stamps/`. |
 
 ## 14. Limitations and caveats
 
