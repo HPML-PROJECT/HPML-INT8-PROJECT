@@ -21,7 +21,7 @@ env/
 .ruff_cache/
 *.egg-info/
 
-# GPU profiling generated runs. Directories stay via .gitkeep.
+# WS2 generated runs. Directories stay via .gitkeep.
 gpu profling - bottleneck/logs/*
 !gpu profling - bottleneck/logs/.gitkeep
 gpu profling - bottleneck/.stamps/

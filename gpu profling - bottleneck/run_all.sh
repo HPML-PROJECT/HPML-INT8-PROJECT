@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# End-to-end driver for WS2. Run on a GPU node; repeat once per GPU type (A6000, L40S, H100 if available).
+# End-to-end driver for WS2. Run on the Google Cloud L4 VM (repeat on any other GPU type added later).
 # Every step logs to logs/, writes a stamp in .stamps/, and is skipped on re-run (FORCE=1 to redo).
 #   ./run_all.sh                         # full plan, hidden 2048 and 4096
 #   HIDDENS="2048" TOKENS="8 1024 4096" ./run_all.sh
@@ -25,7 +25,7 @@ step() {  # step <name> <command...>
     echo "[FAIL] $name - see logs/${name}_${GPU}.log"; exit 1; fi
 }
 
-# 1. Counter access (aborts the pipeline if blocked; use the L4 fallback then)
+# 1. Counter access (aborts the pipeline if blocked; then rerun with sudo -E env "PATH=$PATH" ./run_all.sh)
 step counters ./scripts/check_ncu_counters.sh
 
 # 2. Fairness gate: V0 and V1 must do identical work (scales, residual, dequant error, INT8 mismatch)
