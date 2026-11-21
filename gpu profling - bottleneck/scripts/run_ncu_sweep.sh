@@ -6,17 +6,20 @@
 #   cold -> ncu --cache-control all   (ncu default: flush caches before every replay pass)
 #   warm -> ncu --cache-control none  (no flush; data written/read by earlier passes may stay in L2)
 #
-# Usage: ./scripts/run_ncu_sweep.sh [HIDDEN]      env: TOKENS="8 1024 4096" VARIANTS="v0 v1" CACHES="cold warm"
+# Usage: ./scripts/run_ncu_sweep.sh [HIDDEN]      env: TOKENS="8 256 1024 4096 16384" VARIANTS="v0 v1" CACHES="cold warm"
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
 HIDDEN="${1:-2048}"
-TOKENS="${TOKENS:-8 1024 4096}"
+TOKENS="${TOKENS:-8 256 1024 4096 16384}"
 VARIANTS="${VARIANTS:-v0 v1}"
 CACHES="${CACHES:-cold warm}"
 PY="${PY:-python}"
 OUT="${OUT:-reports/ncu}"
 EXTRA="${EXTRA:-}"          # e.g. EXTRA="--no-residual"
+# base = ncu locks clocks to base (default on clusters). none = keep the clock you locked with nvidia-smi
+# (run_l4_vm.sh locks 2040 MHz and uses none, to match Part 1).
+CLOCK_CONTROL="${CLOCK_CONTROL:-base}"
 GPU=$(nvidia-smi --query-gpu=name --format=csv,noheader | head -1 | tr -c 'A-Za-z0-9\n' '_' | sed 's/_*$//')
 mkdir -p "$OUT"
 
@@ -34,9 +37,9 @@ for cache in $CACHES; do
   for v in $VARIANTS; do
     for T in $TOKENS; do
       name="${v}_${GPU}_H${HIDDEN}_T${T}_${cache}"
-      echo ">>> $name (cache-control=$CC)"
+      echo ">>> $name (cache-control=$CC, clock-control=$CLOCK_CONTROL)"
       ncu --set full --metrics "$METRICS" \
-          --cache-control "$CC" --clock-control base \
+          --cache-control "$CC" --clock-control "$CLOCK_CONTROL" \
           --nvtx --nvtx-include "target/" \
           -f -o "$OUT/$name" \
           $PY harness/profile_target.py --variant "$v" --tokens "$T" --hidden "$HIDDEN" --iters 3 $EXTRA
