@@ -190,7 +190,7 @@ def plot_agreement(tot, p1, ns, out, shapes):
     axes[1].set_xticks(range(len(shapes))); axes[1].set_xticklabels(labels, fontsize=8)
     fig.suptitle("Three measurement methods agree on which shapes are slow",
                  x=0.01, ha="left", fontsize=12, fontweight="bold")
-    fig.text(0.01, -0.03, "NVIDIA L4, BF16, residual add. Gaps = missing Nsight Systems timelines (cold mode has none). "
+    fig.text(0.01, -0.03, "NVIDIA L4, BF16, residual add. Nsight Systems runs are warm only. "
              "Part 1 = CUDA-graph benchmark.", color=INK2, fontsize=8)
     fig.tight_layout()
     save(fig, out, "ratio_agreement.png")
