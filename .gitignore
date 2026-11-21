@@ -1,0 +1,45 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Editors
+.idea/
+.vscode/
+*.swp
+*~
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+
+# WS2 generated runs. Directories stay via .gitkeep.
+ws2/logs/*
+!ws2/logs/.gitkeep
+ws2/.stamps/
+ws2/reports/ncu/*
+!ws2/reports/ncu/.gitkeep
+ws2/reports/nsys/*
+!ws2/reports/nsys/.gitkeep
+ws2/tables/*
+!ws2/tables/.gitkeep
+
+# Profiler binaries and summaries, wherever they land
+*.ncu-rep
+*.nsys-rep
+*.sqlite
+*.qdrep
+*.qdstrm
+*.kern_sum.csv
+
+# Slurm and pipeline logs
+*.log
+slurm-*.out
