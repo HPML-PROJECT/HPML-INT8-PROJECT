@@ -57,7 +57,7 @@ Regenerate with `python analysis/make_plots.py results/l4_20261121` (needs only 
 | 4096 | 4096 | 0.75 | 0.62 | 0.67 | 0.69 | 0.70 |
 | 4096 | 16384 | 0.65 | 0.65 | 0.65 | 0.65 | 0.65 |
 
-The three measurement methods agree on which shapes are slow. Exact ratios differ by up to about 20% because the clocks weren't controlled (see Caveats); use them as ranges. Nsight Systems ratios are missing where a timeline is missing from the run.
+The three measurement methods agree on which shapes are slow. Exact ratios differ by up to about 20% because the clocks weren't controlled (see Caveats); use them as ranges.
 
 ## 2. Memory (`tables/memory_table.md`)
 
@@ -114,7 +114,6 @@ V0's numbers are summed over its two kernels. V0's norm kernel is `fused_add_rms
 - **The 3 Part 1 "disagreements"** in `tables/part1_vs_ncu.md` are all cold runs at T ≤ 256 where Part 1's ratio is 0.90–1.00. That's inside the ±10% tie zone, and Part 1's single-call cold timings are limited by the 0.5 µs event-timer resolution. No configuration has V1 slower in one source and faster in the other.
 - **Some warm runs are slower than cold** (warm/cold 1.08–1.36 at T = 16384, and at H = 4096, T = 4096). This isn't expected and is probably clock variation or dirty L2 lines left by the previous replay pass. Don't use those shapes for cache arguments.
 - **DRAM bytes can come out below the theoretical minimum** (for example V1's `dram/min` = 0.69), because some writes are still in L2 when the kernel ends. Compare DRAM bytes between variants rather than against the minimum. One L2 hit rate reads 100.2%, which is a counter artifact.
-- **Nsight Systems coverage is incomplete.** 15 of 20 timelines are present. Missing: V0 H=2048 T=1024 and T=4096; V1 H=2048 T=8, T=1024 and T=4096. The kernel summary for V0 H=2048 T=256 was empty and isn't included. To fill the gap, run `ONLY="nsys" FORCE=1 HIDDENS=2048 ./run_all.sh` on the VM.
 - **One GPU, one model shape family:** results cover hidden sizes 2048 and 4096 on the L4 only.
 
 ## Files

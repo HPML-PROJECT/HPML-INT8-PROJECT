@@ -366,9 +366,11 @@ python analysis/parse_ncu.py reports/ncu && python analysis/analyze_bottlenecks.
 
 ## 15. Final checklist
 
-- [ ] `check_ncu_counters.sh` reports OK on the L4 (state whether sudo was needed)
-- [ ] `verify` logs show V0 and V1 do the same work
-- [ ] Nsight reports exist for every variant x token count x cache mode x hidden size, named with variant, GPU, shape and cache mode
-- [ ] `tables/memory_table.md` and `tables/execution_table.md` generated
-- [ ] `tables/bottleneck_analysis.md` reviewed; hypothesis verdicts written with measurements
-- [ ] Cache mode and clock-control setting stated next to every reported number
+Status for the L4 run of 2026-11-21 ([results/l4_20261121/](results/l4_20261121/README.md)):
+
+- [x] `check_ncu_counters.sh` reports OK on the L4 (state whether sudo was needed). OK; sudo was used (`run_l4_vm.sh` runs the pipeline with sudo). See `results/l4_20261121/logs/counters_NVIDIA_L4.log`.
+- [x] `verify` logs show V0 and V1 do the same work. PASS for all 10 shapes, with inputs bit-identical to Part 1 (`results/l4_20261121/logs/verify_NVIDIA_L4.log`).
+- [x] Nsight reports exist for every variant x token count x cache mode x hidden size, named with variant, GPU, shape and cache mode. Nsight Compute: all 40, listed with checksums in `results/l4_20261121/ncu/MANIFEST.md` (stored outside git). Nsight Systems timelines and kernel summaries are in `results/l4_20261121/nsys/`.
+- [x] `tables/memory_table.md` and `tables/execution_table.md` generated (`results/l4_20261121/tables/`).
+- [x] `tables/bottleneck_analysis.md` reviewed; hypothesis verdicts written with measurements. See [results/l4_20261121/README.md](results/l4_20261121/README.md) (sections 1–5), which corrects the auto-generated clock note.
+- [x] Cache mode and clock-control setting stated next to every reported number. Cache mode is in every table row and report name; the clock setting (`--clock-control none`, 2040 MHz requested, power-capped) is in the results README's setup and caveats and in each plot's footnote.
