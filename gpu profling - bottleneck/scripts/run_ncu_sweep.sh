@@ -17,8 +17,8 @@ CACHES="${CACHES:-cold warm}"
 PY="${PY:-python}"
 OUT="${OUT:-reports/ncu}"
 EXTRA="${EXTRA:-}"          # e.g. EXTRA="--no-residual"
-# base = ncu locks clocks to base (default on clusters). none = keep the clock you locked with nvidia-smi
-# (run_l4_vm.sh locks 2040 MHz and uses none, to match Part 1).
+# base = ncu locks clocks to base (default on clusters). none = leave clocks to the driver / nvidia-smi
+# (run_l4_vm.sh requests 2040 MHz and uses none, to match Part 1; the L4's power cap can still lower the clock).
 CLOCK_CONTROL="${CLOCK_CONTROL:-base}"
 GPU=$(nvidia-smi --query-gpu=name --format=csv,noheader | head -1 | tr -c 'A-Za-z0-9\n' '_' | sed 's/_*$//')
 mkdir -p "$OUT"

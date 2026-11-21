@@ -50,3 +50,8 @@ vllm-evaluation/results/*
 # Slurm and pipeline logs
 *.log
 slurm-*.out
+
+# Archived results of finished profiling runs (committed on purpose; .ncu-rep and .sqlite stay out)
+!gpu profling - bottleneck/results/**/*.nsys-rep
+!gpu profling - bottleneck/results/**/*.kern_sum.csv
+!gpu profling - bottleneck/results/**/*.log

@@ -1,0 +1,562 @@
+>>> v0_NVIDIA_L4_H2048_T8_cold (cache-control=all, clock-control=none)
+W1121 22:45:34.000000 6333 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:45:34.001000 6333 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:45:34.001000 6333 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+==WARNING== Note: Running with unmodified GPU clocks. If not controlled otherwise, profiling results may be inconsistent.
+==PROF== Connected to process 6333 (/usr/bin/python3.13)
+==PROF== Profiling "fused_add_rms_norm_kernel" - 0: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 1: 0%....50%....100% - 44 passes
+==PROF== Profiling "fused_add_rms_norm_kernel" - 2: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 3: 0%....50%....100% - 44 passes
+==PROF== Profiling "fused_add_rms_norm_kernel" - 4: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 5: 0%....50%....100% - 44 passes
+[profile] variant=v0 T=8 H=2048 bf16 residual=True seed=1234 iters=3 gpu=NVIDIA L4
+==PROF== Disconnected from process 6333
+==PROF== Report: /home/ta2828/ws2/reports/ncu/v0_NVIDIA_L4_H2048_T8_cold.ncu-rep
+>>> v0_NVIDIA_L4_H2048_T256_cold (cache-control=all, clock-control=none)
+W1121 22:45:43.525000 6664 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:45:43.526000 6664 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:45:43.527000 6664 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+==WARNING== Note: Running with unmodified GPU clocks. If not controlled otherwise, profiling results may be inconsistent.
+==PROF== Connected to process 6664 (/usr/bin/python3.13)
+==PROF== Profiling "fused_add_rms_norm_kernel" - 0: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 1: 0%....50%....100% - 44 passes
+==PROF== Profiling "fused_add_rms_norm_kernel" - 2: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 3: 0%....50%....100% - 44 passes
+==PROF== Profiling "fused_add_rms_norm_kernel" - 4: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 5: 0%....50%....100% - 44 passes
+[profile] variant=v0 T=256 H=2048 bf16 residual=True seed=1234 iters=3 gpu=NVIDIA L4
+==PROF== Disconnected from process 6664
+==PROF== Report: /home/ta2828/ws2/reports/ncu/v0_NVIDIA_L4_H2048_T256_cold.ncu-rep
+>>> v0_NVIDIA_L4_H2048_T1024_cold (cache-control=all, clock-control=none)
+W1121 22:45:52.979000 6996 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:45:52.980000 6996 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:45:52.981000 6996 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+==WARNING== Note: Running with unmodified GPU clocks. If not controlled otherwise, profiling results may be inconsistent.
+==PROF== Connected to process 6996 (/usr/bin/python3.13)
+==PROF== Profiling "fused_add_rms_norm_kernel" - 0: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 1: 0%....50%....100% - 44 passes
+==PROF== Profiling "fused_add_rms_norm_kernel" - 2: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 3: 0%....50%....100% - 44 passes
+==PROF== Profiling "fused_add_rms_norm_kernel" - 4: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 5: 0%....50%....100% - 44 passes
+[profile] variant=v0 T=1024 H=2048 bf16 residual=True seed=1234 iters=3 gpu=NVIDIA L4
+==PROF== Disconnected from process 6996
+==PROF== Report: /home/ta2828/ws2/reports/ncu/v0_NVIDIA_L4_H2048_T1024_cold.ncu-rep
+>>> v0_NVIDIA_L4_H2048_T4096_cold (cache-control=all, clock-control=none)
+W1121 22:46:02.649000 7328 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:46:02.650000 7328 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:46:02.651000 7328 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+==WARNING== Note: Running with unmodified GPU clocks. If not controlled otherwise, profiling results may be inconsistent.
+==PROF== Connected to process 7328 (/usr/bin/python3.13)
+==PROF== Profiling "fused_add_rms_norm_kernel" - 0: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 1: 0%....50%....100% - 44 passes
+==PROF== Profiling "fused_add_rms_norm_kernel" - 2: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 3: 0%....50%....100% - 44 passes
+==PROF== Profiling "fused_add_rms_norm_kernel" - 4: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 5: 0%....50%....100% - 44 passes
+[profile] variant=v0 T=4096 H=2048 bf16 residual=True seed=1234 iters=3 gpu=NVIDIA L4
+==PROF== Disconnected from process 7328
+==PROF== Report: /home/ta2828/ws2/reports/ncu/v0_NVIDIA_L4_H2048_T4096_cold.ncu-rep
+>>> v0_NVIDIA_L4_H2048_T16384_cold (cache-control=all, clock-control=none)
+W1121 22:46:12.526000 7665 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:46:12.527000 7665 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:46:12.527000 7665 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+==WARNING== Note: Running with unmodified GPU clocks. If not controlled otherwise, profiling results may be inconsistent.
+==PROF== Connected to process 7665 (/usr/bin/python3.13)
+==PROF== Profiling "fused_add_rms_norm_kernel" - 0: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 1: 0%....50%....100% - 44 passes
+==PROF== Profiling "fused_add_rms_norm_kernel" - 2: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 3: 0%....50%....100% - 44 passes
+==PROF== Profiling "fused_add_rms_norm_kernel" - 4: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 5: 0%....50%....100% - 44 passes
+[profile] variant=v0 T=16384 H=2048 bf16 residual=True seed=1234 iters=3 gpu=NVIDIA L4
+==PROF== Disconnected from process 7665
+==PROF== Report: /home/ta2828/ws2/reports/ncu/v0_NVIDIA_L4_H2048_T16384_cold.ncu-rep
+>>> v1_NVIDIA_L4_H2048_T8_cold (cache-control=all, clock-control=none)
+W1121 22:46:25.155000 7997 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:46:25.155000 7997 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:46:25.156000 7997 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+==WARNING== Note: Running with unmodified GPU clocks. If not controlled otherwise, profiling results may be inconsistent.
+==PROF== Connected to process 7997 (/usr/bin/python3.13)
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 0: 0%....50%....100% - 44 passes
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 1: 0%....50%....100% - 44 passes
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 2: 0%....50%....100% - 44 passes
+[profile] variant=v1 T=8 H=2048 bf16 residual=True seed=1234 iters=3 gpu=NVIDIA L4
+==PROF== Disconnected from process 7997
+==PROF== Report: /home/ta2828/ws2/reports/ncu/v1_NVIDIA_L4_H2048_T8_cold.ncu-rep
+>>> v1_NVIDIA_L4_H2048_T256_cold (cache-control=all, clock-control=none)
+W1121 22:46:33.059000 8185 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:46:33.060000 8185 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:46:33.060000 8185 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+==WARNING== Note: Running with unmodified GPU clocks. If not controlled otherwise, profiling results may be inconsistent.
+==PROF== Connected to process 8185 (/usr/bin/python3.13)
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 0: 0%....50%....100% - 44 passes
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 1: 0%....50%....100% - 44 passes
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 2: 0%....50%....100% - 44 passes
+[profile] variant=v1 T=256 H=2048 bf16 residual=True seed=1234 iters=3 gpu=NVIDIA L4
+==PROF== Disconnected from process 8185
+==PROF== Report: /home/ta2828/ws2/reports/ncu/v1_NVIDIA_L4_H2048_T256_cold.ncu-rep
+>>> v1_NVIDIA_L4_H2048_T1024_cold (cache-control=all, clock-control=none)
+W1121 22:46:40.807000 8373 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:46:40.808000 8373 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:46:40.808000 8373 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+==WARNING== Note: Running with unmodified GPU clocks. If not controlled otherwise, profiling results may be inconsistent.
+==PROF== Connected to process 8373 (/usr/bin/python3.13)
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 0: 0%....50%....100% - 44 passes
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 1: 0%....50%....100% - 44 passes
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 2: 0%....50%....100% - 44 passes
+[profile] variant=v1 T=1024 H=2048 bf16 residual=True seed=1234 iters=3 gpu=NVIDIA L4
+==PROF== Disconnected from process 8373
+==PROF== Report: /home/ta2828/ws2/reports/ncu/v1_NVIDIA_L4_H2048_T1024_cold.ncu-rep
+>>> v1_NVIDIA_L4_H2048_T4096_cold (cache-control=all, clock-control=none)
+W1121 22:46:48.611000 8561 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:46:48.612000 8561 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:46:48.612000 8561 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+==WARNING== Note: Running with unmodified GPU clocks. If not controlled otherwise, profiling results may be inconsistent.
+==PROF== Connected to process 8561 (/usr/bin/python3.13)
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 0: 0%....50%....100% - 44 passes
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 1: 0%....50%....100% - 44 passes
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 2: 0%....50%....100% - 44 passes
+[profile] variant=v1 T=4096 H=2048 bf16 residual=True seed=1234 iters=3 gpu=NVIDIA L4
+==PROF== Disconnected from process 8561
+==PROF== Report: /home/ta2828/ws2/reports/ncu/v1_NVIDIA_L4_H2048_T4096_cold.ncu-rep
+>>> v1_NVIDIA_L4_H2048_T16384_cold (cache-control=all, clock-control=none)
+W1121 22:46:56.756000 8746 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:46:56.757000 8746 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:46:56.757000 8746 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+==WARNING== Note: Running with unmodified GPU clocks. If not controlled otherwise, profiling results may be inconsistent.
+==PROF== Connected to process 8746 (/usr/bin/python3.13)
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 0: 0%....50%....100% - 44 passes
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 1: 0%....50%....100% - 44 passes
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 2: 0%....50%....100% - 44 passes
+[profile] variant=v1 T=16384 H=2048 bf16 residual=True seed=1234 iters=3 gpu=NVIDIA L4
+==PROF== Disconnected from process 8746
+==PROF== Report: /home/ta2828/ws2/reports/ncu/v1_NVIDIA_L4_H2048_T16384_cold.ncu-rep
+>>> v0_NVIDIA_L4_H2048_T8_warm (cache-control=none, clock-control=none)
+W1121 22:47:07.321000 8935 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:47:07.322000 8935 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:47:07.322000 8935 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+==WARNING== Note: Running with uncontrolled GPU caches. Profiling results may be inconsistent.
+==WARNING== Note: Running with unmodified GPU clocks. If not controlled otherwise, profiling results may be inconsistent.
+==PROF== Connected to process 8935 (/usr/bin/python3.13)
+==PROF== Profiling "fused_add_rms_norm_kernel" - 0: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 1: 0%....50%....100% - 44 passes
+==PROF== Profiling "fused_add_rms_norm_kernel" - 2: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 3: 0%....50%....100% - 44 passes
+==PROF== Profiling "fused_add_rms_norm_kernel" - 4: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 5: 0%....50%....100% - 44 passes
+[profile] variant=v0 T=8 H=2048 bf16 residual=True seed=1234 iters=3 gpu=NVIDIA L4
+==PROF== Disconnected from process 8935
+==PROF== Report: /home/ta2828/ws2/reports/ncu/v0_NVIDIA_L4_H2048_T8_warm.ncu-rep
+>>> v0_NVIDIA_L4_H2048_T256_warm (cache-control=none, clock-control=none)
+W1121 22:47:16.459000 9268 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:47:16.460000 9268 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:47:16.461000 9268 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+==WARNING== Note: Running with uncontrolled GPU caches. Profiling results may be inconsistent.
+==WARNING== Note: Running with unmodified GPU clocks. If not controlled otherwise, profiling results may be inconsistent.
+==PROF== Connected to process 9268 (/usr/bin/python3.13)
+==PROF== Profiling "fused_add_rms_norm_kernel" - 0: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 1: 0%....50%....100% - 44 passes
+==PROF== Profiling "fused_add_rms_norm_kernel" - 2: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 3: 0%....50%....100% - 44 passes
+==PROF== Profiling "fused_add_rms_norm_kernel" - 4: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 5: 0%....50%....100% - 44 passes
+[profile] variant=v0 T=256 H=2048 bf16 residual=True seed=1234 iters=3 gpu=NVIDIA L4
+==PROF== Disconnected from process 9268
+==PROF== Report: /home/ta2828/ws2/reports/ncu/v0_NVIDIA_L4_H2048_T256_warm.ncu-rep
+>>> v0_NVIDIA_L4_H2048_T1024_warm (cache-control=none, clock-control=none)
+W1121 22:47:25.741000 9600 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:47:25.742000 9600 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:47:25.742000 9600 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+==WARNING== Note: Running with uncontrolled GPU caches. Profiling results may be inconsistent.
+==WARNING== Note: Running with unmodified GPU clocks. If not controlled otherwise, profiling results may be inconsistent.
+==PROF== Connected to process 9600 (/usr/bin/python3.13)
+==PROF== Profiling "fused_add_rms_norm_kernel" - 0: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 1: 0%....50%....100% - 44 passes
+==PROF== Profiling "fused_add_rms_norm_kernel" - 2: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 3: 0%....50%....100% - 44 passes
+==PROF== Profiling "fused_add_rms_norm_kernel" - 4: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 5: 0%....50%....100% - 44 passes
+[profile] variant=v0 T=1024 H=2048 bf16 residual=True seed=1234 iters=3 gpu=NVIDIA L4
+==PROF== Disconnected from process 9600
+==PROF== Report: /home/ta2828/ws2/reports/ncu/v0_NVIDIA_L4_H2048_T1024_warm.ncu-rep
+>>> v0_NVIDIA_L4_H2048_T4096_warm (cache-control=none, clock-control=none)
+W1121 22:47:35.094000 9932 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:47:35.095000 9932 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:47:35.095000 9932 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+==WARNING== Note: Running with uncontrolled GPU caches. Profiling results may be inconsistent.
+==WARNING== Note: Running with unmodified GPU clocks. If not controlled otherwise, profiling results may be inconsistent.
+==PROF== Connected to process 9932 (/usr/bin/python3.13)
+==PROF== Profiling "fused_add_rms_norm_kernel" - 0: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 1: 0%....50%....100% - 44 passes
+==PROF== Profiling "fused_add_rms_norm_kernel" - 2: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 3: 0%....50%....100% - 44 passes
+==PROF== Profiling "fused_add_rms_norm_kernel" - 4: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 5: 0%....50%....100% - 44 passes
+[profile] variant=v0 T=4096 H=2048 bf16 residual=True seed=1234 iters=3 gpu=NVIDIA L4
+==PROF== Disconnected from process 9932
+==PROF== Report: /home/ta2828/ws2/reports/ncu/v0_NVIDIA_L4_H2048_T4096_warm.ncu-rep
+>>> v0_NVIDIA_L4_H2048_T16384_warm (cache-control=none, clock-control=none)
+W1121 22:47:44.878000 10264 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:47:44.879000 10264 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:47:44.879000 10264 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+==WARNING== Note: Running with uncontrolled GPU caches. Profiling results may be inconsistent.
+==WARNING== Note: Running with unmodified GPU clocks. If not controlled otherwise, profiling results may be inconsistent.
+==PROF== Connected to process 10264 (/usr/bin/python3.13)
+==PROF== Profiling "fused_add_rms_norm_kernel" - 0: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 1: 0%....50%....100% - 44 passes
+==PROF== Profiling "fused_add_rms_norm_kernel" - 2: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 3: 0%....50%....100% - 44 passes
+==PROF== Profiling "fused_add_rms_norm_kernel" - 4: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 5: 0%....50%....100% - 44 passes
+[profile] variant=v0 T=16384 H=2048 bf16 residual=True seed=1234 iters=3 gpu=NVIDIA L4
+==PROF== Disconnected from process 10264
+==PROF== Report: /home/ta2828/ws2/reports/ncu/v0_NVIDIA_L4_H2048_T16384_warm.ncu-rep
+>>> v1_NVIDIA_L4_H2048_T8_warm (cache-control=none, clock-control=none)
+W1121 22:47:57.349000 10597 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:47:57.350000 10597 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:47:57.351000 10597 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+==WARNING== Note: Running with uncontrolled GPU caches. Profiling results may be inconsistent.
+==WARNING== Note: Running with unmodified GPU clocks. If not controlled otherwise, profiling results may be inconsistent.
+==PROF== Connected to process 10597 (/usr/bin/python3.13)
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 0: 0%....50%....100% - 44 passes
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 1: 0%....50%....100% - 44 passes
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 2: 0%....50%....100% - 44 passes
+[profile] variant=v1 T=8 H=2048 bf16 residual=True seed=1234 iters=3 gpu=NVIDIA L4
+==PROF== Disconnected from process 10597
+==PROF== Report: /home/ta2828/ws2/reports/ncu/v1_NVIDIA_L4_H2048_T8_warm.ncu-rep
+>>> v1_NVIDIA_L4_H2048_T256_warm (cache-control=none, clock-control=none)
+W1121 22:48:04.906000 10783 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:48:04.907000 10783 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:48:04.908000 10783 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+==WARNING== Note: Running with uncontrolled GPU caches. Profiling results may be inconsistent.
+==WARNING== Note: Running with unmodified GPU clocks. If not controlled otherwise, profiling results may be inconsistent.
+==PROF== Connected to process 10783 (/usr/bin/python3.13)
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 0: 0%....50%....100% - 44 passes
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 1: 0%....50%....100% - 44 passes
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 2: 0%....50%....100% - 44 passes
+[profile] variant=v1 T=256 H=2048 bf16 residual=True seed=1234 iters=3 gpu=NVIDIA L4
+==PROF== Disconnected from process 10783
+==PROF== Report: /home/ta2828/ws2/reports/ncu/v1_NVIDIA_L4_H2048_T256_warm.ncu-rep
+>>> v1_NVIDIA_L4_H2048_T1024_warm (cache-control=none, clock-control=none)
+W1121 22:48:12.603000 10974 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:48:12.603000 10974 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:48:12.604000 10974 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+==WARNING== Note: Running with uncontrolled GPU caches. Profiling results may be inconsistent.
+==WARNING== Note: Running with unmodified GPU clocks. If not controlled otherwise, profiling results may be inconsistent.
+==PROF== Connected to process 10974 (/usr/bin/python3.13)
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 0: 0%....50%....100% - 44 passes
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 1: 0%....50%....100% - 44 passes
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 2: 0%....50%....100% - 44 passes
+[profile] variant=v1 T=1024 H=2048 bf16 residual=True seed=1234 iters=3 gpu=NVIDIA L4
+==PROF== Disconnected from process 10974
+==PROF== Report: /home/ta2828/ws2/reports/ncu/v1_NVIDIA_L4_H2048_T1024_warm.ncu-rep
+>>> v1_NVIDIA_L4_H2048_T4096_warm (cache-control=none, clock-control=none)
+W1121 22:48:20.334000 11162 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:48:20.334000 11162 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:48:20.335000 11162 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+==WARNING== Note: Running with uncontrolled GPU caches. Profiling results may be inconsistent.
+==WARNING== Note: Running with unmodified GPU clocks. If not controlled otherwise, profiling results may be inconsistent.
+==PROF== Connected to process 11162 (/usr/bin/python3.13)
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 0: 0%....50%....100% - 44 passes
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 1: 0%....50%....100% - 44 passes
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 2: 0%....50%....100% - 44 passes
+[profile] variant=v1 T=4096 H=2048 bf16 residual=True seed=1234 iters=3 gpu=NVIDIA L4
+==PROF== Disconnected from process 11162
+==PROF== Report: /home/ta2828/ws2/reports/ncu/v1_NVIDIA_L4_H2048_T4096_warm.ncu-rep
+>>> v1_NVIDIA_L4_H2048_T16384_warm (cache-control=none, clock-control=none)
+W1121 22:48:28.300000 11350 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:48:28.301000 11350 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:48:28.302000 11350 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+==WARNING== Note: Running with uncontrolled GPU caches. Profiling results may be inconsistent.
+==WARNING== Note: Running with unmodified GPU clocks. If not controlled otherwise, profiling results may be inconsistent.
+==PROF== Connected to process 11350 (/usr/bin/python3.13)
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 0: 0%....50%....100% - 44 passes
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 1: 0%....50%....100% - 44 passes
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 2: 0%....50%....100% - 44 passes
+[profile] variant=v1 T=16384 H=2048 bf16 residual=True seed=1234 iters=3 gpu=NVIDIA L4
+==PROF== Disconnected from process 11350
+==PROF== Report: /home/ta2828/ws2/reports/ncu/v1_NVIDIA_L4_H2048_T16384_warm.ncu-rep
+Done. Reports in reports/ncu/. Next: python analysis/parse_ncu.py reports/ncu
+>>> v0_NVIDIA_L4_H4096_T8_cold (cache-control=all, clock-control=none)
+W1121 22:48:38.816000 11548 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:48:38.816000 11548 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:48:38.817000 11548 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+==WARNING== Note: Running with unmodified GPU clocks. If not controlled otherwise, profiling results may be inconsistent.
+==PROF== Connected to process 11548 (/usr/bin/python3.13)
+==PROF== Profiling "fused_add_rms_norm_kernel" - 0: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 1: 0%....50%....100% - 44 passes
+==PROF== Profiling "fused_add_rms_norm_kernel" - 2: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 3: 0%....50%....100% - 44 passes
+==PROF== Profiling "fused_add_rms_norm_kernel" - 4: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 5: 0%....50%....100% - 44 passes
+[profile] variant=v0 T=8 H=4096 bf16 residual=True seed=1234 iters=3 gpu=NVIDIA L4
+==PROF== Disconnected from process 11548
+==PROF== Report: /home/ta2828/ws2/reports/ncu/v0_NVIDIA_L4_H4096_T8_cold.ncu-rep
+>>> v0_NVIDIA_L4_H4096_T256_cold (cache-control=all, clock-control=none)
+W1121 22:48:48.264000 11879 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:48:48.265000 11879 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:48:48.265000 11879 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+==WARNING== Note: Running with unmodified GPU clocks. If not controlled otherwise, profiling results may be inconsistent.
+==PROF== Connected to process 11879 (/usr/bin/python3.13)
+==PROF== Profiling "fused_add_rms_norm_kernel" - 0: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 1: 0%....50%....100% - 44 passes
+==PROF== Profiling "fused_add_rms_norm_kernel" - 2: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 3: 0%....50%....100% - 44 passes
+==PROF== Profiling "fused_add_rms_norm_kernel" - 4: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 5: 0%....50%....100% - 44 passes
+[profile] variant=v0 T=256 H=4096 bf16 residual=True seed=1234 iters=3 gpu=NVIDIA L4
+==PROF== Disconnected from process 11879
+==PROF== Report: /home/ta2828/ws2/reports/ncu/v0_NVIDIA_L4_H4096_T256_cold.ncu-rep
+>>> v0_NVIDIA_L4_H4096_T1024_cold (cache-control=all, clock-control=none)
+W1121 22:48:57.836000 12209 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:48:57.836000 12209 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:48:57.837000 12209 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+==WARNING== Note: Running with unmodified GPU clocks. If not controlled otherwise, profiling results may be inconsistent.
+==PROF== Connected to process 12209 (/usr/bin/python3.13)
+==PROF== Profiling "fused_add_rms_norm_kernel" - 0: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 1: 0%....50%....100% - 44 passes
+==PROF== Profiling "fused_add_rms_norm_kernel" - 2: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 3: 0%....50%....100% - 44 passes
+==PROF== Profiling "fused_add_rms_norm_kernel" - 4: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 5: 0%....50%....100% - 44 passes
+[profile] variant=v0 T=1024 H=4096 bf16 residual=True seed=1234 iters=3 gpu=NVIDIA L4
+==PROF== Disconnected from process 12209
+==PROF== Report: /home/ta2828/ws2/reports/ncu/v0_NVIDIA_L4_H4096_T1024_cold.ncu-rep
+>>> v0_NVIDIA_L4_H4096_T4096_cold (cache-control=all, clock-control=none)
+W1121 22:49:07.568000 12546 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:49:07.568000 12546 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:49:07.569000 12546 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+==WARNING== Note: Running with unmodified GPU clocks. If not controlled otherwise, profiling results may be inconsistent.
+==PROF== Connected to process 12546 (/usr/bin/python3.13)
+==PROF== Profiling "fused_add_rms_norm_kernel" - 0: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 1: 0%....50%....100% - 44 passes
+==PROF== Profiling "fused_add_rms_norm_kernel" - 2: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 3: 0%....50%....100% - 44 passes
+==PROF== Profiling "fused_add_rms_norm_kernel" - 4: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 5: 0%....50%....100% - 44 passes
+[profile] variant=v0 T=4096 H=4096 bf16 residual=True seed=1234 iters=3 gpu=NVIDIA L4
+==PROF== Disconnected from process 12546
+==PROF== Report: /home/ta2828/ws2/reports/ncu/v0_NVIDIA_L4_H4096_T4096_cold.ncu-rep
+>>> v0_NVIDIA_L4_H4096_T16384_cold (cache-control=all, clock-control=none)
+W1121 22:49:19.292000 12883 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:49:19.292000 12883 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:49:19.293000 12883 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+==WARNING== Note: Running with unmodified GPU clocks. If not controlled otherwise, profiling results may be inconsistent.
+==PROF== Connected to process 12883 (/usr/bin/python3.13)
+==PROF== Profiling "fused_add_rms_norm_kernel" - 0: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 1: 0%....50%....100% - 44 passes
+==PROF== Profiling "fused_add_rms_norm_kernel" - 2: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 3: 0%....50%....100% - 44 passes
+==PROF== Profiling "fused_add_rms_norm_kernel" - 4: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 5: 0%....50%....100% - 44 passes
+[profile] variant=v0 T=16384 H=4096 bf16 residual=True seed=1234 iters=3 gpu=NVIDIA L4
+==PROF== Disconnected from process 12883
+==PROF== Report: /home/ta2828/ws2/reports/ncu/v0_NVIDIA_L4_H4096_T16384_cold.ncu-rep
+>>> v1_NVIDIA_L4_H4096_T8_cold (cache-control=all, clock-control=none)
+W1121 22:49:33.077000 13215 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:49:33.078000 13215 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:49:33.078000 13215 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+==WARNING== Note: Running with unmodified GPU clocks. If not controlled otherwise, profiling results may be inconsistent.
+==PROF== Connected to process 13215 (/usr/bin/python3.13)
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 0: 0%....50%....100% - 44 passes
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 1: 0%....50%....100% - 44 passes
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 2: 0%....50%....100% - 44 passes
+[profile] variant=v1 T=8 H=4096 bf16 residual=True seed=1234 iters=3 gpu=NVIDIA L4
+==PROF== Disconnected from process 13215
+==PROF== Report: /home/ta2828/ws2/reports/ncu/v1_NVIDIA_L4_H4096_T8_cold.ncu-rep
+>>> v1_NVIDIA_L4_H4096_T256_cold (cache-control=all, clock-control=none)
+W1121 22:49:40.731000 13402 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:49:40.732000 13402 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:49:40.733000 13402 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+==WARNING== Note: Running with unmodified GPU clocks. If not controlled otherwise, profiling results may be inconsistent.
+==PROF== Connected to process 13402 (/usr/bin/python3.13)
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 0: 0%....50%....100% - 44 passes
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 1: 0%....50%....100% - 44 passes
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 2: 0%....50%....100% - 44 passes
+[profile] variant=v1 T=256 H=4096 bf16 residual=True seed=1234 iters=3 gpu=NVIDIA L4
+==PROF== Disconnected from process 13402
+==PROF== Report: /home/ta2828/ws2/reports/ncu/v1_NVIDIA_L4_H4096_T256_cold.ncu-rep
+>>> v1_NVIDIA_L4_H4096_T1024_cold (cache-control=all, clock-control=none)
+W1121 22:49:48.533000 13590 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:49:48.534000 13590 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:49:48.534000 13590 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+==WARNING== Note: Running with unmodified GPU clocks. If not controlled otherwise, profiling results may be inconsistent.
+==PROF== Connected to process 13590 (/usr/bin/python3.13)
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 0: 0%....50%....100% - 44 passes
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 1: 0%....50%....100% - 44 passes
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 2: 0%....50%....100% - 44 passes
+[profile] variant=v1 T=1024 H=4096 bf16 residual=True seed=1234 iters=3 gpu=NVIDIA L4
+==PROF== Disconnected from process 13590
+==PROF== Report: /home/ta2828/ws2/reports/ncu/v1_NVIDIA_L4_H4096_T1024_cold.ncu-rep
+>>> v1_NVIDIA_L4_H4096_T4096_cold (cache-control=all, clock-control=none)
+W1121 22:49:56.385000 13775 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:49:56.385000 13775 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:49:56.386000 13775 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+==WARNING== Note: Running with unmodified GPU clocks. If not controlled otherwise, profiling results may be inconsistent.
+==PROF== Connected to process 13775 (/usr/bin/python3.13)
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 0: 0%....50%....100% - 44 passes
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 1: 0%....50%....100% - 44 passes
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 2: 0%....50%....100% - 44 passes
+[profile] variant=v1 T=4096 H=4096 bf16 residual=True seed=1234 iters=3 gpu=NVIDIA L4
+==PROF== Disconnected from process 13775
+==PROF== Report: /home/ta2828/ws2/reports/ncu/v1_NVIDIA_L4_H4096_T4096_cold.ncu-rep
+>>> v1_NVIDIA_L4_H4096_T16384_cold (cache-control=all, clock-control=none)
+W1121 22:50:04.706000 13963 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:50:04.707000 13963 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:50:04.708000 13963 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+==WARNING== Note: Running with unmodified GPU clocks. If not controlled otherwise, profiling results may be inconsistent.
+==PROF== Connected to process 13963 (/usr/bin/python3.13)
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 0: 0%....50%....100% - 44 passes
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 1: 0%....50%....100% - 44 passes
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 2: 0%....50%....100% - 44 passes
+[profile] variant=v1 T=16384 H=4096 bf16 residual=True seed=1234 iters=3 gpu=NVIDIA L4
+==PROF== Disconnected from process 13963
+==PROF== Report: /home/ta2828/ws2/reports/ncu/v1_NVIDIA_L4_H4096_T16384_cold.ncu-rep
+>>> v0_NVIDIA_L4_H4096_T8_warm (cache-control=none, clock-control=none)
+W1121 22:50:16.307000 14154 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:50:16.308000 14154 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:50:16.309000 14154 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+==WARNING== Note: Running with uncontrolled GPU caches. Profiling results may be inconsistent.
+==WARNING== Note: Running with unmodified GPU clocks. If not controlled otherwise, profiling results may be inconsistent.
+==PROF== Connected to process 14154 (/usr/bin/python3.13)
+==PROF== Profiling "fused_add_rms_norm_kernel" - 0: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 1: 0%....50%....100% - 44 passes
+==PROF== Profiling "fused_add_rms_norm_kernel" - 2: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 3: 0%....50%....100% - 44 passes
+==PROF== Profiling "fused_add_rms_norm_kernel" - 4: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 5: 0%....50%....100% - 44 passes
+[profile] variant=v0 T=8 H=4096 bf16 residual=True seed=1234 iters=3 gpu=NVIDIA L4
+==PROF== Disconnected from process 14154
+==PROF== Report: /home/ta2828/ws2/reports/ncu/v0_NVIDIA_L4_H4096_T8_warm.ncu-rep
+>>> v0_NVIDIA_L4_H4096_T256_warm (cache-control=none, clock-control=none)
+W1121 22:50:25.509000 14485 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:50:25.509000 14485 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:50:25.510000 14485 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+==WARNING== Note: Running with uncontrolled GPU caches. Profiling results may be inconsistent.
+==WARNING== Note: Running with unmodified GPU clocks. If not controlled otherwise, profiling results may be inconsistent.
+==PROF== Connected to process 14485 (/usr/bin/python3.13)
+==PROF== Profiling "fused_add_rms_norm_kernel" - 0: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 1: 0%....50%....100% - 44 passes
+==PROF== Profiling "fused_add_rms_norm_kernel" - 2: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 3: 0%....50%....100% - 44 passes
+==PROF== Profiling "fused_add_rms_norm_kernel" - 4: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 5: 0%....50%....100% - 44 passes
+[profile] variant=v0 T=256 H=4096 bf16 residual=True seed=1234 iters=3 gpu=NVIDIA L4
+==PROF== Disconnected from process 14485
+==PROF== Report: /home/ta2828/ws2/reports/ncu/v0_NVIDIA_L4_H4096_T256_warm.ncu-rep
+>>> v0_NVIDIA_L4_H4096_T1024_warm (cache-control=none, clock-control=none)
+W1121 22:50:34.824000 14817 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:50:34.825000 14817 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:50:34.825000 14817 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+==WARNING== Note: Running with uncontrolled GPU caches. Profiling results may be inconsistent.
+==WARNING== Note: Running with unmodified GPU clocks. If not controlled otherwise, profiling results may be inconsistent.
+==PROF== Connected to process 14817 (/usr/bin/python3.13)
+==PROF== Profiling "fused_add_rms_norm_kernel" - 0: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 1: 0%....50%....100% - 44 passes
+==PROF== Profiling "fused_add_rms_norm_kernel" - 2: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 3: 0%....50%....100% - 44 passes
+==PROF== Profiling "fused_add_rms_norm_kernel" - 4: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 5: 0%....50%....100% - 44 passes
+[profile] variant=v0 T=1024 H=4096 bf16 residual=True seed=1234 iters=3 gpu=NVIDIA L4
+==PROF== Disconnected from process 14817
+==PROF== Report: /home/ta2828/ws2/reports/ncu/v0_NVIDIA_L4_H4096_T1024_warm.ncu-rep
+>>> v0_NVIDIA_L4_H4096_T4096_warm (cache-control=none, clock-control=none)
+W1121 22:50:44.230000 15149 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:50:44.231000 15149 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:50:44.232000 15149 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+==WARNING== Note: Running with uncontrolled GPU caches. Profiling results may be inconsistent.
+==WARNING== Note: Running with unmodified GPU clocks. If not controlled otherwise, profiling results may be inconsistent.
+==PROF== Connected to process 15149 (/usr/bin/python3.13)
+==PROF== Profiling "fused_add_rms_norm_kernel" - 0: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 1: 0%....50%....100% - 44 passes
+==PROF== Profiling "fused_add_rms_norm_kernel" - 2: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 3: 0%....50%....100% - 44 passes
+==PROF== Profiling "fused_add_rms_norm_kernel" - 4: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 5: 0%....50%....100% - 44 passes
+[profile] variant=v0 T=4096 H=4096 bf16 residual=True seed=1234 iters=3 gpu=NVIDIA L4
+==PROF== Disconnected from process 15149
+==PROF== Report: /home/ta2828/ws2/reports/ncu/v0_NVIDIA_L4_H4096_T4096_warm.ncu-rep
+>>> v0_NVIDIA_L4_H4096_T16384_warm (cache-control=none, clock-control=none)
+W1121 22:50:54.341000 15481 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:50:54.342000 15481 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:50:54.342000 15481 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+==WARNING== Note: Running with uncontrolled GPU caches. Profiling results may be inconsistent.
+==WARNING== Note: Running with unmodified GPU clocks. If not controlled otherwise, profiling results may be inconsistent.
+==PROF== Connected to process 15481 (/usr/bin/python3.13)
+==PROF== Profiling "fused_add_rms_norm_kernel" - 0: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 1: 0%....50%....100% - 44 passes
+==PROF== Profiling "fused_add_rms_norm_kernel" - 2: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 3: 0%....50%....100% - 44 passes
+==PROF== Profiling "fused_add_rms_norm_kernel" - 4: 0%....50%....100% - 44 passes
+==PROF== Profiling "dynamic_scaled_int8_quant_ker..." - 5: 0%....50%....100% - 44 passes
+[profile] variant=v0 T=16384 H=4096 bf16 residual=True seed=1234 iters=3 gpu=NVIDIA L4
+==PROF== Disconnected from process 15481
+==PROF== Report: /home/ta2828/ws2/reports/ncu/v0_NVIDIA_L4_H4096_T16384_warm.ncu-rep
+>>> v1_NVIDIA_L4_H4096_T8_warm (cache-control=none, clock-control=none)
+W1121 22:51:08.133000 15816 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:51:08.134000 15816 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:51:08.135000 15816 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+==WARNING== Note: Running with uncontrolled GPU caches. Profiling results may be inconsistent.
+==WARNING== Note: Running with unmodified GPU clocks. If not controlled otherwise, profiling results may be inconsistent.
+==PROF== Connected to process 15816 (/usr/bin/python3.13)
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 0: 0%....50%....100% - 44 passes
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 1: 0%....50%....100% - 44 passes
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 2: 0%....50%....100% - 44 passes
+[profile] variant=v1 T=8 H=4096 bf16 residual=True seed=1234 iters=3 gpu=NVIDIA L4
+==PROF== Disconnected from process 15816
+==PROF== Report: /home/ta2828/ws2/reports/ncu/v1_NVIDIA_L4_H4096_T8_warm.ncu-rep
+>>> v1_NVIDIA_L4_H4096_T256_warm (cache-control=none, clock-control=none)
+W1121 22:51:15.651000 16003 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:51:15.652000 16003 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:51:15.652000 16003 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+==WARNING== Note: Running with uncontrolled GPU caches. Profiling results may be inconsistent.
+==WARNING== Note: Running with unmodified GPU clocks. If not controlled otherwise, profiling results may be inconsistent.
+==PROF== Connected to process 16003 (/usr/bin/python3.13)
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 0: 0%....50%....100% - 44 passes
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 1: 0%....50%....100% - 44 passes
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 2: 0%....50%....100% - 44 passes
+[profile] variant=v1 T=256 H=4096 bf16 residual=True seed=1234 iters=3 gpu=NVIDIA L4
+==PROF== Disconnected from process 16003
+==PROF== Report: /home/ta2828/ws2/reports/ncu/v1_NVIDIA_L4_H4096_T256_warm.ncu-rep
+>>> v1_NVIDIA_L4_H4096_T1024_warm (cache-control=none, clock-control=none)
+W1121 22:51:23.341000 16191 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:51:23.341000 16191 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:51:23.342000 16191 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+==WARNING== Note: Running with uncontrolled GPU caches. Profiling results may be inconsistent.
+==WARNING== Note: Running with unmodified GPU clocks. If not controlled otherwise, profiling results may be inconsistent.
+==PROF== Connected to process 16191 (/usr/bin/python3.13)
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 0: 0%....50%....100% - 44 passes
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 1: 0%....50%....100% - 44 passes
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 2: 0%....50%....100% - 44 passes
+[profile] variant=v1 T=1024 H=4096 bf16 residual=True seed=1234 iters=3 gpu=NVIDIA L4
+==PROF== Disconnected from process 16191
+==PROF== Report: /home/ta2828/ws2/reports/ncu/v1_NVIDIA_L4_H4096_T1024_warm.ncu-rep
+>>> v1_NVIDIA_L4_H4096_T4096_warm (cache-control=none, clock-control=none)
+W1121 22:51:31.039000 16379 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:51:31.040000 16379 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:51:31.040000 16379 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+==WARNING== Note: Running with uncontrolled GPU caches. Profiling results may be inconsistent.
+==WARNING== Note: Running with unmodified GPU clocks. If not controlled otherwise, profiling results may be inconsistent.
+==PROF== Connected to process 16379 (/usr/bin/python3.13)
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 0: 0%....50%....100% - 44 passes
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 1: 0%....50%....100% - 44 passes
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 2: 0%....50%....100% - 44 passes
+[profile] variant=v1 T=4096 H=4096 bf16 residual=True seed=1234 iters=3 gpu=NVIDIA L4
+==PROF== Disconnected from process 16379
+==PROF== Report: /home/ta2828/ws2/reports/ncu/v1_NVIDIA_L4_H4096_T4096_warm.ncu-rep
+>>> v1_NVIDIA_L4_H4096_T16384_warm (cache-control=none, clock-control=none)
+W1121 22:51:39.357000 16567 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:51:39.357000 16567 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:51:39.358000 16567 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+==WARNING== Note: Running with uncontrolled GPU caches. Profiling results may be inconsistent.
+==WARNING== Note: Running with unmodified GPU clocks. If not controlled otherwise, profiling results may be inconsistent.
+==PROF== Connected to process 16567 (/usr/bin/python3.13)
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 0: 0%....50%....100% - 44 passes
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 1: 0%....50%....100% - 44 passes
+==PROF== Profiling "rms_norm_dynamic_per_token_qu..." - 2: 0%....50%....100% - 44 passes
+[profile] variant=v1 T=16384 H=4096 bf16 residual=True seed=1234 iters=3 gpu=NVIDIA L4
+==PROF== Disconnected from process 16567
+==PROF== Report: /home/ta2828/ws2/reports/ncu/v1_NVIDIA_L4_H4096_T16384_warm.ncu-rep
+Done. Reports in reports/ncu/. Next: python analysis/parse_ncu.py reports/ncu

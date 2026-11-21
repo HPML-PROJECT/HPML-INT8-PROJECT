@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 # Run the whole WS2 profiling plan on the Google Cloud L4 VM, aligned with the Part 1 run.
-# Reuses Part 1's vLLM environment (~/rmsnorm_int8_bench/.venv), locks the SM clock at 2040 MHz like Part 1
-# (LOCK_CLOCKS=1), and runs ncu with sudo (Google Cloud blocks GPU counters for normal users).
-#   cd ~/ws2 && bash run_l4_vm.sh            # full plan (~1 h)
+# Reuses Part 1's vLLM environment (~/rmsnorm_int8_bench/.venv), requests a 2040 MHz SM clock like Part 1, and runs
+# ncu with sudo (Google Cloud blocks GPU counters for normal users). The L4's 72 W power cap can still pull the
+# clock below 2040 MHz under load, so absolute times vary; compare variants by ratio.
+#   cd ~/HPML-INT8-PROJECT/"gpu profling - bottleneck" && bash run_l4_vm.sh   # full plan (~1 h)
 #   QUICK=1 bash run_l4_vm.sh                # 1 hidden size, 2 token counts (~10 min) to test the setup
 set -euo pipefail
 cd "$(dirname "$0")"
@@ -27,7 +28,7 @@ ncu --version | tail -1; nsys --version
 python -c "import torch, vllm, triton; print('torch', torch.__version__, '| vllm', vllm.__version__, '| triton', triton.__version__, '|', torch.cuda.get_device_name())"
 echo "HIDDENS=$HIDDENS  TOKENS=$TOKENS  clock-control=$CLOCK_CONTROL"
 
-echo "== lock SM clock at 2040 MHz (same as Part 1) =="
+echo "== request SM clock 2040 MHz (same as Part 1; the power cap may still lower it) =="
 sudo nvidia-smi -pm 1 >/dev/null
 sudo nvidia-smi -lgc 2040,2040
 # always release the locked clock, even if a later step fails

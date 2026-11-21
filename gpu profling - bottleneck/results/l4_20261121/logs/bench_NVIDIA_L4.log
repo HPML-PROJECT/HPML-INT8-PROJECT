@@ -1,0 +1,60 @@
+T=8 H=2048
+W1121 22:43:24.688000 4938 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:43:24.688000 4938 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:43:24.689000 4938 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+v0: median 59.4 us (event timing, no graph; sanity only - use Part 1 numbers)
+v1: median 54.8 us (event timing, no graph; sanity only - use Part 1 numbers)
+T=256 H=2048
+W1121 22:43:27.126000 4951 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:43:27.127000 4951 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:43:27.128000 4951 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+v0: median 62.9 us (event timing, no graph; sanity only - use Part 1 numbers)
+v1: median 58.4 us (event timing, no graph; sanity only - use Part 1 numbers)
+T=1024 H=2048
+W1121 22:43:29.576000 4966 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:43:29.577000 4966 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:43:29.577000 4966 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+v0: median 59.3 us (event timing, no graph; sanity only - use Part 1 numbers)
+v1: median 74.8 us (event timing, no graph; sanity only - use Part 1 numbers)
+T=4096 H=2048
+W1121 22:43:32.063000 4979 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:43:32.063000 4979 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:43:32.064000 4979 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+v0: median 92.2 us (event timing, no graph; sanity only - use Part 1 numbers)
+v1: median 166.9 us (event timing, no graph; sanity only - use Part 1 numbers)
+T=16384 H=2048
+W1121 22:43:34.700000 4992 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:43:34.701000 4992 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:43:34.701000 4992 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+v0: median 1517.6 us (event timing, no graph; sanity only - use Part 1 numbers)
+v1: median 936.0 us (event timing, no graph; sanity only - use Part 1 numbers)
+T=8 H=4096
+W1121 22:43:37.915000 5010 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:43:37.916000 5010 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:43:37.916000 5010 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+v0: median 59.9 us (event timing, no graph; sanity only - use Part 1 numbers)
+v1: median 54.3 us (event timing, no graph; sanity only - use Part 1 numbers)
+T=256 H=4096
+W1121 22:43:40.341000 5022 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:43:40.341000 5022 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:43:40.342000 5022 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+v0: median 60.4 us (event timing, no graph; sanity only - use Part 1 numbers)
+v1: median 54.3 us (event timing, no graph; sanity only - use Part 1 numbers)
+T=1024 H=4096
+W1121 22:43:42.817000 5035 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:43:42.818000 5035 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:43:42.819000 5035 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+v0: median 59.4 us (event timing, no graph; sanity only - use Part 1 numbers)
+v1: median 86.0 us (event timing, no graph; sanity only - use Part 1 numbers)
+T=4096 H=4096
+W1121 22:43:45.352000 5048 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:43:45.353000 5048 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:43:45.353000 5048 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+v0: median 692.2 us (event timing, no graph; sanity only - use Part 1 numbers)
+v1: median 461.8 us (event timing, no graph; sanity only - use Part 1 numbers)
+T=16384 H=4096
+W1121 22:43:48.196000 5064 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:43:48.197000 5064 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:43:48.197000 5064 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+v0: median 3072.0 us (event timing, no graph; sanity only - use Part 1 numbers)
+v1: median 1987.1 us (event timing, no graph; sanity only - use Part 1 numbers)

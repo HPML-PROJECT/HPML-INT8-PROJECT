@@ -82,7 +82,7 @@ def main():
         hit = [" / ".join(f"{r['kernel'][:24]}: {r['L2_hit_%']}" for r in kern_m.get(((k[0], k[1], 'warm', k[3]), v), [])) for v in ("v0", "v1")]
         L.append(f"| {k[0]} | {k[1]} | {k[3]} | {row[0]} | {row[1]} | {hit[0]} | {hit[1]} |")
     L += ["", "## Caveats", "- Heuristic thresholds: " + str(TH),
-          "- Clock setting: see logs/ncu_*.log (base on clusters; locked 2040 MHz + clock-control none on the L4 VM, as in Part 1).",
+          "- Clock setting: see logs/ncu_*.log (base on clusters; on the L4 VM, 2040 MHz requested + clock-control none, as in Part 1, but the 72 W power cap can lower the clock, so compare ratios, not absolute times).",
           "- For V0, the L2 hit rate that matters for H2 is the quantization kernel's (it re-reads the normalized intermediate).",
           "- Low DRAM %peak alone does not prove scalar loads (see proposal H1); confirm with stalls and the load-width columns.",
           "- Warm mode means 'not flushed'; trust the L2 hit rate, not the label.",

@@ -1,0 +1,90 @@
+W1121 22:42:49.949000 4791 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:42:49.950000 4791 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:42:49.951000 4791 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[inputs] identical to Part 1 for T=8 H=2048 bf16 residual=True: YES
+[verify] T=8 H=2048 bf16 residual=True tolerances={'q_max_abs': 3, 'q_mismatch_frac': 0.15, 'scale_rtol': 0.016, 'scale_atol': 1e-06, 'dequant_lsb': 2.5, 'res_atol': 0.01, 'res_rtol': 0.001}
+  v0 vs ref: dequant max err = 1.074 INT8 steps, scales ok, residual max|diff| = 0.000e+00  PASS
+  v1 vs ref: dequant max err = 1.333 INT8 steps, scales ok, residual max|diff| = 0.000e+00  PASS
+  v1 vs v0: INT8 mismatch 8.46%, max step diff 2, scale max rel diff 7.69e-03  PASS
+[verify] RESULT: PASS
+W1121 22:42:52.682000 4803 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:42:52.683000 4803 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:42:52.683000 4803 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[inputs] identical to Part 1 for T=256 H=2048 bf16 residual=True: YES
+[verify] T=256 H=2048 bf16 residual=True tolerances={'q_max_abs': 3, 'q_mismatch_frac': 0.15, 'scale_rtol': 0.016, 'scale_atol': 1e-06, 'dequant_lsb': 2.5, 'res_atol': 0.01, 'res_rtol': 0.001}
+  v0 vs ref: dequant max err = 1.260 INT8 steps, scales ok, residual max|diff| = 0.000e+00  PASS
+  v1 vs ref: dequant max err = 1.687 INT8 steps, scales ok, residual max|diff| = 0.000e+00  PASS
+  v1 vs v0: INT8 mismatch 9.05%, max step diff 2, scale max rel diff 9.13e-03  PASS
+[verify] RESULT: PASS
+W1121 22:42:55.485000 4816 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:42:55.486000 4816 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:42:55.486000 4816 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[inputs] identical to Part 1 for T=1024 H=2048 bf16 residual=True: YES
+[verify] T=1024 H=2048 bf16 residual=True tolerances={'q_max_abs': 3, 'q_mismatch_frac': 0.15, 'scale_rtol': 0.016, 'scale_atol': 1e-06, 'dequant_lsb': 2.5, 'res_atol': 0.01, 'res_rtol': 0.001}
+  v0 vs ref: dequant max err = 1.362 INT8 steps, scales ok, residual max|diff| = 0.000e+00  PASS
+  v1 vs ref: dequant max err = 1.676 INT8 steps, scales ok, residual max|diff| = 0.000e+00  PASS
+  v1 vs v0: INT8 mismatch 8.89%, max step diff 2, scale max rel diff 9.09e-03  PASS
+[verify] RESULT: PASS
+W1121 22:42:58.332000 4832 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:42:58.332000 4832 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:42:58.333000 4832 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[inputs] identical to Part 1 for T=4096 H=2048 bf16 residual=True: YES
+[verify] T=4096 H=2048 bf16 residual=True tolerances={'q_max_abs': 3, 'q_mismatch_frac': 0.15, 'scale_rtol': 0.016, 'scale_atol': 1e-06, 'dequant_lsb': 2.5, 'res_atol': 0.01, 'res_rtol': 0.001}
+  v0 vs ref: dequant max err = 1.366 INT8 steps, scales ok, residual max|diff| = 0.000e+00  PASS
+  v1 vs ref: dequant max err = 1.752 INT8 steps, scales ok, residual max|diff| = 0.000e+00  PASS
+  v1 vs v0: INT8 mismatch 9.06%, max step diff 2, scale max rel diff 9.35e-03  PASS
+[verify] RESULT: PASS
+W1121 22:43:01.530000 4845 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:43:01.530000 4845 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:43:01.531000 4845 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[inputs] identical to Part 1 for T=16384 H=2048 bf16 residual=True: YES
+[verify] T=16384 H=2048 bf16 residual=True tolerances={'q_max_abs': 3, 'q_mismatch_frac': 0.15, 'scale_rtol': 0.016, 'scale_atol': 1e-06, 'dequant_lsb': 2.5, 'res_atol': 0.01, 'res_rtol': 0.001}
+  v0 vs ref: dequant max err = 1.416 INT8 steps, scales ok, residual max|diff| = 0.000e+00  PASS
+  v1 vs ref: dequant max err = 1.864 INT8 steps, scales ok, residual max|diff| = 0.000e+00  PASS
+  v1 vs v0: INT8 mismatch 8.89%, max step diff 2, scale max rel diff 9.48e-03  PASS
+[verify] RESULT: PASS
+W1121 22:43:06.109000 4858 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:43:06.110000 4858 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:43:06.111000 4858 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[inputs] identical to Part 1 for T=8 H=4096 bf16 residual=True: YES
+[verify] T=8 H=4096 bf16 residual=True tolerances={'q_max_abs': 3, 'q_mismatch_frac': 0.15, 'scale_rtol': 0.016, 'scale_atol': 1e-06, 'dequant_lsb': 2.5, 'res_atol': 0.01, 'res_rtol': 0.001}
+  v0 vs ref: dequant max err = 1.025 INT8 steps, scales ok, residual max|diff| = 0.000e+00  PASS
+  v1 vs ref: dequant max err = 1.102 INT8 steps, scales ok, residual max|diff| = 0.000e+00  PASS
+  v1 vs v0: INT8 mismatch 6.81%, max step diff 1, scale max rel diff 4.24e-03  PASS
+[verify] RESULT: PASS
+W1121 22:43:08.852000 4873 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:43:08.853000 4873 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:43:08.853000 4873 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[inputs] identical to Part 1 for T=256 H=4096 bf16 residual=True: YES
+[verify] T=256 H=4096 bf16 residual=True tolerances={'q_max_abs': 3, 'q_mismatch_frac': 0.15, 'scale_rtol': 0.016, 'scale_atol': 1e-06, 'dequant_lsb': 2.5, 'res_atol': 0.01, 'res_rtol': 0.001}
+  v0 vs ref: dequant max err = 1.178 INT8 steps, scales ok, residual max|diff| = 0.000e+00  PASS
+  v1 vs ref: dequant max err = 1.559 INT8 steps, scales ok, residual max|diff| = 0.000e+00  PASS
+  v1 vs v0: INT8 mismatch 8.65%, max step diff 2, scale max rel diff 8.85e-03  PASS
+[verify] RESULT: PASS
+W1121 22:43:11.675000 4889 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:43:11.675000 4889 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:43:11.676000 4889 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[inputs] identical to Part 1 for T=1024 H=4096 bf16 residual=True: YES
+[verify] T=1024 H=4096 bf16 residual=True tolerances={'q_max_abs': 3, 'q_mismatch_frac': 0.15, 'scale_rtol': 0.016, 'scale_atol': 1e-06, 'dequant_lsb': 2.5, 'res_atol': 0.01, 'res_rtol': 0.001}
+  v0 vs ref: dequant max err = 1.416 INT8 steps, scales ok, residual max|diff| = 0.000e+00  PASS
+  v1 vs ref: dequant max err = 1.728 INT8 steps, scales ok, residual max|diff| = 0.000e+00  PASS
+  v1 vs v0: INT8 mismatch 8.50%, max step diff 2, scale max rel diff 8.81e-03  PASS
+[verify] RESULT: PASS
+W1121 22:43:14.612000 4904 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:43:14.613000 4904 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:43:14.614000 4904 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[inputs] identical to Part 1 for T=4096 H=4096 bf16 residual=True: YES
+[verify] T=4096 H=4096 bf16 residual=True tolerances={'q_max_abs': 3, 'q_mismatch_frac': 0.15, 'scale_rtol': 0.016, 'scale_atol': 1e-06, 'dequant_lsb': 2.5, 'res_atol': 0.01, 'res_rtol': 0.001}
+  v0 vs ref: dequant max err = 1.416 INT8 steps, scales ok, residual max|diff| = 0.000e+00  PASS
+  v1 vs ref: dequant max err = 2.159 INT8 steps, scales ok, residual max|diff| = 0.000e+00  PASS
+  v1 vs v0: INT8 mismatch 8.51%, max step diff 2, scale max rel diff 9.39e-03  PASS
+[verify] RESULT: PASS
+W1121 22:43:18.272000 4920 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1121 22:43:18.273000 4920 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1121 22:43:18.273000 4920 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+[inputs] identical to Part 1 for T=16384 H=4096 bf16 residual=True: YES
+[verify] T=16384 H=4096 bf16 residual=True tolerances={'q_max_abs': 3, 'q_mismatch_frac': 0.15, 'scale_rtol': 0.016, 'scale_atol': 1e-06, 'dequant_lsb': 2.5, 'res_atol': 0.01, 'res_rtol': 0.001}
+  v0 vs ref: dequant max err = 1.416 INT8 steps, scales ok, residual max|diff| = 0.000e+00  PASS
+  v1 vs ref: dequant max err = 1.955 INT8 steps, scales ok, residual max|diff| = 0.000e+00  PASS
+  v1 vs v0: INT8 mismatch 8.45%, max step diff 2, scale max rel diff 9.26e-03  PASS
+[verify] RESULT: PASS

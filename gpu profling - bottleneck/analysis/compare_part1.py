@@ -34,7 +34,7 @@ def main():
             ncu[(r["gpu"], int(r["H"]), int(r["T"]), r["cache"], r["variant"])] = f(r["time_us"])
 
     L = ["# Part 1 vs Part 2 alignment (BF16, residual add)\n",
-         "Part 1 = CUDA-graph median (µs, locked clocks). Part 2 = Nsight Compute kernel time (µs, sum of V0's two kernels).",
+         "Part 1 = CUDA-graph median (µs; 2040 MHz requested, power-capped). Part 2 = Nsight Compute kernel time (µs, sum of V0's two kernels).",
          "Ratio = V1 / V0 (>1: fused is slower). 'agree' = both ratios on the same side of 1 (±10%).\n",
          "| GPU | H | T | cache | P1 V0 | P1 V1 | P1 ratio | ncu V0 | ncu V1 | ncu ratio | agree |",
          "|---|---|---|---|---|---|---|---|---|---|---|"]
