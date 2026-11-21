@@ -1,7 +1,7 @@
 # Proposed integration approach for V3 (fused Triton RMSNorm + INT8 quantization) in vLLM
 
 > Status: **proposal**. Hook locations must be confirmed against the installed vLLM version with
-> `python -m vllm_eval.integration.inspect_integration` (writes `results/integration_map.md` with file:line hits). Names below are the
+> `python src/inspect_integration.py` (writes `results/integration_map.md` with file:line hits). Names below are the
 > concepts to look for, not guaranteed paths.
 
 ## 1. What the W8A8 model does per decoder layer (Qwen3-1.7B)
