@@ -103,7 +103,9 @@ Known issue being investigated (vLLM #60499): V1 beats V0 at decode sizes but is
 
 ### 4b. Prepare the environment on the VM
 
-SSH in with `gcloud compute ssh <vm-name> --zone <zone>`, then run the following. Paths are examples; adjust them to your install.
+# 3. Go to the toolkit folder and make scripts executable
+cd "gpu profling - bottleneck"
+chmod +x run_all.sh scripts/*.sh slurm/job.sbatch harness/*.py analysis/*.py
 
 ```bash
 # 1. Check the GPU and driver (expect "NVIDIA L4", compute capability 8.9)

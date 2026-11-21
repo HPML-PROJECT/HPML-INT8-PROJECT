@@ -131,41 +131,39 @@ Results cover one operation, one serving system, one main model and up to three 
 .
 ├── README.md
 ├── .gitignore
-└── gpu profling - bottleneck/    WS2: Nsight profiling toolkit
-    ├── README.md                 how to run the sweep and read the tables
-    ├── run_all.sh                end-to-end driver
-    ├── slurm/job.sbatch          Slurm wrapper
-    ├── scripts/                  counter check, nsys, ncu sweep
-    ├── harness/profile_target.py V0/V1 calls (profile, verify, bench)
-    ├── analysis/                 parse reports and write the bottleneck note
-    ├── reports/                  ncu/ and nsys/ outputs (gitignored)
-    ├── tables/                   generated comparison tables (gitignored)
-    └── logs/                     per-step logs (gitignored)
+├── gpu profling - bottleneck/   Nsight profiling of the fused and unfused kernels
+└── vllm-evaluation/             end-to-end vLLM benchmark and integration notes
+    ├── README.md
+    ├── INTEGRATION_PROPOSAL.md
+    ├── run_all.sh
+    ├── setup_env.sh
+    ├── requirements.txt
+    ├── vllm_eval/               bench, profile, reporting, integration
+    ├── results/                 generated measurements (gitignored)
+    └── logs/                    per-step logs (gitignored)
 ```
 
-Each workstream lives in its own directory, with source, job scripts and generated results kept in separate folders. Folders for the other workstreams will be added as their code lands.
+## Profiling
 
-### Running WS2 (profiling)
+Compare the unfused path (V0) with the fused vLLM kernel (V1) using Nsight Systems and Nsight Compute.
 
-WS2 profiles V0 against V1 with Nsight Systems and Nsight Compute. Setup, the sweep and how to read the tables are in [gpu profling - bottleneck/README.md](<gpu profling - bottleneck/README.md>). On the GPU machine:
+Guide: [gpu profling - bottleneck/README.md](<gpu profling - bottleneck/README.md>).
 
 ```bash
 cd "gpu profling - bottleneck"
 ./run_all.sh
 ```
 
-## Key references
+## vLLM evaluation
 
-- vLLM Issue [#60499](https://github.com/vllm-project/vllm/issues/60499): RMSNorm and INT8 quant are never fused for W8A8 models; the fused kernel is up to 2× slower at prefill (sm_89)
-- vLLM [fusion `torch.compile` passes](https://docs.vllm.ai/en/latest/design/fusions/)
-- vLLM PRs [#26234](https://github.com/vllm-project/vllm/pull/26234) (vectorized RMSNorm variance read), [#38026](https://github.com/vllm-project/vllm/pull/38026) (Inductor quant fusion), [#45364](https://github.com/vllm-project/vllm/pull/45364) (manual RMSNorm-quant fusion), [#60224](https://github.com/vllm-project/vllm/pull/60224) (vectorized RMSNorm-quant kernel)
-- [AshrithaG/int8-linear](https://github.com/AshrithaG/int8-linear): Triton W8A8 INT8 kernels benchmarked against vLLM
-- Zhang & Sennrich, *Root Mean Square Layer Normalization*, NeurIPS 2019
-- Xiao et al., *SmoothQuant*, ICML 2023
-- Dettmers et al., *LLM.int8()*, NeurIPS 2022
-- Yao et al., *ZeroQuant*, NeurIPS 2022
-- Ivanov et al., *Data Movement Is All You Need*, MLSys 2021
-- Lin et al., *QServe*, MLSys 2025
-- Kwon et al., *PagedAttention (vLLM)*, SOSP 2023
-- Tillet et al., *Triton*, MAPL 2019
-- Williams et al., *Roofline*, CACM 2009
+Measure how much of Qwen3-1.7B inference on an NVIDIA L4 is RMSNorm and activation quantization, bound the end-to-end gain with Amdahl's law, and map where a fused kernel would plug into vLLM.
+
+Guide: [vllm-evaluation/README.md](vllm-evaluation/README.md).
+
+```bash
+cd vllm-evaluation
+VLLM_VERSION=<team-pinned-version> ./setup_env.sh
+source .venv/bin/activate
+python -m vllm_eval.reporting.selftest
+QUICK=1 ./run_all.sh
+```

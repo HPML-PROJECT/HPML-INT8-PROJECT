@@ -1,0 +1,5 @@
+# vLLM brings its own pinned torch. Pin vLLM to the team's version via VLLM_VERSION in setup_env.sh.
+datasets
+transformers
+pandas
+numpy
