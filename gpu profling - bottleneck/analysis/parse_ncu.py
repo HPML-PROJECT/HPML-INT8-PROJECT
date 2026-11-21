@@ -3,7 +3,7 @@
 Turn ncu reports into comparison tables.
   python analysis/parse_ncu.py reports/ncu   -> tables/memory_table.csv|md, tables/execution_table.csv|md
 Filename convention: <variant>_<gpu>_H<hidden>_T<tokens>_<cache>.ncu-rep
-Paths are relative to the ws2/ directory (the parent of this file's folder).
+Paths are relative to the toolkit directory (the parent of this file's folder).
 """
 import csv, glob, io, os, re, statistics, subprocess, sys
 from collections import defaultdict

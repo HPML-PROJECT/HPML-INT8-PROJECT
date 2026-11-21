@@ -41,14 +41,14 @@ Both variants perform the same work on a `(T tokens x H hidden)` BF16 activation
 
 Shapes: hidden size **2048** (Qwen3-1.7B) and optionally **4096** (8B-class models). Token counts: **8, 1024, 4096** (small, medium, large). The `--no-residual` flag switches both variants to plain RMSNorm + quant.
 
-Known issue being investigated (vLLM #60499): V1 beats V0 at decode sizes but is up to about 2x slower at prefill sizes on an RTX 4090. This toolkit measures why, on your GPUs.
+Known issue being investigated (vLLM #60499): V1 beats V0 at decode sizes but is up to about 2x slower at prefill sizes on an RTX 4090. This toolkit measures why on our GPU: an **NVIDIA L4 on Google Cloud** (Ada, sm_89, the same architecture as the RTX 4090; 24 GB, ~300 GB/s, 48 MB L2, 58 SMs, 72 W).
 
 ## 2. Folder contents
 
 | File | Purpose |
 |---|---|
 | `run_all.sh` | **Driver.** Runs every step in order, logs, resumable. |
-| `slurm/job.sbatch` | Slurm wrapper that calls `run_all.sh` (edit partition/GPU lines). |
+| `slurm/job.sbatch` | Optional Slurm wrapper for running on a cluster later (not used on the L4 VM). |
 | `scripts/check_ncu_counters.sh` | Step 0: checks that Nsight Compute can read GPU counters. |
 | `harness/profile_target.py` | Harness: V0/V1 calls with modes `profile`, `verify`, `bench`. |
 | `scripts/run_nsys.sh` | Nsight Systems timelines and kernel summaries. |
@@ -58,47 +58,77 @@ Known issue being investigated (vLLM #60499): V1 beats V0 at decode sizes but is
 
 ## 3. Prerequisites
 
-- A **GPU compute node** (not a login node). Use the same GPU type as WS1 for each run.
+- The team's **Google Cloud L4 VM**, the same GPU as WS1.
 - **CUDA toolkit with Nsight Compute (`ncu`) and Nsight Systems (`nsys`)** on `PATH`. Check with `ncu --version` and `nsys --version`.
 - **Python environment with vLLM** (the version pinned by the team) and its matching PyTorch. The harness imports `vllm._custom_ops`, so vLLM's compiled `_C` extension must be installed (a normal pip install of vLLM provides it).
-- **Permission to read GPU performance counters.** Shared clusters often block this. Step 0 checks it.
+- **Permission to read GPU performance counters.** The NVIDIA driver blocks them for non-root users by default, so on the VM you may need `sudo` (step 0 checks this).
 - `nvidia-smi` and `bash`. Python 3.9+.
 
 ## 4. One-time setup
 
-The exact module names and Slurm options depend on the cluster, so the lines below use placeholders.
+### 4a. Create the VM (once per team)
+
+- **Machine type:** a `g2-standard-*` instance. G2 is the GCP machine family that comes with an NVIDIA L4. `g2-standard-8` is enough for this toolkit.
+- **Boot image:** a GCP Deep Learning VM image with CUDA 12.x, so the NVIDIA driver and CUDA toolkit are preinstalled. With a plain Ubuntu image, install the driver yourself.
+- **Disk:** at least 100 GB. vLLM, PyTorch and the CUDA toolkit are large.
+- **Cost:** stop the VM when you're not using it. A stopped VM costs only its disk.
+
+### 4b. Prepare the environment on the VM
+
+SSH in with `gcloud compute ssh <vm-name> --zone <zone>`, then run the following. Paths are examples; adjust them to your install.
 
 ```bash
-# 1. Get a GPU node (interactive). Adjust partition/account/GPU type for your cluster.
-srun --gres=gpu:1 --time=03:00:00 --pty bash
+# 1. Check the GPU and driver (expect "NVIDIA L4", compute capability 8.9)
+nvidia-smi --query-gpu=name,driver_version,compute_cap --format=csv
 
-# 2. Load CUDA tools and activate the vLLM environment
-module load cuda                      # whatever provides ncu / nsys
-source ~/venvs/vllm/bin/activate      # your pinned vLLM env
+# 2. Make ncu and nsys available. pip-installed vLLM/PyTorch do NOT include them.
+export PATH=/usr/local/cuda/bin:$PATH        # add to ~/.bashrc
+ncu --version && nsys --version
+# If either is missing (pick the CUDA 12.x version that matches your driver):
+#   sudo apt-get install -y cuda-nsight-compute-12-4 nsight-systems
+# ncu must be 2022.3 or newer to support sm_89.
 
-# 3. Go to the toolkit folder and make scripts executable
-cd ws2
-chmod +x run_all.sh scripts/*.sh slurm/job.sbatch harness/*.py analysis/*.py
+# 3. Create the pinned vLLM environment (use the team's pinned version)
+python3 -m venv ~/venvs/vllm && source ~/venvs/vllm/bin/activate
+pip install "vllm==<pinned-version>"
 
-# 4. Confirm the environment
-nvidia-smi
+# 4. Get the code with git, not by copying files from a Windows laptop
+#    (Windows copies can have CRLF line endings, which break the bash scripts)
+git clone https://github.com/HPML-PROJECT/HPML-INT8-PROJECT.git
+cd "HPML-INT8-PROJECT/gpu profling - bottleneck"
+chmod +x run_all.sh scripts/*.sh harness/*.py analysis/*.py
+
+# 5. Confirm the environment
 python -c "import torch, vllm; print(torch.__version__, vllm.__version__, torch.cuda.get_device_name())"
 python -c "from vllm import _custom_ops as o; print([n for n in dir(o) if 'rms' in n or 'int8' in n])"
 ```
 
 The last command should list `fused_add_rms_norm`, `rms_norm`, `rms_norm_dynamic_per_token_quant` and `scaled_int8_quant`. If any are missing, see [Troubleshooting](#13-troubleshooting).
 
+### 4c. Allow GPU performance counters (recommended)
+
+By default the driver blocks performance counters for non-root users, so Nsight Compute fails with `ERR_NVGPUCTRPERM`. Running everything with `sudo` works, but then `reports/`, `tables/`, `logs/` and `.stamps/` are owned by root, and later runs without sudo can't overwrite them. Since we own the VM, enable counters for all users once instead:
+
+```bash
+echo 'options nvidia NVreg_RestrictProfilingToAdminUsers=0' | sudo tee /etc/modprobe.d/nvidia-profiling.conf
+sudo update-initramfs -u && sudo reboot
+# after the reboot, confirm:
+./scripts/check_ncu_counters.sh
+```
+
+If you already ran with sudo, take back ownership of the output files with `sudo chown -R $USER: reports tables logs .stamps`.
+
 ## 5. Quick start
 
 ```bash
-# Full plan on the current GPU (hidden 2048 and 4096, tokens 8/1024/4096, cold + warm)
+# Full plan on the L4 (hidden 2048 and 4096, tokens 8/1024/4096, cold + warm)
 ./run_all.sh
 
-# or as a batch job
-sbatch slurm/job.sbatch
+# if step 0 reports ERR_NVGPUCTRPERM, run as root while keeping your PATH and venv
+sudo -E env "PATH=$PATH" ./run_all.sh
 ```
 
-When it finishes, open `tables/memory_table.md`, `tables/execution_table.md` and `tables/bottleneck_analysis.md`. Repeat on each GPU type ([section 12](#12-running-on-several-gpus)).
+The sweep takes a while, so run it inside `tmux` or `screen` so it survives an SSH disconnect. When it finishes, open `tables/memory_table.md`, `tables/execution_table.md` and `tables/bottleneck_analysis.md`.
 
 Useful variations:
 
@@ -111,7 +141,7 @@ ONLY="ncu parse analyze" FORCE=1 ./run_all.sh    # redo selected steps
 
 ## 6. Step-by-step guide
 
-`run_all.sh` performs steps 0 to 6. You can also run each step by hand. Every command below is run from the toolkit folder on a GPU node.
+`run_all.sh` performs steps 0 to 6. You can also run each step by hand. Every command below is run from the toolkit folder on the L4 VM.
 
 ### Step 0: Check that Nsight Compute can read counters
 
@@ -120,7 +150,9 @@ ONLY="ncu parse analyze" FORCE=1 ./run_all.sh    # redo selected steps
 ```
 Prints the GPU, tool versions, and runs a tiny profile.
 - **Success:** `RESULT: OK - Nsight Compute can read counters on this GPU.`
-- **Failure:** `RESULT: FAIL (ERR_NVGPUCTRPERM)`. The driver blocks counters for normal users. Either ask the cluster admins to enable profiling for your account, or use the fallback: a **Google Cloud L4 VM** (Ada, sm_89, the same architecture as the L40S) and run the sweep with sudo, e.g. `sudo -E env "PATH=$PATH" ./scripts/run_ncu_sweep.sh`. Note in your report that the L4 has a different L2 size and bandwidth than the L40S.
+- **Failure:** `RESULT: FAIL (ERR_NVGPUCTRPERM)`. The driver blocks counters for non-root users. Since we own the VM, either:
+  - run with sudo: `sudo -E env "PATH=$PATH" ./run_all.sh` (or the same prefix on any single script), or
+  - allow counters for all users permanently: `echo 'options nvidia NVreg_RestrictProfilingToAdminUsers=0' | sudo tee /etc/modprobe.d/nvidia-profiling.conf`, then `sudo update-initramfs -u` and reboot the VM.
 
 Do not continue to step 4 until this passes. Steps 1 to 3 do not need counters.
 
@@ -176,7 +208,7 @@ Writes `tables/bottleneck_analysis.md`: for each GPU, hidden size, cache mode an
 ## 7. Output layout and naming
 
 ```
-ws2/
+gpu profling - bottleneck/
 ├── run_all.sh                 driver
 ├── slurm/job.sbatch
 ├── scripts/                   ncu/nsys sweeps and the counter check
@@ -192,7 +224,7 @@ ws2/
     ├── execution_table.csv / .md
     └── bottleneck_analysis.md
 ```
-Example name: `v1_NVIDIA_L40S_H2048_T4096_cold.ncu-rep` = variant V1, NVIDIA L40S, hidden 2048, 4096 tokens, cache flushed.
+Example name: `v1_NVIDIA_L4_H2048_T4096_cold.ncu-rep` = variant V1, NVIDIA L4, hidden 2048, 4096 tokens, cache flushed.
 
 ## 8. Configuration reference
 
@@ -221,7 +253,7 @@ The cache mode changes what the profile means, so every report records it in its
 | `cold` | `--cache-control all` (ncu default) | Caches are flushed before each replay pass, so data comes from DRAM. |
 | `warm` | `--cache-control none` | No flushing, so data left in L2 by earlier passes may be reused. |
 
-"Warm" only means "not flushed". **Check the measured L2 hit rate** instead of assuming the data was resident. This matters for hypothesis H2: the L40S has a large L2 (96 MB) that can hold a full intermediate tensor, while the A6000 has 6 MB.
+"Warm" only means "not flushed". **Check the measured L2 hit rate** instead of assuming the data was resident. This matters for hypothesis H2: the L4's 48 MB L2 can hold the full ~16 MB intermediate tensor (H = 2048, T = 4096), so warm-cache V0 may benefit from L2 reuse that a GPU with a small L2 (e.g. the A6000, 6 MB) would not get.
 
 ## 10. Reading the tables
 
@@ -254,25 +286,23 @@ The cache mode changes what the profile means, so every report records it in its
 
 Start from `tables/bottleneck_analysis.md`, then write about one page covering:
 
-1. **Where V1 stops winning.** Compare the time ratio at T = 8, 1024 and 4096. Is the crossover point the same on each GPU?
+1. **Where V1 stops winning.** Compare the time ratio at T = 8, 1024 and 4096, and compare the crossover with the RTX 4090 numbers in vLLM #60499. Compare ratios, not absolute µs: the L4 has about 3× less DRAM bandwidth.
 2. **H1: how the fused kernel moves data.** Look at `approx_B/ld_inst`, `ld_sectors/req`, the `inst` ratio, `DRAM_%peak`, occupancy and `top_stalls`. Low bandwidth alone does not prove scalar loads (the proposal cites about 40% DRAM throughput on sm_86), so look for agreement between load width, stalls and instruction counts.
-3. **H2: cache residency.** Compare warm and cold results and the L2 hit rate. Does the GPU with the larger L2 behave differently?
+3. **H2: cache residency.** Compare warm and cold results and the L2 hit rate. Does the V0 intermediate stay in the L4's L2 when warm?
 4. **Verdict per hypothesis:** supported, contradicted or inconclusive, with the numbers that justify it.
 5. **Hand-off:** list candidate causes for the ablation and Triton work (vectorized vs. scalar loads, one vs. two passes per row, register use).
 
 ## 12. Running on several GPUs
 
-Run the same toolkit once on each GPU type (A6000, L40S, and H100 if available). File names include the GPU, so results never overwrite each other, and `.stamps/` is tracked per GPU.
+All current results come from the L4. If another GPU type becomes available later, run the same toolkit there. File names include the GPU, so results never overwrite each other, and `.stamps/` is tracked per GPU. On a Slurm cluster, use `sbatch slurm/job.sbatch` after editing its partition/GPU lines.
 
 ```bash
-# on an A6000 node
-./run_all.sh
-# on an L40S node (same folder)
-./run_all.sh
-# afterwards, on any machine that has all reports/ncu files (needs only ncu for parsing)
+# copy reports to your laptop (the .ncu-rep files open in the Nsight Compute GUI)
+gcloud compute scp --recurse "<vm-name>:~/HPML-INT8-PROJECT/gpu\ profling\ -\ bottleneck/reports" "./gpu profling - bottleneck/" --zone <zone>
+
+# after collecting reports/ncu from every GPU into one folder (parsing needs only ncu)
 python analysis/parse_ncu.py reports/ncu && python analysis/analyze_bottlenecks.py
 ```
-Copy `reports/` between machines if you ran on different nodes with separate folders.
 
 ## 13. Troubleshooting
 
@@ -280,13 +310,16 @@ Copy `reports/` between machines if you ran on different nodes with separate fol
 |---|---|
 | `Could not import vllm._custom_ops` | Wrong environment. Activate the pinned vLLM env; check `python -c "import vllm"`. |
 | `AttributeError` for `fused_add_rms_norm`, `scaled_int8_quant` or `rms_norm_dynamic_per_token_quant` | Op names or signatures differ in your vLLM version. Run the `dir(o)` command in [section 4](#4-one-time-setup) and edit `call_v0`/`call_v1` in `harness/profile_target.py`. |
-| `ERR_NVGPUCTRPERM` | Counters blocked. See step 0 (admin request or L4 fallback). |
+| `ERR_NVGPUCTRPERM` | Counters blocked for non-root users. See step 0 (run with sudo, or set `NVreg_RestrictProfilingToAdminUsers=0`). |
 | ncu profiles nothing / empty reports | The NVTX filter did not match. In `scripts/run_ncu_sweep.sh` replace `--nvtx --nvtx-include "target/"` with `-k regex:"rms_norm\|int8_quant"`. |
 | ncu error: unknown metric | A metric name is not supported on your GPU/ncu version. Remove it from the `METRICS` list in `scripts/run_ncu_sweep.sh`; the parser leaves missing columns empty. |
+| `ncu` or `nsys`: command not found (often under sudo) | Add `/usr/local/cuda/bin` to `PATH`, and keep it under sudo with `sudo -E env "PATH=$PATH" ...`. |
 | Sweep is very slow | Reduce `TOKENS`, `CACHES` or `HIDDENS`, or switch `--set full` to `--set detailed`. |
 | `parse_ncu.py`: `skip (name)` | A report does not follow the naming pattern. Use the sweep script's names. |
 | Tables have empty or `nan` columns | The metric was not collected. Check the raw report in the GUI and the metric list. |
 | `analyze_bottlenecks.py`: missing tables | Run `parse_ncu.py` first. |
+| `/usr/bin/env: 'bash\r'` or `$'\r': command not found` | The scripts have Windows (CRLF) line endings. Clone with git on the VM, or run `sed -i 's/\r$//' run_all.sh scripts/*.sh`. |
+| `Permission denied` writing `reports/`, `tables/` or `.stamps/` | An earlier run used sudo. Run `sudo chown -R $USER: reports tables logs .stamps`. |
 | Step skipped unexpectedly | A stamp exists for this GPU. Use `FORCE=1`, or delete `.stamps/`. |
 
 ## 14. Limitations and caveats
@@ -295,13 +328,13 @@ Copy `reports/` between machines if you ran on different nodes with separate fol
 - Nsight Compute replays kernels and restores memory between passes, so the in-place ops are safe, but timing under replay is not the same as back-to-back CUDA-graph timing. Use this toolkit for **diagnosis**; use the WS1 benchmark for headline timings.
 - Kernel names vary across vLLM versions; tables use the names `ncu` reports.
 - The analysis flags use fixed thresholds (listed at the bottom of `bottleneck_analysis.md`). They suggest where to look and do not replace reading the numbers.
-- Results cover one operation, one serving system and the GPUs you can access.
+- Results cover one operation, one serving system and one GPU (the L4). The L4 is limited to 72 W; `ncu --clock-control base` keeps its clocks fixed during profiling, but WS1-style timings can drift as it heats up.
 
 ## 15. Final checklist
 
-- [ ] `check_ncu_counters.sh` reports OK (or the L4 fallback is documented)
+- [ ] `check_ncu_counters.sh` reports OK on the L4 (state whether sudo was needed)
 - [ ] `verify` logs show V0 and V1 do the same work
 - [ ] Nsight reports exist for every variant x token count x cache mode x hidden size, named with variant, GPU, shape and cache mode
-- [ ] `tables/memory_table.md` and `tables/execution_table.md` generated for each GPU
+- [ ] `tables/memory_table.md` and `tables/execution_table.md` generated
 - [ ] `tables/bottleneck_analysis.md` reviewed; hypothesis verdicts written with measurements
 - [ ] Cache mode and clock-control setting stated next to every reported number
