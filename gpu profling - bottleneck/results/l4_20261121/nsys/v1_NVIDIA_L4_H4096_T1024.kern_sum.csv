@@ -1,0 +1,5 @@
+Generating SQLite file reports/nsys/v1_NVIDIA_L4_H4096_T1024.sqlite from reports/nsys/v1_NVIDIA_L4_H4096_T1024.nsys-rep
+Processing [reports/nsys/v1_NVIDIA_L4_H4096_T1024.sqlite] with [/opt/nvidia/nsight-systems/2025.6.3/host-linux-x64/reports/cuda_gpu_kern_sum.py]... 
+Time (%),Total Time (ns),Instances,Avg (ns),Med (ns),Min (ns),Max (ns),StdDev (ns),Name
+100.0,1251672,25,50066.9,50143.0,49056,51488,552.5,"void vllm::rms_norm_dynamic_per_token_quant_kernel<c10::BFloat16, signed char, (bool)1>(T2 *, float *, const T1 *, const T1 *, const float *, float, int, int, T1 *)"
+

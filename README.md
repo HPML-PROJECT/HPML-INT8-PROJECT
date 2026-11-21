@@ -132,6 +132,7 @@ Results cover one operation, one serving system, one main model and up to three 
 ├── README.md
 ├── .gitignore
 ├── gpu profling - bottleneck/   Nsight profiling of the fused and unfused kernels
+│   └── results/l4_20261121/     WS2 results on the L4: tables, Nsight Systems reports, bottleneck analysis
 └── vllm-evaluation/             end-to-end vLLM benchmark and integration notes
     ├── README.md
     ├── INTEGRATION_PROPOSAL.md
@@ -148,6 +149,8 @@ Results cover one operation, one serving system, one main model and up to three 
 Compare the unfused path (V0) with the fused vLLM kernel (V1) using Nsight Systems and Nsight Compute.
 
 Guide: [gpu profling - bottleneck/README.md](<gpu profling - bottleneck/README.md>).
+
+**Results (L4, 2026-11-21):** [bottleneck analysis and tables](<gpu profling - bottleneck/results/l4_20261121/README.md>). V1 is 1.4–2.35× slower than V0 only when the data is already in L2; when data comes from DRAM it is 0.59–0.85× (faster), because it moves about 35% fewer bytes. Its slowdown comes from narrower loads, about 2.3× the instructions, a 66.7% occupancy cap from 1024-thread blocks, and block-wide barrier stalls.
 
 ```bash
 cd "gpu profling - bottleneck"

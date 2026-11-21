@@ -3,7 +3,8 @@
 # Every step logs to logs/, writes a stamp in .stamps/, and is skipped on re-run (FORCE=1 to redo).
 #   ./run_all.sh                         # full plan, hidden 2048 and 4096
 #   HIDDENS="2048" TOKENS="256 16384" ./run_all.sh
-# On the Google Cloud L4 VM use run_l4_vm.sh instead (sudo for counters, clocks locked like Part 1).
+# On the Google Cloud L4 VM use run_l4_vm.sh instead (sudo for counters; requests a 2040 MHz SM clock like Part 1,
+# but the L4's 72 W power cap can still lower it, so compare variants by ratio).
 #   ONLY="verify ncu" ./run_all.sh       # run selected steps only
 # Steps: counters -> verify -> bench -> nsys -> ncu -> parse -> analyze
 set -euo pipefail
@@ -32,8 +33,17 @@ step() {  # step <name> <command...>
 step counters ./scripts/check_ncu_counters.sh
 
 # 2. Fairness gate: V0 and V1 must do identical work, checked with Part 1's inputs, reference and tolerances.
-#    Exits on FAIL. Also confirms inputs are bit-identical to Part 1 (if PART1_DIR has bench_rmsnorm_int8.py).
-verify_all() { for H in $HIDDENS; do for T in $TOKENS; do "$PY" harness/profile_target.py --mode verify --tokens "$T" --hidden "$H"; done; done; }
+#    Checks every shape, then stops the pipeline if any shape failed. Also confirms inputs are bit-identical to
+#    Part 1 (if PART1_DIR has bench_rmsnorm_int8.py).
+#    The loops collect failures in rc: step() runs them inside an `if`, where `set -e` does not apply, so without
+#    rc only the last shape's exit status would count.
+verify_all() {
+  local rc=0
+  for H in $HIDDENS; do for T in $TOKENS; do
+    "$PY" harness/profile_target.py --mode verify --tokens "$T" --hidden "$H" || { echo "[verify] FAILED: T=$T H=$H"; rc=1; }
+  done; done
+  return $rc
+}
 step verify verify_all
 
 # 3. Quick event-timing sanity (NOT authoritative; shows the slowdown direction before the long profiles)
@@ -41,11 +51,11 @@ bench_all() { for H in $HIDDENS; do for T in $TOKENS; do echo "T=$T H=$H"; "$PY"
 step bench bench_all
 
 # 4. Nsight Systems (timeline, kernel counts, gaps)
-nsys_all() { for H in $HIDDENS; do ./scripts/run_nsys.sh "$H"; done; }
+nsys_all() { local rc=0; for H in $HIDDENS; do ./scripts/run_nsys.sh "$H" || rc=1; done; return $rc; }
 step nsys nsys_all
 
 # 5. Nsight Compute: variants x tokens x {cold,warm} x hidden
-ncu_all() { for H in $HIDDENS; do ./scripts/run_ncu_sweep.sh "$H"; done; }
+ncu_all() { local rc=0; for H in $HIDDENS; do ./scripts/run_ncu_sweep.sh "$H" || rc=1; done; return $rc; }
 step ncu ncu_all
 
 # 6. Tables  7. Bottleneck analysis

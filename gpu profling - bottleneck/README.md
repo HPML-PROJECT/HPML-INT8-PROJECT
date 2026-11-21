@@ -8,6 +8,8 @@ Workstream 2 of the HPML project *"Why Is Fused RMSNorm + INT8 Quantization Slow
 2. Memory and execution-resource comparison tables
 3. An initial bottleneck analysis with supporting measurements
 
+**Results from the L4 run (2026-11-21):** [results/l4_20261121/](results/l4_20261121/README.md), with the bottleneck analysis, the tables, the Nsight Systems reports and a checksum manifest for the Nsight Compute reports.
+
 ---
 
 ## 0. Alignment with Part 1 (WS1 baseline) — read first
@@ -21,7 +23,7 @@ This toolkit is set up to measure **exactly what Part 1 benchmarked** (`rmsnorm_
 | dtype / eps / residual | BF16 (main), eps 1e-6, residual add on | Same defaults |
 | Kernels | `torch.ops._C` fused_add_rms_norm + dynamic_scaled_int8_quant (V0); rms_norm_dynamic_per_token_quant (V1) | Same kernels via `vllm._custom_ops` |
 | Reference / tolerances | FP32 with vLLM's rounding points; ≤3 INT8 steps on ≤15%, scales 1.6%, dequant ≤2.5 steps | Same; `verify` **fails the run** if they are not met |
-| GPU / clocks | NVIDIA L4, SM clock locked at 2040 MHz | `run_l4_vm.sh` locks 2040 MHz and runs ncu with `--clock-control none` |
+| GPU / clocks | NVIDIA L4; clocks requested at 2040 MHz but power-capped (72 W), so not fixed | `run_l4_vm.sh` requests 2040 MHz and runs ncu with `--clock-control none`; the power cap still lowers clocks, so compare ratios, not absolute µs |
 | Token counts | 1–16384; V1 slower at 128–4096 (warm), faster at ≥ 8192 | Default `8 256 1024 4096 16384`: both sides of the switch |
 | Cold cache | 8×L2 buffer written before each call | ncu `--cache-control all` (flush before each replay) — same intent |
 | Warm cache | back-to-back calls in a CUDA graph | ncu `--cache-control none`; **not identical**: ncu replays each kernel separately, so V0's quant kernel may lose L2 reuse. Check its L2 hit rate and `tables/part1_vs_ncu.md` |
@@ -31,7 +33,7 @@ profiled shape, and flags shapes where they point different ways. Report those h
 
 **On the L4 VM (same VM and environment as Part 1):**
 ```bash
-cd ~/ws2
+cd ~/HPML-INT8-PROJECT/"gpu profling - bottleneck"
 QUICK=1 bash run_l4_vm.sh     # ~10 min setup test (H=2048, T=256 and 16384)
 bash run_l4_vm.sh             # full plan (~1 h); prints the results bundle path at the end
 ```
@@ -295,7 +297,7 @@ The cache mode changes what the profile means, so every report records it in its
 |---|---|
 | `variant`, `gpu`, `H`, `T`, `cache` | Configuration |
 | `kernel` | Kernel name; `TOTAL` = sum over the variant's kernels |
-| `time_us` | GPU kernel duration (Nsight Compute, base clocks) |
+| `time_us` | GPU kernel duration (Nsight Compute, at the run's clock setting: base, or power-capped 2040 MHz on the L4 VM) |
 | `dram_MB`, `dram_rd_MB`, `dram_wr_MB` | DRAM traffic |
 | `L2_MB`, `L2_hit_%` | L2 traffic and sector hit rate |
 | `DRAM_%peak` | DRAM throughput as a percent of peak |
@@ -360,7 +362,7 @@ python analysis/parse_ncu.py reports/ncu && python analysis/analyze_bottlenecks.
 - Nsight Compute replays kernels and restores memory between passes, so the in-place ops are safe, but timing under replay is not the same as back-to-back CUDA-graph timing. Use this toolkit for **diagnosis**; use the WS1 benchmark for headline timings.
 - Kernel names vary across vLLM versions; tables use the names `ncu` reports.
 - The analysis flags use fixed thresholds (listed at the bottom of `bottleneck_analysis.md`). They suggest where to look and do not replace reading the numbers.
-- Results cover one operation, one serving system and one GPU (the L4). The L4 is limited to 72 W; `ncu --clock-control base` keeps its clocks fixed during profiling, but WS1-style timings can drift as it heats up.
+- Results cover one operation, one serving system and one GPU (the L4). The L4 is limited to 72 W, and `run_l4_vm.sh` profiles with `--clock-control none`, so the power cap can lower the clock during a run. Compare variants by ratio, not absolute µs. (`run_all.sh` alone uses `--clock-control base`, which keeps clocks fixed.)
 
 ## 15. Final checklist
 
