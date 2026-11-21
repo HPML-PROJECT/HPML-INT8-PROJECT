@@ -64,81 +64,12 @@ Why is the fused RMSNorm + INT8 kernel slow at large token counts? Does this hol
 
 ## Current focus (midpoint)
 
-Work toward the midpoint report is split into four workstreams. All of them follow the shared conventions: the same shapes, dtypes, epsilon, timing method, GPU (L4), correctness tolerances and CSV result format. Every reported number states the hardware, dtype/backend, batch or token size, warm-up and number of repetitions.
+Work toward the midpoint report is split into four workstreams:
 
-### WS1: Baseline implementation and benchmarking
-
-**Objective:** measure the performance of the existing fused and unfused implementations.
-
-**Tasks**
-- Wrap V0 (vLLM's unfused RMSNorm + INT8 quantization ops) and V1 (vLLM's fused CUDA kernel). Add V2 (the existing Triton kernel) if feasible.
-- Cross-check V0, V1 and V2 outputs against each other within the shared tolerances.
-- Generate deterministic inputs for the shared token counts and hidden sizes.
-- Build a standalone benchmark script using the shared timing method (CUDA events/graphs).
-- Measure warm-cache latency across the representative sizes. Add the cold-cache protocol if time allows.
-- Compute speedups relative to V0 and plot them.
-
-**Deliverables**
-- V0/V1 (and V2) wrappers that pass the cross-check
-- A reproducible benchmark script, with results in the shared CSV format
-- Plots of latency vs. token count, and of speedup
-
-### WS2: GPU profiling and bottleneck analysis
-
-**Objective:** understand why the fused and unfused implementations perform differently.
-
-**Tasks**
-- Confirm early that Nsight Compute can read GPU performance counters on the L4 instance.
-- Set up V0/V1 calls for profiling independently of the WS1 scripts, using the shared shapes and the same GPU as WS1.
-- Profile with Nsight Compute and Nsight Systems.
-- Record the cache mode of every profile. Nsight Compute flushes caches by default (`--cache-control all`); use `--cache-control none` for warm-cache runs.
-- Measure DRAM traffic, L2 hit rate, memory throughput, registers, occupancy and warp stalls.
-- Compare small, medium and large token counts (e.g. T = 8, 1024, 4096).
-- Identify likely bottlenecks and form hypotheses that explain the behavior.
-
-**Deliverables**
-- Nsight reports labeled by variant, GPU, shape and cache mode
-- Tables comparing memory and execution-resource use
-- A first bottleneck analysis backed by measurements
-
-### WS3: Custom Triton kernel (V3) and optimization
-
-**Objective:** implement our own fused RMSNorm + INT8 quantization kernel and show first optimization results.
-
-**Tasks**
-- Implement V3 in Triton: residual addition, RMSNorm, per-token scaling and INT8 quantization, matching the shared interface.
-- Write an independent PyTorch FP32 reference implementation.
-- Check updated residuals, scales, INT8 outputs and dequantized-output error against the reference and V0, using the shared tolerances.
-- Test representative shapes and edge cases: all-zero rows, T = 1, T not a power of two, and large values.
-- Write a standalone V3 benchmark script using the shared timing method and the same GPU as WS1.
-- Try one or two kernel configurations (e.g. `num_warps`, row scheduling) and compare their latency.
-
-**Deliverables**
-- A working V3 Triton kernel
-- Automated correctness tests with a pass/fail summary
-- First V3 performance measurements in the shared CSV format
-- Early optimization and ablation results
-
-### WS4: vLLM model-level evaluation and integration feasibility
-
-**Objective:** understand how much RMSNorm and quantization affect real model inference.
-
-**Tasks**
-- Set up Qwen3-1.7B W8A8 inference with stock vLLM ([`nytopop/Qwen3-1.7B.w8a8`](https://huggingface.co/nytopop/Qwen3-1.7B.w8a8)), and the BF16 model ([`Qwen/Qwen3-1.7B`](https://huggingface.co/Qwen/Qwen3-1.7B)) for the precision comparison.
-- Run the fixed workloads:
-  - Prefill: 8 × 512-token prompts and 1 × 2,048-token prompt.
-  - Decode: batch sizes 1, 8 and 64, with 128 output tokens.
-- Benchmark prefill throughput and decode latency for W8A8 and BF16.
-- Measure baseline WikiText-2 perplexity for W8A8 and BF16.
-- Profile inference to find the RMSNorm and quantization ops, and estimate their share of inference time.
-- Compute the possible end-to-end speedup with Amdahl's Law, if the time breakdown allows it.
-- Investigate where the fused Triton kernel could be integrated into vLLM.
-
-**Deliverables**
-- A working stock-vLLM inference pipeline for W8A8 and BF16
-- Prefill and decode performance results, and baseline perplexity
-- A breakdown of model execution time, including the norm + quant share
-- A proposed approach for integrating V3
+1. **Baseline implementation and benchmarking:** run the existing fused and unfused implementations, benchmark latency and produce comparison plots.
+2. **GPU profiling and bottleneck analysis:** analyze memory traffic, occupancy and performance bottlenecks.
+3. **Custom Triton kernel and optimization:** implement our fused kernel (V3), validate its correctness and test first optimizations.
+4. **vLLM model-level evaluation:** run Qwen3 inference benchmarks, measure how much RMSNorm and quantization affect end-to-end time, and identify where a fused kernel can be integrated.
 
 ## Methodology
 
