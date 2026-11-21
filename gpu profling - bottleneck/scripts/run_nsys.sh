@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 # Nsight Systems timelines + kernel summaries (launch gaps, kernel counts, V0's 2 kernels vs V1's 1).
-# Usage: ./scripts/run_nsys.sh [HIDDEN]     env: TOKENS="8 1024 4096" VARIANTS="v0 v1"
+# Usage: ./scripts/run_nsys.sh [HIDDEN]     env: TOKENS="8 256 1024 4096 16384" VARIANTS="v0 v1"
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
-HIDDEN="${1:-2048}"; TOKENS="${TOKENS:-8 1024 4096}"; VARIANTS="${VARIANTS:-v0 v1}"
+HIDDEN="${1:-2048}"; TOKENS="${TOKENS:-8 256 1024 4096 16384}"; VARIANTS="${VARIANTS:-v0 v1}"
 PY="${PY:-python}"; OUT="${OUT:-reports/nsys}"
 GPU=$(nvidia-smi --query-gpu=name --format=csv,noheader | head -1 | tr -c 'A-Za-z0-9\n' '_' | sed 's/_*$//')
 mkdir -p "$OUT"

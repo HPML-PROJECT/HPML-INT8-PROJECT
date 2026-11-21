@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Step 0: verify Nsight Compute can read GPU performance counters on this node.
-# Usage: ./scripts/check_ncu_counters.sh   (from the profiling directory, on a GPU node)
+# Usage: ./scripts/check_ncu_counters.sh   (from the toolkit folder, on the L4 VM)
 set -u
 
 echo "== GPU =="
@@ -10,7 +10,7 @@ echo; echo "== Tools =="
 for t in ncu nsys python; do
   if command -v "$t" >/dev/null; then echo "$t: $(command -v $t)"; else echo "$t: MISSING"; fi
 done
-command -v ncu >/dev/null || { echo "Load a CUDA module (e.g. 'module load cuda') or install Nsight Compute."; exit 2; }
+command -v ncu >/dev/null || { echo "Add /usr/local/cuda/bin to PATH or install Nsight Compute."; exit 2; }
 ncu --version | tail -n 2
 
 echo; echo "== Counter access test =="
@@ -29,13 +29,12 @@ echo "$OUT" | tail -n 15
 if echo "$OUT" | grep -q "ERR_NVGPUCTRPERM"; then
   cat << 'MSG'
 
-RESULT: FAIL (ERR_NVGPUCTRPERM) - the driver blocks counters for non-admin users.
-Options:
-  1. Ask Insomnia admins to enable profiling for your account/partition
-     (driver option NVreg_RestrictProfilingToAdminUsers=0, or a profiling-enabled node).
-  2. FALLBACK: Google Cloud L4 VM (Ada, sm_89 - same architecture as the L40S, 24 GB, 48 MB L2).
-     Counters work as root/sudo:  sudo -E env "PATH=$PATH" ./scripts/run_ncu_sweep.sh
-     Record in the report that the L4 has a different L2 size / bandwidth than the L40S.
+RESULT: FAIL (ERR_NVGPUCTRPERM) - the driver blocks counters for non-root users.
+Options on the L4 VM:
+  1. Run as root, keeping PATH and the venv:  sudo -E env "PATH=$PATH" ./run_all.sh
+  2. Allow counters for all users permanently:
+       echo 'options nvidia NVreg_RestrictProfilingToAdminUsers=0' | sudo tee /etc/modprobe.d/nvidia-profiling.conf
+       sudo update-initramfs -u && sudo reboot
 MSG
   exit 1
 elif echo "$OUT" | grep -q "dram__bytes_read.sum"; then
