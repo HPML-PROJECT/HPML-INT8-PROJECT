@@ -1,0 +1,101 @@
+variant,gpu,hidden,tokens,cache,T,H,kernel,time_us,dram_MB,dram_rd_MB,dram_wr_MB,L2_MB,L2_hit_%,DRAM_%peak,dram_GBps,min_bytes_MB,dram/min
+v0,NVIDIA_L4,2048,8,cold,8,2048,TOTAL,6.3,0.135,0.135,0.0,0.358,nan,nan,21.5,0.119,1.14
+v0,NVIDIA_L4,2048,8,cold,8,2048,"std::enable_if<T2>0&&_typeConvert<T1>::exists, void>::type f",3.39,0.086,0.086,0.0,0.229,64.3,8.6,25.4,0.119,
+v0,NVIDIA_L4,2048,8,cold,8,2048,"void dynamic_scaled_int8_quant_kernel<BFloat16, float>",2.91,0.049,0.049,0.0,0.129,62.6,5.8,17.0,0.119,
+v1,NVIDIA_L4,2048,8,cold,8,2048,TOTAL,4.26,0.11,0.11,0.0,0.325,nan,nan,25.9,0.119,0.93
+v1,NVIDIA_L4,2048,8,cold,8,2048,"void rms_norm_dynamic_per_token_quant_kernel<BFloat16, signe",4.26,0.11,0.11,0.0,0.325,67.9,8.8,25.9,0.119,
+v0,NVIDIA_L4,2048,256,cold,256,2048,TOTAL,18.14,3.552,3.552,0.0,6.196,nan,nan,195.8,3.675,0.97
+v0,NVIDIA_L4,2048,256,cold,256,2048,"std::enable_if<T2>0&&_typeConvert<T1>::exists, void>::type f",11.3,2.38,2.38,0.0,4.515,53.4,70.7,210.7,3.675,
+v0,NVIDIA_L4,2048,256,cold,256,2048,"void dynamic_scaled_int8_quant_kernel<BFloat16, float>",6.85,1.173,1.173,0.0,1.68,37.1,57.3,171.2,3.675,
+v1,NVIDIA_L4,2048,256,cold,256,2048,TOTAL,15.1,2.336,2.336,0.0,4.123,nan,nan,154.7,3.675,0.64
+v1,NVIDIA_L4,2048,256,cold,256,2048,"void rms_norm_dynamic_per_token_quant_kernel<BFloat16, signe",15.1,2.336,2.336,0.0,4.123,48.3,51.7,154.7,3.675,
+v0,NVIDIA_L4,2048,1024,cold,1024,2048,TOTAL,53.41,13.967,13.967,0.0,23.666,nan,nan,261.5,14.688,0.95
+v0,NVIDIA_L4,2048,1024,cold,1024,2048,"std::enable_if<T2>0&&_typeConvert<T1>::exists, void>::type f",34.94,9.389,9.389,0.0,17.133,51.0,89.7,268.7,14.688,
+v0,NVIDIA_L4,2048,1024,cold,1024,2048,"void dynamic_scaled_int8_quant_kernel<BFloat16, float>",18.46,4.578,4.578,0.0,6.533,35.4,83.0,248.0,14.688,
+v1,NVIDIA_L4,2048,1024,cold,1024,2048,TOTAL,45.44,9.249,9.249,0.0,15.215,nan,nan,203.5,14.688,0.63
+v1,NVIDIA_L4,2048,1024,cold,1024,2048,"void rms_norm_dynamic_per_token_quant_kernel<BFloat16, signe",45.44,9.249,9.249,0.0,15.215,44.6,67.9,203.5,14.688,
+v0,NVIDIA_L4,2048,4096,cold,4096,2048,TOTAL,216.96,61.914,55.678,6.236,93.676,nan,nan,285.4,58.741,1.05
+v0,NVIDIA_L4,2048,4096,cold,4096,2048,"std::enable_if<T2>0&&_typeConvert<T1>::exists, void>::type f",152.26,43.811,37.576,6.236,67.699,50.5,96.0,287.7,58.741,
+v0,NVIDIA_L4,2048,4096,cold,4096,2048,"void dynamic_scaled_int8_quant_kernel<BFloat16, float>",64.7,18.103,18.103,0.0,25.977,35.2,93.4,279.8,58.741,
+v1,NVIDIA_L4,2048,4096,cold,4096,2048,TOTAL,171.78,40.37,36.8,3.57,59.353,nan,nan,235.0,58.741,0.69
+v1,NVIDIA_L4,2048,4096,cold,4096,2048,"void rms_norm_dynamic_per_token_quant_kernel<BFloat16, signe",171.78,40.37,36.8,3.57,59.353,43.4,78.4,235.0,58.741,
+v0,NVIDIA_L4,2048,16384,cold,16384,2048,TOTAL,1303.17,363.465,223.392,140.072,374.792,nan,nan,278.9,234.951,1.55
+v0,NVIDIA_L4,2048,16384,cold,16384,2048,"std::enable_if<T2>0&&_typeConvert<T1>::exists, void>::type f",990.46,274.069,151.039,123.029,270.63,50.3,92.0,276.7,234.951,
+v0,NVIDIA_L4,2048,16384,cold,16384,2048,"void dynamic_scaled_int8_quant_kernel<BFloat16, float>",312.7,89.396,72.353,17.043,104.162,35.5,95.5,285.9,234.951,
+v1,NVIDIA_L4,2048,16384,cold,16384,2048,TOTAL,833.89,231.155,144.987,86.168,235.906,nan,nan,277.2,234.951,0.98
+v1,NVIDIA_L4,2048,16384,cold,16384,2048,"void rms_norm_dynamic_per_token_quant_kernel<BFloat16, signe",833.89,231.155,144.987,86.168,235.906,43.1,92.6,277.2,234.951,
+v0,NVIDIA_L4,2048,8,warm,8,2048,TOTAL,5.18,0.0,0.0,0.0,0.353,nan,nan,0.1,0.119,0.0
+v0,NVIDIA_L4,2048,8,warm,8,2048,"std::enable_if<T2>0&&_typeConvert<T1>::exists, void>::type f",2.75,0.0,0.0,0.0,0.226,79.3,0.0,0.0,0.119,
+v0,NVIDIA_L4,2048,8,warm,8,2048,"void dynamic_scaled_int8_quant_kernel<BFloat16, float>",2.43,0.0,0.0,0.0,0.126,49.8,0.0,0.1,0.119,
+v1,NVIDIA_L4,2048,8,warm,8,2048,TOTAL,3.62,0.015,0.0,0.015,0.322,nan,nan,4.2,0.119,0.13
+v1,NVIDIA_L4,2048,8,warm,8,2048,"void rms_norm_dynamic_per_token_quant_kernel<BFloat16, signe",3.62,0.015,0.0,0.015,0.322,50.9,1.4,4.2,0.119,
+v0,NVIDIA_L4,2048,256,warm,256,2048,TOTAL,7.17,0.229,0.0,0.229,6.193,nan,nan,32.0,3.675,0.06
+v0,NVIDIA_L4,2048,256,warm,256,2048,"std::enable_if<T2>0&&_typeConvert<T1>::exists, void>::type f",3.9,0.167,0.0,0.167,4.513,98.9,14.5,42.8,3.675,
+v0,NVIDIA_L4,2048,256,warm,256,2048,"void dynamic_scaled_int8_quant_kernel<BFloat16, float>",3.26,0.062,0.0,0.062,1.68,96.1,6.6,19.1,3.675,
+v1,NVIDIA_L4,2048,256,warm,256,2048,TOTAL,11.84,0.088,0.0,0.088,4.121,nan,nan,7.5,3.675,0.02
+v1,NVIDIA_L4,2048,256,warm,256,2048,"void rms_norm_dynamic_per_token_quant_kernel<BFloat16, signe",11.84,0.088,0.0,0.088,4.121,96.1,2.5,7.5,3.675,
+v0,NVIDIA_L4,2048,1024,warm,1024,2048,TOTAL,16.32,0.063,0.0,0.063,23.619,nan,nan,3.9,14.688,0.0
+v0,NVIDIA_L4,2048,1024,warm,1024,2048,"std::enable_if<T2>0&&_typeConvert<T1>::exists, void>::type f",9.89,0.04,0.0,0.04,17.171,99.7,1.4,4.1,14.688,
+v0,NVIDIA_L4,2048,1024,warm,1024,2048,"void dynamic_scaled_int8_quant_kernel<BFloat16, float>",6.43,0.023,0.0,0.023,6.448,99.3,1.2,3.5,14.688,
+v1,NVIDIA_L4,2048,1024,warm,1024,2048,TOTAL,38.34,0.024,0.0,0.024,15.203,nan,nan,0.6,14.688,0.0
+v1,NVIDIA_L4,2048,1024,warm,1024,2048,"void rms_norm_dynamic_per_token_quant_kernel<BFloat16, signe",38.34,0.024,0.0,0.024,15.203,98.9,0.2,0.6,14.688,
+v0,NVIDIA_L4,2048,4096,warm,4096,2048,TOTAL,104.7,23.952,14.166,9.786,93.414,nan,nan,228.8,58.741,0.41
+v0,NVIDIA_L4,2048,4096,warm,4096,2048,"std::enable_if<T2>0&&_typeConvert<T1>::exists, void>::type f",86.3,23.905,14.166,9.74,67.815,86.2,91.9,277.0,58.741,
+v0,NVIDIA_L4,2048,4096,warm,4096,2048,"void dynamic_scaled_int8_quant_kernel<BFloat16, float>",18.4,0.047,0.0,0.047,25.599,99.9,0.8,2.5,58.741,
+v1,NVIDIA_L4,2048,4096,warm,4096,2048,TOTAL,168.1,32.187,18.366,13.821,59.347,nan,nan,191.5,58.741,0.55
+v1,NVIDIA_L4,2048,4096,warm,4096,2048,"void rms_norm_dynamic_per_token_quant_kernel<BFloat16, signe",168.1,32.187,18.366,13.821,59.347,71.5,63.9,191.5,58.741,
+v0,NVIDIA_L4,2048,16384,warm,16384,2048,TOTAL,1532.29,411.353,225.045,186.308,375.81,nan,nan,268.5,234.951,1.75
+v0,NVIDIA_L4,2048,16384,warm,16384,2048,"std::enable_if<T2>0&&_typeConvert<T1>::exists, void>::type f",1122.75,300.375,151.302,149.073,271.129,50.5,89.3,267.5,234.951,
+v0,NVIDIA_L4,2048,16384,warm,16384,2048,"void dynamic_scaled_int8_quant_kernel<BFloat16, float>",409.54,110.978,73.743,37.234,104.68,35.9,90.3,271.0,234.951,
+v1,NVIDIA_L4,2048,16384,warm,16384,2048,TOTAL,897.34,256.826,144.44,112.386,236.011,nan,nan,286.2,234.951,1.09
+v1,NVIDIA_L4,2048,16384,warm,16384,2048,"void rms_norm_dynamic_per_token_quant_kernel<BFloat16, signe",897.34,256.826,144.44,112.386,236.011,43.0,95.5,286.2,234.951,
+v0,NVIDIA_L4,4096,8,cold,8,4096,TOTAL,6.69,0.246,0.246,0.0,0.574,nan,nan,36.7,0.238,1.03
+v0,NVIDIA_L4,4096,8,cold,8,4096,"std::enable_if<T2>0&&_typeConvert<T1>::exists, void>::type f",3.62,0.161,0.161,0.0,0.395,61.4,15.1,44.4,0.238,
+v0,NVIDIA_L4,4096,8,cold,8,4096,"void dynamic_scaled_int8_quant_kernel<BFloat16, float>",3.07,0.085,0.085,0.0,0.179,57.3,9.5,27.6,0.238,
+v1,NVIDIA_L4,4096,8,cold,8,4096,TOTAL,4.96,0.185,0.185,0.0,0.473,nan,nan,37.4,0.238,0.78
+v1,NVIDIA_L4,4096,8,cold,8,4096,"void rms_norm_dynamic_per_token_quant_kernel<BFloat16, signe",4.96,0.185,0.185,0.0,0.473,65.4,12.6,37.4,0.238,
+v0,NVIDIA_L4,4096,256,cold,256,4096,TOTAL,30.91,7.067,7.067,0.0,12.227,nan,nan,228.6,7.349,0.96
+v0,NVIDIA_L4,4096,256,cold,256,4096,"std::enable_if<T2>0&&_typeConvert<T1>::exists, void>::type f",19.81,4.712,4.712,0.0,8.962,53.0,79.7,237.9,7.349,
+v0,NVIDIA_L4,4096,256,cold,256,4096,"void dynamic_scaled_int8_quant_kernel<BFloat16, float>",11.1,2.355,2.355,0.0,3.265,35.2,71.0,212.1,7.349,
+v1,NVIDIA_L4,4096,256,cold,256,4096,TOTAL,21.86,4.624,4.624,0.0,8.037,nan,nan,211.6,7.349,0.63
+v1,NVIDIA_L4,4096,256,cold,256,4096,"void rms_norm_dynamic_per_token_quant_kernel<BFloat16, signe",21.86,4.624,4.624,0.0,8.037,47.3,70.7,211.6,7.349,
+v0,NVIDIA_L4,4096,1024,cold,1024,4096,TOTAL,103.3,28.169,28.163,0.006,49.145,nan,nan,272.7,29.372,0.96
+v0,NVIDIA_L4,4096,1024,cold,1024,4096,"std::enable_if<T2>0&&_typeConvert<T1>::exists, void>::type f",68.45,18.845,18.838,0.006,35.28,52.3,92.0,275.3,29.372,
+v0,NVIDIA_L4,4096,1024,cold,1024,4096,"void dynamic_scaled_int8_quant_kernel<BFloat16, float>",34.85,9.325,9.325,0.0,13.865,39.2,89.4,267.6,29.372,
+v1,NVIDIA_L4,4096,1024,cold,1024,4096,TOTAL,68.1,18.193,18.193,0.0,30.234,nan,nan,267.2,29.372,0.62
+v1,NVIDIA_L4,4096,1024,cold,1024,4096,"void rms_norm_dynamic_per_token_quant_kernel<BFloat16, signe",68.1,18.193,18.193,0.0,30.234,44.5,89.2,267.2,29.372,
+v0,NVIDIA_L4,4096,4096,cold,4096,4096,TOTAL,556.29,155.732,112.867,42.865,198.915,nan,nan,279.9,117.465,1.33
+v0,NVIDIA_L4,4096,4096,cold,4096,4096,"std::enable_if<T2>0&&_typeConvert<T1>::exists, void>::type f",420.32,116.769,75.654,41.115,141.471,52.5,92.4,277.8,117.465,
+v0,NVIDIA_L4,4096,4096,cold,4096,4096,"void dynamic_scaled_int8_quant_kernel<BFloat16, float>",135.97,38.963,37.213,1.75,57.444,41.0,95.6,286.6,117.465,
+v1,NVIDIA_L4,4096,4096,cold,4096,4096,TOTAL,346.88,96.77,72.374,24.397,118.81,nan,nan,279.0,117.465,0.82
+v1,NVIDIA_L4,4096,4096,cold,4096,4096,"void rms_norm_dynamic_per_token_quant_kernel<BFloat16, signe",346.88,96.77,72.374,24.397,118.81,43.5,92.7,279.0,117.465,
+v0,NVIDIA_L4,4096,16384,cold,16384,4096,TOTAL,2869.15,786.795,453.393,333.401,797.633,nan,nan,274.2,469.836,1.67
+v0,NVIDIA_L4,4096,16384,cold,16384,4096,"std::enable_if<T2>0&&_typeConvert<T1>::exists, void>::type f",2150.69,584.983,304.635,280.348,567.47,52.6,90.8,272.0,469.836,
+v0,NVIDIA_L4,4096,16384,cold,16384,4096,"void dynamic_scaled_int8_quant_kernel<BFloat16, float>",718.46,201.812,148.758,53.054,230.163,41.9,93.5,280.9,469.836,
+v1,NVIDIA_L4,4096,16384,cold,16384,4096,TOTAL,1871.04,491.695,291.537,200.158,471.096,nan,nan,262.8,469.836,1.05
+v1,NVIDIA_L4,4096,16384,cold,16384,4096,"void rms_norm_dynamic_per_token_quant_kernel<BFloat16, signe",1871.04,491.695,291.537,200.158,471.096,43.0,87.7,262.8,469.836,
+v0,NVIDIA_L4,4096,8,warm,8,4096,TOTAL,5.57,0.0,0.0,0.0,0.569,nan,nan,0.1,0.238,0.0
+v0,NVIDIA_L4,4096,8,warm,8,4096,"std::enable_if<T2>0&&_typeConvert<T1>::exists, void>::type f",2.98,0.0,0.0,0.0,0.392,88.1,0.0,0.1,0.238,
+v0,NVIDIA_L4,4096,8,warm,8,4096,"void dynamic_scaled_int8_quant_kernel<BFloat16, float>",2.59,0.0,0.0,0.0,0.177,64.3,0.0,0.0,0.238,
+v1,NVIDIA_L4,4096,8,warm,8,4096,TOTAL,4.16,0.001,0.0,0.001,0.473,nan,nan,0.3,0.238,0.01
+v1,NVIDIA_L4,4096,8,warm,8,4096,"void rms_norm_dynamic_per_token_quant_kernel<BFloat16, signe",4.16,0.001,0.0,0.001,0.473,66.2,0.1,0.3,0.238,
+v0,NVIDIA_L4,4096,256,warm,256,4096,TOTAL,10.88,0.017,0.0,0.017,12.223,nan,nan,1.6,7.349,0.0
+v0,NVIDIA_L4,4096,256,warm,256,4096,"std::enable_if<T2>0&&_typeConvert<T1>::exists, void>::type f",6.43,0.012,0.0,0.012,8.965,99.5,0.6,1.8,7.349,
+v0,NVIDIA_L4,4096,256,warm,256,4096,"void dynamic_scaled_int8_quant_kernel<BFloat16, float>",4.45,0.005,0.0,0.005,3.258,98.0,0.4,1.2,7.349,
+v1,NVIDIA_L4,4096,256,warm,256,4096,TOTAL,15.1,0.014,0.0,0.014,8.029,nan,nan,0.9,7.349,0.0
+v1,NVIDIA_L4,4096,256,warm,256,4096,"void rms_norm_dynamic_per_token_quant_kernel<BFloat16, signe",15.1,0.014,0.0,0.014,8.029,98.1,0.3,0.9,7.349,
+v0,NVIDIA_L4,4096,1024,warm,1024,4096,TOTAL,26.53,0.213,0.0,0.213,48.889,nan,nan,8.0,29.372,0.01
+v0,NVIDIA_L4,4096,1024,warm,1024,4096,"std::enable_if<T2>0&&_typeConvert<T1>::exists, void>::type f",17.92,0.196,0.0,0.196,35.523,100.2,3.7,10.9,29.372,
+v0,NVIDIA_L4,4096,1024,warm,1024,4096,"void dynamic_scaled_int8_quant_kernel<BFloat16, float>",8.61,0.017,0.0,0.017,13.366,99.6,0.7,2.0,29.372,
+v1,NVIDIA_L4,4096,1024,warm,1024,4096,TOTAL,49.63,0.039,0.0,0.039,30.269,nan,nan,0.8,29.372,0.0
+v1,NVIDIA_L4,4096,1024,warm,1024,4096,"void rms_norm_dynamic_per_token_quant_kernel<BFloat16, signe",49.63,0.039,0.0,0.039,30.269,99.4,0.3,0.8,29.372,
+v0,NVIDIA_L4,4096,4096,warm,4096,4096,TOTAL,628.38,174.157,91.98,82.177,199.006,nan,nan,277.2,117.465,1.48
+v0,NVIDIA_L4,4096,4096,warm,4096,4096,"std::enable_if<T2>0&&_typeConvert<T1>::exists, void>::type f",535.33,148.595,75.641,72.954,141.728,53.2,92.8,277.6,117.465,
+v0,NVIDIA_L4,4096,4096,warm,4096,4096,"void dynamic_scaled_int8_quant_kernel<BFloat16, float>",93.06,25.562,16.338,9.224,57.278,88.7,91.3,274.7,117.465,
+v1,NVIDIA_L4,4096,4096,warm,4096,4096,TOTAL,471.07,127.072,72.446,54.626,118.376,nan,nan,269.8,117.465,1.08
+v1,NVIDIA_L4,4096,4096,warm,4096,4096,"void rms_norm_dynamic_per_token_quant_kernel<BFloat16, signe",471.07,127.072,72.446,54.626,118.376,43.5,90.0,269.8,117.465,
+v0,NVIDIA_L4,4096,16384,warm,16384,4096,TOTAL,3104.67,832.293,453.279,379.014,800.654,nan,nan,268.1,469.836,1.77
+v0,NVIDIA_L4,4096,16384,warm,16384,4096,"std::enable_if<T2>0&&_typeConvert<T1>::exists, void>::type f",2274.94,608.278,304.823,303.455,568.219,52.8,89.2,267.4,469.836,
+v0,NVIDIA_L4,4096,16384,warm,16384,4096,"void dynamic_scaled_int8_quant_kernel<BFloat16, float>",829.73,224.015,148.456,75.559,232.435,41.8,90.0,270.0,469.836,
+v1,NVIDIA_L4,4096,16384,warm,16384,4096,TOTAL,2011.46,515.458,291.751,223.706,471.085,nan,nan,256.3,469.836,1.1
+v1,NVIDIA_L4,4096,16384,warm,16384,4096,"void rms_norm_dynamic_per_token_quant_kernel<BFloat16, signe",2011.46,515.458,291.751,223.706,471.085,43.0,85.5,256.3,469.836,

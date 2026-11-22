@@ -8,6 +8,36 @@ Workstream 2 of the HPML project *"Why Is Fused RMSNorm + INT8 Quantization Slow
 2. Memory and execution-resource comparison tables
 3. An initial bottleneck analysis with supporting measurements
 
+**Results from the L4 run (2026-11-21):** [results/l4_20261121/](results/l4_20261121/README.md), with the bottleneck analysis, the tables, the Nsight Systems reports and a checksum manifest for the Nsight Compute reports.
+
+---
+
+## 0. Alignment with Part 1 (WS1 baseline) — read first
+
+This toolkit is set up to measure **exactly what Part 1 benchmarked** (`rmsnorm_int8_bench`, results
+`results_l4_20261121_213823`), so its numbers explain Part 1's results instead of a different workload.
+
+| Setting | Part 1 | This toolkit |
+|---|---|---|
+| Inputs | CPU generator, per-shape seed, seed 1234; x ~ N(0,1), w = 1 + 0.1·N(0,1), residual ~ N(0,1) | **Identical** (same code); `verify` checks bit-identity against Part 1's script if it is in `$PART1_DIR` |
+| dtype / eps / residual | BF16 (main), eps 1e-6, residual add on | Same defaults |
+| Kernels | `torch.ops._C` fused_add_rms_norm + dynamic_scaled_int8_quant (V0); rms_norm_dynamic_per_token_quant (V1) | Same kernels via `vllm._custom_ops` |
+| Reference / tolerances | FP32 with vLLM's rounding points; ≤3 INT8 steps on ≤15%, scales 1.6%, dequant ≤2.5 steps | Same; `verify` **fails the run** if they are not met |
+| GPU / clocks | NVIDIA L4; clocks requested at 2040 MHz but power-capped (72 W), so not fixed | `run_l4_vm.sh` requests 2040 MHz and runs ncu with `--clock-control none`; the power cap still lowers clocks, so compare ratios, not absolute µs |
+| Token counts | 1–16384; V1 slower at 128–4096 (warm), faster at ≥ 8192 | Default `8 256 1024 4096 16384`: both sides of the switch |
+| Cold cache | 8×L2 buffer written before each call | ncu `--cache-control all` (flush before each replay) — same intent |
+| Warm cache | back-to-back calls in a CUDA graph | ncu `--cache-control none`; **not identical**: ncu replays each kernel separately, so V0's quant kernel may lose L2 reuse. Check its L2 hit rate and `tables/part1_vs_ncu.md` |
+
+`analysis/compare_part1.py` writes `tables/part1_vs_ncu.md`: Part 1's V1/V0 ratio next to Nsight Compute's for every
+profiled shape, and flags shapes where they point different ways. Report those honestly.
+
+**On the L4 VM (same VM and environment as Part 1):**
+```bash
+cd ~/HPML-INT8-PROJECT/"gpu profling - bottleneck"
+QUICK=1 bash run_l4_vm.sh     # ~10 min setup test (H=2048, T=256 and 16384)
+bash run_l4_vm.sh             # full plan (~1 h); prints the results bundle path at the end
+```
+
 ---
 
 ## Contents
@@ -39,7 +69,7 @@ Both variants perform the same work on a `(T tokens x H hidden)` BF16 activation
 | **V0, unfused** | `fused_add_rms_norm(x, residual, w, eps)` then `scaled_int8_quant(x)` | 2 |
 | **V1, vLLM fused** | `rms_norm_dynamic_per_token_quant(x, w, eps, torch.int8, residual=residual)` | 1 |
 
-Shapes: hidden size **2048** (Qwen3-1.7B) and optionally **4096** (8B-class models). Token counts: **8, 1024, 4096** (small, medium, large). The `--no-residual` flag switches both variants to plain RMSNorm + quant.
+Shapes: hidden size **2048** (Qwen3-1.7B) and **4096** (8B-class models). Token counts: **8, 256, 1024, 4096, 16384** (decode, Part 1's slow zone, and the large size where V1 wins). The `--no-residual` flag switches both variants to plain RMSNorm + quant.
 
 Known issue being investigated (vLLM #60499): V1 beats V0 at decode sizes but is up to about 2x slower at prefill sizes on an RTX 4090. This toolkit measures why on our GPU: an **NVIDIA L4 on Google Cloud** (Ada, sm_89, the same architecture as the RTX 4090; 24 GB, ~300 GB/s, 48 MB L2, 58 SMs, 72 W).
 
@@ -69,13 +99,15 @@ Known issue being investigated (vLLM #60499): V1 beats V0 at decode sizes but is
 ### 4a. Create the VM (once per team)
 
 - **Machine type:** a `g2-standard-*` instance. G2 is the GCP machine family that comes with an NVIDIA L4. `g2-standard-8` is enough for this toolkit.
-- **Boot image:** a GCP Deep Learning VM image with CUDA 12.x, so the NVIDIA driver and CUDA toolkit are preinstalled. With a plain Ubuntu image, install the driver yourself.
+- **Boot image:** an image with the NVIDIA driver and a CUDA 13 toolkit. Our results came from a Debian 13 VM with driver 620.70.06, Nsight Compute 2026.1 and Nsight Systems 2025.6. With a plain image, install the driver and toolkit with Google's CUDA installer.
 - **Disk:** at least 100 GB. vLLM, PyTorch and the CUDA toolkit are large.
 - **Cost:** stop the VM when you're not using it. A stopped VM costs only its disk.
 
 ### 4b. Prepare the environment on the VM
 
-SSH in with `gcloud compute ssh <vm-name> --zone <zone>`, then run the following. Paths are examples; adjust them to your install.
+# 3. Go to the toolkit folder and make scripts executable
+cd "gpu profling - bottleneck"
+chmod +x run_all.sh scripts/*.sh slurm/job.sbatch harness/*.py analysis/*.py
 
 ```bash
 # 1. Check the GPU and driver (expect "NVIDIA L4", compute capability 8.9)
@@ -84,13 +116,14 @@ nvidia-smi --query-gpu=name,driver_version,compute_cap --format=csv
 # 2. Make ncu and nsys available. pip-installed vLLM/PyTorch do NOT include them.
 export PATH=/usr/local/cuda/bin:$PATH        # add to ~/.bashrc
 ncu --version && nsys --version
-# If either is missing (pick the CUDA 12.x version that matches your driver):
-#   sudo apt-get install -y cuda-nsight-compute-12-4 nsight-systems
+# If either is missing, install the CUDA toolkit (it includes ncu) with Google's installer:
+#   sudo python3 cuda_installer.pyz install_cuda
+# and add the Nsight Systems bin folder to PATH:  ls -d /usr/local/cuda*/nsight-systems*/bin /opt/nvidia/nsight-systems/*/bin
 # ncu must be 2022.3 or newer to support sm_89.
 
-# 3. Create the pinned vLLM environment (use the team's pinned version)
+# 3. Create the vLLM environment (the team's pinned version, as in the WS1 results)
 python3 -m venv ~/venvs/vllm && source ~/venvs/vllm/bin/activate
-pip install "vllm==<pinned-version>"
+pip install "vllm==0.34.0"
 
 # 4. Get the code with git, not by copying files from a Windows laptop
 #    (Windows copies can have CRLF line endings, which break the bash scripts)
@@ -233,7 +266,7 @@ Environment variables (set on the command line before the script):
 | Variable | Default | Used by | Meaning |
 |---|---|---|---|
 | `HIDDENS` | `2048 4096` | `run_all.sh` | Hidden sizes to run |
-| `TOKENS` | `8 1024 4096` | all sweeps | Token counts |
+| `TOKENS` | `8 256 1024 4096 16384` | all sweeps | Token counts |
 | `VARIANTS` | `v0 v1` | sweeps | Variants to profile |
 | `CACHES` | `cold warm` | `run_ncu_sweep.sh` | Cache modes |
 | `ONLY` | all steps | `run_all.sh` | Steps to run: `counters verify bench nsys ncu parse analyze` |
@@ -241,8 +274,10 @@ Environment variables (set on the command line before the script):
 | `PY` | `python` | sweeps | Python executable |
 | `OUT` | `reports/ncu` or `reports/nsys` | sweeps | Output folder |
 | `EXTRA` | empty | `run_ncu_sweep.sh` | Extra harness flags, e.g. `EXTRA="--no-residual"` |
+| `CLOCK_CONTROL` | `base` (`none` in `run_l4_vm.sh`) | `run_ncu_sweep.sh` | ncu clock control |
+| `PART1_DIR` | `~/rmsnorm_int8_bench` | harness, `run_l4_vm.sh` | Part 1 folder (input check, venv, results CSV) |
 
-Harness flags (`profile_target.py`): `--variant {v0,v1}`, `--tokens`, `--hidden`, `--dtype {bf16,fp16}`, `--no-residual`, `--mode {profile,verify,bench}`, `--iters` (profiled calls, default 3), `--warmup` (default 5), `--seed`.
+Harness flags (`profile_target.py`): `--variant {v0,v1}`, `--tokens`, `--hidden`, `--dtype {bf16,fp16}`, `--no-residual`, `--mode {profile,verify,bench}`, `--iters` (profiled calls, default 3), `--warmup` (default 5), `--seed` (default 1234, as in Part 1).
 
 ## 9. Cold vs. warm cache
 
@@ -263,7 +298,7 @@ The cache mode changes what the profile means, so every report records it in its
 |---|---|
 | `variant`, `gpu`, `H`, `T`, `cache` | Configuration |
 | `kernel` | Kernel name; `TOTAL` = sum over the variant's kernels |
-| `time_us` | GPU kernel duration (Nsight Compute, base clocks) |
+| `time_us` | GPU kernel duration (Nsight Compute, at the run's clock setting: base, or power-capped 2040 MHz on the L4 VM) |
 | `dram_MB`, `dram_rd_MB`, `dram_wr_MB` | DRAM traffic |
 | `L2_MB`, `L2_hit_%` | L2 traffic and sector hit rate |
 | `DRAM_%peak` | DRAM throughput as a percent of peak |
@@ -328,13 +363,15 @@ python analysis/parse_ncu.py reports/ncu && python analysis/analyze_bottlenecks.
 - Nsight Compute replays kernels and restores memory between passes, so the in-place ops are safe, but timing under replay is not the same as back-to-back CUDA-graph timing. Use this toolkit for **diagnosis**; use the WS1 benchmark for headline timings.
 - Kernel names vary across vLLM versions; tables use the names `ncu` reports.
 - The analysis flags use fixed thresholds (listed at the bottom of `bottleneck_analysis.md`). They suggest where to look and do not replace reading the numbers.
-- Results cover one operation, one serving system and one GPU (the L4). The L4 is limited to 72 W; `ncu --clock-control base` keeps its clocks fixed during profiling, but WS1-style timings can drift as it heats up.
+- Results cover one operation, one serving system and one GPU (the L4). The L4 is limited to 72 W, and `run_l4_vm.sh` profiles with `--clock-control none`, so the power cap can lower the clock during a run. Compare variants by ratio, not absolute µs. (`run_all.sh` alone uses `--clock-control base`, which keeps clocks fixed.)
 
 ## 15. Final checklist
 
-- [ ] `check_ncu_counters.sh` reports OK on the L4 (state whether sudo was needed)
-- [ ] `verify` logs show V0 and V1 do the same work
-- [ ] Nsight reports exist for every variant x token count x cache mode x hidden size, named with variant, GPU, shape and cache mode
-- [ ] `tables/memory_table.md` and `tables/execution_table.md` generated
-- [ ] `tables/bottleneck_analysis.md` reviewed; hypothesis verdicts written with measurements
-- [ ] Cache mode and clock-control setting stated next to every reported number
+Status for the L4 run of 2026-11-21 ([results/l4_20261121/](results/l4_20261121/README.md)):
+
+- [x] `check_ncu_counters.sh` reports OK on the L4 (state whether sudo was needed). OK; sudo was used (`run_l4_vm.sh` runs the pipeline with sudo). See `results/l4_20261121/logs/counters_NVIDIA_L4.log`.
+- [x] `verify` logs show V0 and V1 do the same work. PASS for all 10 shapes, with inputs bit-identical to Part 1 (`results/l4_20261121/logs/verify_NVIDIA_L4.log`).
+- [x] Nsight reports exist for every variant x token count x cache mode x hidden size, named with variant, GPU, shape and cache mode. Nsight Compute: all 40, listed with checksums in `results/l4_20261121/ncu/MANIFEST.md` (stored outside git). Nsight Systems timelines and kernel summaries are in `results/l4_20261121/nsys/`.
+- [x] `tables/memory_table.md` and `tables/execution_table.md` generated (`results/l4_20261121/tables/`).
+- [x] `tables/bottleneck_analysis.md` reviewed; hypothesis verdicts written with measurements. See [results/l4_20261121/README.md](results/l4_20261121/README.md) (sections 1–5), which corrects the auto-generated clock note.
+- [x] Cache mode and clock-control setting stated next to every reported number. Cache mode is in every table row and report name; the clock setting (`--clock-control none`, 2040 MHz requested, power-capped) is in the results README's setup and caveats and in each plot's footnote.

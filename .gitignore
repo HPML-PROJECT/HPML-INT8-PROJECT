@@ -21,7 +21,7 @@ env/
 .ruff_cache/
 *.egg-info/
 
-# WS2 generated runs. Directories stay via .gitkeep.
+# GPU profiling generated runs. Directories stay via .gitkeep.
 gpu profling - bottleneck/logs/*
 !gpu profling - bottleneck/logs/.gitkeep
 gpu profling - bottleneck/.stamps/
@@ -50,3 +50,9 @@ vllm-evaluation/results/*
 # Slurm and pipeline logs
 *.log
 slurm-*.out
+
+# Archived results of finished profiling runs and benchmark runs (committed on purpose; .ncu-rep and .sqlite stay out)
+!gpu profling - bottleneck/results/**/*.nsys-rep
+!gpu profling - bottleneck/results/**/*.kern_sum.csv
+!gpu profling - bottleneck/results/**/*.log
+!baseline-benchmark/results/**/*.log

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Step 0: verify Nsight Compute can read GPU performance counters on this node.
-# Usage: ./scripts/check_ncu_counters.sh   (from the profiling directory, on the L4 VM)
+# Usage: ./scripts/check_ncu_counters.sh   (from the toolkit folder, on the L4 VM)
 set -u
 
 echo "== GPU =="

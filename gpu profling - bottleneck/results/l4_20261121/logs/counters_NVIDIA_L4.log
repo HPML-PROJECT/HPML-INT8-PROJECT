@@ -1,0 +1,27 @@
+== GPU ==
+name, driver_version, compute_cap
+NVIDIA L4, 620.70.06, 8.9
+
+== Tools ==
+ncu: /usr/local/cuda/bin/ncu
+nsys: /usr/local/cuda/bin/nsys
+python: /home/ta2828/rmsnorm_int8_bench/.venv/bin/python
+Copyright (c) 2018-2026 NVIDIA Corporation
+Version 2026.1.1.0 (build 37634170) (public-release)
+
+== Counter access test ==
+==PROF== Connected to process 4761 (/usr/bin/python3.13)
+==PROF== Profiling "distribution_elementwise_grid..." - 0 (1/1): 0%....50%....100% - 3 passes
+==PROF== Disconnected from process 4761
+[4761] python3.13@127.0.0.1
+  void unnamed>::distribution_elementwise_grid_stride_kernel<float, 4, void normal_and_transform<float, float, CUDAGeneratorImpl *, void normal_kernel<CUDAGeneratorImpl *>(const TensorBase &, double, double, T1)::[lambda() (instance 1)]::operator ()() lambda() (instance 2)]::operator ()() lambda(float) (instance 1)]>(TensorIteratorBase &, T3, T4)::[lambda(curandStatePhilox4_32_10 *) (instance 2)], void unnamed>::distribution_nullary_kernel<float, float, float4, CUDAGeneratorImpl *, void normal_and_transform<float, float, CUDAGeneratorImpl *, void normal_kernel<CUDAGeneratorImpl *>(const TensorBase &, double, double, T1)::[lambda() (instance 1)]::operator ()() lambda() (instance 2)]::operator ()() lambda(float) (instance 1)]>(TensorIteratorBase &, T3, T4)::[lambda(curandStatePhilox4_32_10 *) (instance 2)], void normal_kernel<CUDAGeneratorImpl *>(const TensorBase &, double, double, T1)::[lambda() (instance 1)]::operator ()() lambda() (instance 2)]::operator ()() lambda(float) (instance 1)]>(TensorIteratorBase &, T4, const T5 &, T6)::[lambda(int, float) (instance 1)]>(long, PhiloxCudaState, T3, T4) (348, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Section: Command line profiler metrics
+    -------------------------- ----------- ------------
+    Metric Name                Metric Unit Metric Value
+    -------------------------- ----------- ------------
+    dram__bytes_read.sum             Kbyte        11.01
+    gpu__time_duration.sum              us         8.93
+    lts__t_sector_hit_rate.pct           %        99.72
+    -------------------------- ----------- ------------
+
+RESULT: OK - Nsight Compute can read counters on this GPU.
