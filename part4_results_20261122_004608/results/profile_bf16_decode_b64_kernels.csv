@@ -1,0 +1,26 @@
+kernel,category,calls,total_us,share_of_gpu_time
+void cutlass::Kernel2<cutlass_80_tensorop_bf16_s16816gemm_relu_bf16_256x128_32x3_tn_align8>(cutlass_80_tensorop_bf16_s16816gemm_relu_bf16_25,gemm,145,485807.5,0.69512
+ampere_bf16_s16816gemm_bf16_256x128_ldg8_f2f_stages_32x3_tn,gemm,896,209365.4,0.29957
+"void flash::flash_fwd_splitkv_kernel<Flash_fwd_kernel_traits<128, 64, 64, 4, false, false, cutlass::bfloat16_t, Flash_kernel_traits<128, 64,",gemm,896,147350.5,0.21084
+ampere_bf16_s16816gemm_bf16_64x64_ldg8_f2f_stages_64x5_tn,gemm,1792,138732.2,0.19851
+ampere_bf16_s16816gemm_bf16_128x64_ldg8_f2f_stages_64x3_tn,gemm,896,71198.3,0.10188
+triton_poi_fused_mul_silu_slice_1,activation,924,38135.0,0.05457
+triton_red_fused_fused_add_rms_norm_2,norm,924,19715.6,0.02821
+triton_red_fused_fused_add_rms_norm_0,norm,924,13990.8,0.02002
+"void flash::flash_fwd_splitkv_kernel<Flash_fwd_kernel_traits<128, 64, 128, 4, false, false, cutlass::bfloat16_t, Flash_kernel_traits<128, 64",gemm,28,12864.7,0.01841
+"void vllm::reshape_and_cache_flash_kernel<__nv_bfloat16, __nv_bfloat16, (vllm::Fp8KVCacheDataType)0>(__nv_bfloat16 const*, __nv_bfloat16 con",attention,924,10534.6,0.01507
+triton_per_fused_add_cat_index_select_mul_rms_norm_split_split_with_sizes_sub_unsqueeze_view_3,norm,891,9379.6,0.01342
+triton_per_fused_add_cat_index_select_mul_rms_norm_split_split_with_sizes_sub_unsqueeze_view_4,norm,891,6913.2,0.00989
+"void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&):",other,1792,6550.0,0.00937
+void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const:,other,33,4786.2,0.00685
+"void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&):",other,896,2175.8,0.00311
+_gumbel_sample_kernel,other,33,2143.1,0.00307
+triton_red_fused__to_copy_embedding_rms_norm_0,norm,33,434.4,0.00062
+_bias_kernel,other,33,434.3,0.00062
+triton_per_fused_add_cat_index_select_mul_rms_norm_split_split_with_sizes_sub_unsqueeze_view_1,norm,33,380.6,0.00054
+triton_per_fused_add_cat_index_select_mul_rms_norm_split_split_with_sizes_sub_unsqueeze_view_2,norm,33,263.2,0.00038
+_gather_block_tables_kernel,other,33,221.6,0.00032
+"void at::native::index_elementwise_kernel<128, 4, at::native::gpu_index_kernel<at::native::index_kernel_impl<at::native::OpaqueType<8> >(at:",other,33,196.4,0.00028
+_combine_sampled_and_draft_tokens_kernel,other,33,192.9,0.00028
+_get_num_sampled_and_rejected_kernel,other,33,192.6,0.00028
+_post_update_kernel,other,33,177.2,0.00025

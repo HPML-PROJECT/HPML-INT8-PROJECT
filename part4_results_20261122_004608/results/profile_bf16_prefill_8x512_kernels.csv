@@ -1,0 +1,26 @@
+kernel,category,calls,total_us,share_of_gpu_time
+void cutlass::Kernel2<cutlass_80_tensorop_bf16_s16816gemm_relu_bf16_256x128_32x3_tn_align8>(cutlass_80_tensorop_bf16_s16816gemm_relu_bf16_25,gemm,56,134898.7,0.53577
+ampere_bf16_s1688gemm_bf16_128x128_ldg8_f2f_stages_32x1_tn,gemm,56,68721.5,0.27294
+triton_poi_fused_mul_silu_slice_1,activation,28,16657.8,0.06616
+"void flash::flash_fwd_splitkv_kernel<Flash_fwd_kernel_traits<128, 64, 128, 4, false, false, cutlass::bfloat16_t, Flash_kernel_traits<128, 64",gemm,28,10314.7,0.04097
+triton_red_fused_fused_add_rms_norm_2,norm,28,7354.8,0.02921
+triton_red_fused_fused_add_rms_norm_0,norm,28,3761.3,0.01494
+"void vllm::reshape_and_cache_flash_kernel<__nv_bfloat16, __nv_bfloat16, (vllm::Fp8KVCacheDataType)0>(__nv_bfloat16 const*, __nv_bfloat16 con",attention,28,2934.2,0.01165
+triton_per_fused_add_cat_index_select_mul_rms_norm_split_split_with_sizes_sub_unsqueeze_view_3,norm,27,2807.2,0.01115
+void cutlass::Kernel2<cutlass_80_wmma_tensorop_bf16_s161616gemm_bf16_16x16_128x2_tn_align8>(cutlass_80_wmma_tensorop_bf16_s161616gemm_bf16_1,gemm,1,2550.8,0.01013
+triton_per_fused_add_cat_index_select_mul_rms_norm_split_split_with_sizes_sub_unsqueeze_view_4,norm,27,1430.4,0.00568
+triton_per_fused_add_cat_index_select_mul_rms_norm_split_split_with_sizes_sub_unsqueeze_view_1,norm,1,115.1,0.00046
+triton_red_fused__to_copy_embedding_rms_norm_0,norm,1,83.1,0.00033
+triton_per_fused_add_cat_index_select_mul_rms_norm_split_split_with_sizes_sub_unsqueeze_view_2,norm,1,46.5,0.00018
+_apply_write_kernel,other,4,24.4,0.0001
+_gumbel_sample_kernel,other,1,16.4,7e-05
+_prepare_prefill_inputs_kernel,other,1,7.2,3e-05
+"void at::native::index_elementwise_kernel<128, 4, at::native::gpu_index_kernel<at::native::index_kernel_impl<at::native::OpaqueType<8> >(at:",other,1,7.0,3e-05
+_post_update_kernel,other,1,5.9,2e-05
+"void at::native::index_elementwise_kernel<128, 4, at::native::gpu_index_kernel<at::native::index_kernel_impl<at::native::OpaqueType<4> >(at:",other,1,5.6,2e-05
+_gather_block_tables_kernel,other,1,5.3,2e-05
+_get_num_sampled_and_rejected_kernel,other,1,5.2,2e-05
+_combine_sampled_and_draft_tokens_kernel,other,1,4.5,2e-05
+_compute_slot_mappings_kernel,other,1,4.4,2e-05
+"void at::native::vectorized_elementwise_kernel<4, at::native::FillFunctor<int>, std::array<char*, 1ul>, false>(int, at::native::FillFunctor<",other,2,3.8,2e-05
+Memcpy DtoH (Device -> Pinned),memory,2,3.6,1e-05

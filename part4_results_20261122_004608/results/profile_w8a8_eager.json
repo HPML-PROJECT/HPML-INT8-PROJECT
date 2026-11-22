@@ -1,0 +1,830 @@
+{
+  "tag": "w8a8",
+  "model": "nytopop/Qwen3-1.7B.w8a8",
+  "gpu": "NVIDIA L4",
+  "mode": "eager",
+  "quantization": "compressed-tensors",
+  "env": {
+    "python": "3.13.5",
+    "torch": "2.14.0+cu130",
+    "cuda": "13.0",
+    "gpu": "NVIDIA L4",
+    "compute_capability": "8.9",
+    "smi": "NVIDIA L4, 620.70.06, 1200 MHz, 2040 MHz, 6251 MHz, 30.97 W, 72.00 W, 68.16, 18864 MiB, 23034 MiB",
+    "vllm": "0.34.0",
+    "transformers": "5.22.2"
+  },
+  "phases": {
+    "prefill_8x512": {
+      "metrics": {
+        "total_us": 190949.275,
+        "span_us": 193895.625,
+        "n_kernels": 476,
+        "by_cat_us": {
+          "quant": 11716.414000000004,
+          "norm": 14156.829999999994,
+          "norm_quant_fused": 0.0,
+          "gemm": 142272.35100000002,
+          "attention": 2684.0650000000005,
+          "activation": 17412.478,
+          "rope": 2533.217,
+          "memory": 4.705,
+          "other": 169.215
+        },
+        "by_cat_n": {
+          "quant": 112,
+          "norm": 113,
+          "norm_quant_fused": 0,
+          "gemm": 141,
+          "attention": 28,
+          "activation": 28,
+          "rope": 28,
+          "memory": 4,
+          "other": 22
+        },
+        "fusable": {
+          "norm_us": 8905.345,
+          "norm_n": 56,
+          "quant_us": 2021.4379999999996,
+          "quant_n": 56
+        },
+        "top": [
+          {
+            "name": "void cutlass::Kernel2<enable_sm89_to_sm90<cutlass::gemm::kernel::DefaultGemmWithVisitor<signed char, cutlass::layout::RowMajor, (cutlass::Co",
+            "cat": "gemm",
+            "n": 112,
+            "us": 130625.49700000002
+          },
+          {
+            "name": "void vllm::act_and_mul_kernel<c10::BFloat16, __nv_bfloat162, &(c10::BFloat16 vllm::silu_kernel<c10::BFloat16>(c10::BFloat16 const&, float)),",
+            "cat": "activation",
+            "n": 28,
+            "us": 17412.478
+          },
+          {
+            "name": "void vllm::dynamic_scaled_int8_quant_kernel<c10::BFloat16, float>(c10::BFloat16 const*, signed char*, float*, int)",
+            "cat": "quant",
+            "n": 112,
+            "us": 11716.414000000004
+          },
+          {
+            "name": "std::enable_if<(((8)>(0)))&&vllm::_typeConvert<c10::BFloat16>::exists, void>::type vllm::fused_add_rms_norm_kernel<c10::BFloat16, 8, true>(c",
+            "cat": "norm",
+            "n": 56,
+            "us": 9051.905999999999
+          },
+          {
+            "name": "void flash::flash_fwd_splitkv_kernel<Flash_fwd_kernel_traits<128, 64, 128, 4, false, false, cutlass::bfloat16_t, Flash_kernel_traits<128, 64",
+            "cat": "gemm",
+            "n": 28,
+            "us": 9016.133
+          },
+          {
+            "name": "void vllm::rms_norm_kernel<c10::BFloat16, 8, 3, true>(c10::BFloat16*, c10::BFloat16 const*, long, long, long, long, long, c10::BFloat16 cons",
+            "cat": "norm",
+            "n": 56,
+            "us": 5070.493
+          },
+          {
+            "name": "void vllm::reshape_and_cache_flash_kernel<__nv_bfloat16, __nv_bfloat16, (vllm::Fp8KVCacheDataType)0>(__nv_bfloat16 const*, __nv_bfloat16 con",
+            "cat": "attention",
+            "n": 28,
+            "us": 2684.0650000000005
+          },
+          {
+            "name": "void cutlass::Kernel2<cutlass_80_wmma_tensorop_bf16_s161616gemm_bf16_16x16_128x2_tn_align8>(cutlass_80_wmma_tensorop_bf16_s161616gemm_bf16_1",
+            "cat": "gemm",
+            "n": 1,
+            "us": 2630.721
+          },
+          {
+            "name": "void vllm::rotary_embedding_kernel<c10::BFloat16, c10::BFloat16, true>(long const*, c10::BFloat16*, c10::BFloat16*, c10::BFloat16 const*, in",
+            "cat": "rope",
+            "n": 28,
+            "us": 2533.217
+          },
+          {
+            "name": "void at::native::vectorized_gather_kernel<16, long>(char*, char*, long*, int, long, long, long, long, bool)",
+            "cat": "other",
+            "n": 2,
+            "us": 69.504
+          },
+          {
+            "name": "void vllm::rms_norm_kernel<c10::BFloat16, 8, 2, true>(c10::BFloat16*, c10::BFloat16 const*, long, long, long, long, long, c10::BFloat16 cons",
+            "cat": "norm",
+            "n": 1,
+            "us": 34.431
+          },
+          {
+            "name": "_apply_write_kernel",
+            "cat": "other",
+            "n": 4,
+            "us": 24.384000000000004
+          },
+          {
+            "name": "_gumbel_sample_kernel",
+            "cat": "other",
+            "n": 1,
+            "us": 16.416
+          },
+          {
+            "name": "_prepare_prefill_inputs_kernel",
+            "cat": "other",
+            "n": 1,
+            "us": 7.52
+          },
+          {
+            "name": "void at::native::index_elementwise_kernel<128, 4, at::native::gpu_index_kernel<at::native::index_kernel_impl<at::native::OpaqueType<8> >(at:",
+            "cat": "other",
+            "n": 1,
+            "us": 5.824
+          },
+          {
+            "name": "_gather_block_tables_kernel",
+            "cat": "other",
+            "n": 1,
+            "us": 5.536
+          },
+          {
+            "name": "_get_num_sampled_and_rejected_kernel",
+            "cat": "other",
+            "n": 1,
+            "us": 4.896
+          },
+          {
+            "name": "_post_update_kernel",
+            "cat": "other",
+            "n": 1,
+            "us": 4.832
+          },
+          {
+            "name": "void at::native::index_elementwise_kernel<128, 4, at::native::gpu_index_kernel<at::native::index_kernel_impl<at::native::OpaqueType<4> >(at:",
+            "cat": "other",
+            "n": 1,
+            "us": 4.8
+          },
+          {
+            "name": "_combine_sampled_and_draft_tokens_kernel",
+            "cat": "other",
+            "n": 1,
+            "us": 4.544
+          },
+          {
+            "name": "void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const:",
+            "cat": "other",
+            "n": 1,
+            "us": 4.511
+          },
+          {
+            "name": "_compute_slot_mappings_kernel",
+            "cat": "other",
+            "n": 1,
+            "us": 4.448
+          },
+          {
+            "name": "Memcpy DtoH (Device -> Pinned)",
+            "cat": "memory",
+            "n": 2,
+            "us": 3.584
+          },
+          {
+            "name": "void at::native::vectorized_elementwise_kernel<4, at::native::FillFunctor<int>, std::array<char*, 1ul>, false>(int, at::native::FillFunctor<",
+            "cat": "other",
+            "n": 2,
+            "us": 3.52
+          },
+          {
+            "name": "_gumbel_combine_kernel",
+            "cat": "other",
+            "n": 1,
+            "us": 2.72
+          }
+        ]
+      },
+      "shares": {
+        "norm": 0.07413921838666314,
+        "quant": 0.06135877708883684,
+        "norm_quant_fused": 0.0,
+        "norm_plus_quant": 0.13549799547549998,
+        "fusable_region": 0.0572234851376105,
+        "gemm": 0.7450792939643266,
+        "attention": 0.01405642938419117,
+        "activation": 0.09118902389129259,
+        "rope": 0.013266439477185761,
+        "memory": 2.46400516576981e-05,
+        "other": 0.0008861777558464152
+      },
+      "wall_s": 0.2027687910003806,
+      "gpu_busy_frac_of_wall": 0.9417093925447413
+    },
+    "decode_b1": {
+      "metrics": {
+        "total_us": 354887.435,
+        "span_us": 1279017.0869140625,
+        "n_kernels": 16932,
+        "by_cat_us": {
+          "quant": 11242.036999999966,
+          "norm": 12317.813000000233,
+          "norm_quant_fused": 0.0,
+          "gemm": 316399.2790000004,
+          "attention": 3498.7220000000084,
+          "activation": 3351.069999999998,
+          "rope": 3611.715999999998,
+          "memory": 1843.6359999999877,
+          "other": 2623.1620000000025
+        },
+        "by_cat_n": {
+          "quant": 3584,
+          "norm": 3616,
+          "norm_quant_fused": 0,
+          "gemm": 5408,
+          "attention": 896,
+          "activation": 896,
+          "rope": 896,
+          "memory": 1024,
+          "other": 612
+        },
+        "fusable": {
+          "norm_us": 6697.032000000049,
+          "norm_n": 1792,
+          "quant_us": 5148.7720000000845,
+          "quant_n": 1792
+        },
+        "top": [
+          {
+            "name": "void cutlass::Kernel2<enable_sm89_to_sm90<cutlass::gemm::kernel::DefaultGemmWithVisitor<signed char, cutlass::layout::RowMajor, (cutlass::Co",
+            "cat": "gemm",
+            "n": 2688,
+            "us": 115154.32899999995
+          },
+          {
+            "name": "void cutlass::Kernel2<enable_sm89_to_sm90<cutlass::gemm::kernel::DefaultGemmWithVisitor<signed char, cutlass::layout::RowMajor, (cutlass::Co",
+            "cat": "gemm",
+            "n": 896,
+            "us": 105826.6210000002
+          },
+          {
+            "name": "std::enable_if<!(false), void>::type internal::gemvx::kernel<int, int, __nv_bfloat16, __nv_bfloat16, __nv_bfloat16, float, false, true, true",
+            "cat": "gemm",
+            "n": 33,
+            "us": 80830.69800000002
+          },
+          {
+            "name": "void vllm::dynamic_scaled_int8_quant_kernel<c10::BFloat16, float>(c10::BFloat16 const*, signed char*, float*, int)",
+            "cat": "quant",
+            "n": 3696,
+            "us": 11708.537999999966
+          },
+          {
+            "name": "void flash::flash_fwd_splitkv_kernel<Flash_fwd_kernel_traits<128, 64, 128, 4, false, false, cutlass::bfloat16_t, Flash_kernel_traits<128, 64",
+            "cat": "gemm",
+            "n": 896,
+            "us": 11124.659999999976
+          },
+          {
+            "name": "std::enable_if<(((8)>(0)))&&vllm::_typeConvert<c10::BFloat16>::exists, void>::type vllm::fused_add_rms_norm_kernel<c10::BFloat16, 8, true>(c",
+            "cat": "norm",
+            "n": 1848,
+            "us": 7152.619000000051
+          },
+          {
+            "name": "void flash::flash_fwd_splitkv_combine_kernel<Flash_fwd_kernel_traits<128, 64, 128, 4, false, false, cutlass::bfloat16_t, Flash_kernel_traits",
+            "cat": "gemm",
+            "n": 896,
+            "us": 5900.336999999966
+          },
+          {
+            "name": "void vllm::rms_norm_kernel<c10::BFloat16, 8, 3, true>(c10::BFloat16*, c10::BFloat16 const*, long, long, long, long, long, c10::BFloat16 cons",
+            "cat": "norm",
+            "n": 1848,
+            "us": 5811.022000000007
+          },
+          {
+            "name": "void cutlass::Kernel2<enable_sm89_to_sm90<cutlass::gemm::kernel::DefaultGemmWithVisitor<signed char, cutlass::layout::RowMajor, (cutlass::Co",
+            "cat": "gemm",
+            "n": 84,
+            "us": 5096.966
+          },
+          {
+            "name": "void cutlass::Kernel2<enable_sm89_to_sm90<cutlass::gemm::kernel::DefaultGemmWithVisitor<signed char, cutlass::layout::RowMajor, (cutlass::Co",
+            "cat": "gemm",
+            "n": 28,
+            "us": 4652.545000000001
+          },
+          {
+            "name": "void vllm::rotary_embedding_kernel<c10::BFloat16, c10::BFloat16, true>(long const*, c10::BFloat16*, c10::BFloat16*, c10::BFloat16 const*, in",
+            "cat": "rope",
+            "n": 924,
+            "us": 3775.271999999998
+          },
+          {
+            "name": "void vllm::reshape_and_cache_flash_kernel<__nv_bfloat16, __nv_bfloat16, (vllm::Fp8KVCacheDataType)0>(__nv_bfloat16 const*, __nv_bfloat16 con",
+            "cat": "attention",
+            "n": 924,
+            "us": 3638.529000000008
+          },
+          {
+            "name": "void vllm::act_and_mul_kernel<c10::BFloat16, __nv_bfloat162, &(c10::BFloat16 vllm::silu_kernel<c10::BFloat16>(c10::BFloat16 const&, float)),",
+            "cat": "activation",
+            "n": 924,
+            "us": 3562.844999999998
+          },
+          {
+            "name": "Memcpy DtoD (Device -> Device)",
+            "cat": "memory",
+            "n": 896,
+            "us": 1703.030999999989
+          },
+          {
+            "name": "void flash::flash_fwd_splitkv_kernel<Flash_fwd_kernel_traits<128, 64, 128, 4, false, false, cutlass::bfloat16_t, Flash_kernel_traits<128, 64",
+            "cat": "gemm",
+            "n": 28,
+            "us": 426.6889999999999
+          },
+          {
+            "name": "_gumbel_sample_kernel",
+            "cat": "other",
+            "n": 33,
+            "us": 317.15099999999995
+          },
+          {
+            "name": "_bias_kernel",
+            "cat": "other",
+            "n": 33,
+            "us": 246.36600000000007
+          },
+          {
+            "name": "void at::native::index_elementwise_kernel<128, 4, at::native::gpu_index_kernel<at::native::index_kernel_impl<at::native::OpaqueType<2> >(at:",
+            "cat": "other",
+            "n": 33,
+            "us": 221.24799999999993
+          },
+          {
+            "name": "_gather_block_tables_kernel",
+            "cat": "other",
+            "n": 33,
+            "us": 178.65799999999996
+          },
+          {
+            "name": "_post_update_kernel",
+            "cat": "other",
+            "n": 33,
+            "us": 178.36900000000006
+          },
+          {
+            "name": "void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const:",
+            "cat": "other",
+            "n": 33,
+            "us": 165.09299999999996
+          },
+          {
+            "name": "void at::native::index_elementwise_kernel<128, 4, at::native::gpu_index_kernel<at::native::index_kernel_impl<at::native::OpaqueType<4> >(at:",
+            "cat": "other",
+            "n": 33,
+            "us": 154.33699999999996
+          },
+          {
+            "name": "_combine_sampled_and_draft_tokens_kernel",
+            "cat": "other",
+            "n": 33,
+            "us": 153.62899999999993
+          },
+          {
+            "name": "void at::native::index_elementwise_kernel<128, 4, at::native::gpu_index_kernel<at::native::index_kernel_impl<at::native::OpaqueType<8> >(at:",
+            "cat": "other",
+            "n": 33,
+            "us": 152.83299999999997
+          },
+          {
+            "name": "_get_num_sampled_and_rejected_kernel",
+            "cat": "other",
+            "n": 33,
+            "us": 150.11300000000003
+          }
+        ]
+      },
+      "shares": {
+        "norm": 0.03470907049724156,
+        "quant": 0.03167775438428798,
+        "norm_quant_fused": 0.0,
+        "norm_plus_quant": 0.06638682488152954,
+        "fusable_region": 0.033379045950162015,
+        "gemm": 0.8915482707918368,
+        "attention": 0.009858680964571227,
+        "activation": 0.009442627913834137,
+        "rope": 0.010177074880095425,
+        "memory": 0.00519498809530968,
+        "other": 0.0073915324728248055
+      },
+      "wall_s": 1.2794156439995277,
+      "gpu_busy_frac_of_wall": 0.27738244147976904,
+      "decode_steps": 32
+    },
+    "decode_b8": {
+      "metrics": {
+        "total_us": 376382.185,
+        "span_us": 1302112.6728515625,
+        "n_kernels": 17828,
+        "by_cat_us": {
+          "quant": 11077.739000000212,
+          "norm": 12547.06800000015,
+          "norm_quant_fused": 0.0,
+          "gemm": 330038.27899999917,
+          "attention": 3503.252000000015,
+          "activation": 3377.9819999999754,
+          "rope": 3536.441000000002,
+          "memory": 134.21099999999996,
+          "other": 12167.213000000282
+        },
+        "by_cat_n": {
+          "quant": 3584,
+          "norm": 3616,
+          "norm_quant_fused": 0,
+          "gemm": 4512,
+          "attention": 896,
+          "activation": 896,
+          "rope": 896,
+          "memory": 128,
+          "other": 3300
+        },
+        "fusable": {
+          "norm_us": 6523.990000000046,
+          "norm_n": 1792,
+          "quant_us": 5067.993999999845,
+          "quant_n": 1792
+        },
+        "top": [
+          {
+            "name": "void cutlass::Kernel2<enable_sm89_to_sm90<cutlass::gemm::kernel::DefaultGemmWithVisitor<signed char, cutlass::layout::RowMajor, (cutlass::Co",
+            "cat": "gemm",
+            "n": 2688,
+            "us": 115999.04400000014
+          },
+          {
+            "name": "void cutlass::Kernel2<enable_sm89_to_sm90<cutlass::gemm::kernel::DefaultGemmWithVisitor<signed char, cutlass::layout::RowMajor, (cutlass::Co",
+            "cat": "gemm",
+            "n": 896,
+            "us": 108498.58000000015
+          },
+          {
+            "name": "void cutlass::Kernel2<cutlass_80_wmma_tensorop_bf16_s161616gemm_bf16_16x16_128x2_tn_align8>(cutlass_80_wmma_tensorop_bf16_s161616gemm_bf16_1",
+            "cat": "gemm",
+            "n": 33,
+            "us": 83115.05099999998
+          },
+          {
+            "name": "void cutlass::Kernel2<enable_sm89_to_sm90<cutlass::gemm::kernel::DefaultGemmWithVisitor<signed char, cutlass::layout::RowMajor, (cutlass::Co",
+            "cat": "gemm",
+            "n": 112,
+            "us": 37764.638
+          },
+          {
+            "name": "void flash::flash_fwd_splitkv_kernel<Flash_fwd_kernel_traits<128, 64, 64, 4, false, false, cutlass::bfloat16_t, Flash_kernel_traits<128, 64,",
+            "cat": "gemm",
+            "n": 896,
+            "us": 25021.676999999985
+          },
+          {
+            "name": "void vllm::dynamic_scaled_int8_quant_kernel<c10::BFloat16, float>(c10::BFloat16 const*, signed char*, float*, int)",
+            "cat": "quant",
+            "n": 3696,
+            "us": 12468.549000000212
+          },
+          {
+            "name": "std::enable_if<(((8)>(0)))&&vllm::_typeConvert<c10::BFloat16>::exists, void>::type vllm::fused_add_rms_norm_kernel<c10::BFloat16, 8, true>(c",
+            "cat": "norm",
+            "n": 1848,
+            "us": 8056.791000000045
+          },
+          {
+            "name": "void vllm::rms_norm_kernel<c10::BFloat16, 8, 3, true>(c10::BFloat16*, c10::BFloat16 const*, long, long, long, long, long, c10::BFloat16 cons",
+            "cat": "norm",
+            "n": 1848,
+            "us": 7133.444999999904
+          },
+          {
+            "name": "void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&):",
+            "cat": "other",
+            "n": 1792,
+            "us": 6634.274999999947
+          },
+          {
+            "name": "void vllm::act_and_mul_kernel<c10::BFloat16, __nv_bfloat162, &(c10::BFloat16 vllm::silu_kernel<c10::BFloat16>(c10::BFloat16 const&, float)),",
+            "cat": "activation",
+            "n": 924,
+            "us": 5179.961999999976
+          },
+          {
+            "name": "void vllm::rotary_embedding_kernel<c10::BFloat16, c10::BFloat16, true>(long const*, c10::BFloat16*, c10::BFloat16*, c10::BFloat16 const*, in",
+            "cat": "rope",
+            "n": 924,
+            "us": 4201.466000000002
+          },
+          {
+            "name": "void vllm::reshape_and_cache_flash_kernel<__nv_bfloat16, __nv_bfloat16, (vllm::Fp8KVCacheDataType)0>(__nv_bfloat16 const*, __nv_bfloat16 con",
+            "cat": "attention",
+            "n": 924,
+            "us": 4025.939000000015
+          },
+          {
+            "name": "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&):",
+            "cat": "other",
+            "n": 896,
+            "us": 2272.9669999999887
+          },
+          {
+            "name": "void flash::flash_fwd_splitkv_kernel<Flash_fwd_kernel_traits<128, 64, 128, 4, false, false, cutlass::bfloat16_t, Flash_kernel_traits<128, 64",
+            "cat": "gemm",
+            "n": 28,
+            "us": 1513.6009999999999
+          },
+          {
+            "name": "void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const:",
+            "cat": "other",
+            "n": 33,
+            "us": 562.689
+          },
+          {
+            "name": "_gumbel_sample_kernel",
+            "cat": "other",
+            "n": 33,
+            "us": 480.06399999999996
+          },
+          {
+            "name": "_bias_kernel",
+            "cat": "other",
+            "n": 33,
+            "us": 264.637
+          },
+          {
+            "name": "void at::native::(anonymous namespace)::indexSelectSmallIndex<c10::BFloat16, long, unsigned int, 2, 2, -2>(at::cuda::detail::TensorInfo<c10:",
+            "cat": "other",
+            "n": 32,
+            "us": 252.99299999999997
+          },
+          {
+            "name": "void at::native::index_elementwise_kernel<128, 4, at::native::gpu_index_kernel<at::native::index_kernel_impl<at::native::OpaqueType<8> >(at:",
+            "cat": "other",
+            "n": 33,
+            "us": 196.96100000000004
+          },
+          {
+            "name": "_gather_block_tables_kernel",
+            "cat": "other",
+            "n": 33,
+            "us": 187.516
+          },
+          {
+            "name": "_post_update_kernel",
+            "cat": "other",
+            "n": 33,
+            "us": 173.46899999999997
+          },
+          {
+            "name": "_combine_sampled_and_draft_tokens_kernel",
+            "cat": "other",
+            "n": 33,
+            "us": 166.65699999999998
+          },
+          {
+            "name": "_get_num_sampled_and_rejected_kernel",
+            "cat": "other",
+            "n": 33,
+            "us": 159.807
+          },
+          {
+            "name": "void at::native::index_elementwise_kernel<128, 4, at::native::gpu_index_kernel<at::native::index_kernel_impl<at::native::OpaqueType<4> >(at:",
+            "cat": "other",
+            "n": 33,
+            "us": 157.69199999999998
+          },
+          {
+            "name": "_compute_slot_mappings_kernel",
+            "cat": "other",
+            "n": 33,
+            "us": 140.513
+          }
+        ]
+      },
+      "shares": {
+        "norm": 0.03333597736566663,
+        "quant": 0.02943215550969877,
+        "norm_quant_fused": 0.0,
+        "norm_plus_quant": 0.06276813287536541,
+        "fusable_region": 0.030798439623277843,
+        "gemm": 0.8768700861864628,
+        "attention": 0.009307698769005272,
+        "activation": 0.008974872176800758,
+        "rope": 0.009395877756541538,
+        "memory": 0.0003565817016551938,
+        "other": 0.032326750534168565
+      },
+      "wall_s": 1.3012066769997546,
+      "gpu_busy_frac_of_wall": 0.2892562662434532,
+      "decode_steps": 32
+    },
+    "decode_b64": {
+      "metrics": {
+        "total_us": 590112.146,
+        "span_us": 1322618.3740234375,
+        "n_kernels": 17828,
+        "by_cat_us": {
+          "quant": 12903.896000004112,
+          "norm": 18170.98499999827,
+          "norm_quant_fused": 0.0,
+          "gemm": 526901.6810000015,
+          "attention": 3943.2919999999885,
+          "activation": 4875.402000000031,
+          "rope": 4255.131000000078,
+          "memory": 133.05699999999985,
+          "other": 18928.702000000005
+        },
+        "by_cat_n": {
+          "quant": 3584,
+          "norm": 3616,
+          "norm_quant_fused": 0,
+          "gemm": 4512,
+          "attention": 896,
+          "activation": 896,
+          "rope": 896,
+          "memory": 128,
+          "other": 3300
+        },
+        "fusable": {
+          "norm_us": 10648.254000000343,
+          "norm_n": 1792,
+          "quant_us": 5858.256999999654,
+          "quant_n": 1792
+        },
+        "top": [
+          {
+            "name": "void cutlass::Kernel2<enable_sm89_to_sm90<cutlass::gemm::kernel::DefaultGemmWithVisitor<signed char, cutlass::layout::RowMajor, (cutlass::Co",
+            "cat": "gemm",
+            "n": 112,
+            "us": 255518.21600000001
+          },
+          {
+            "name": "void flash::flash_fwd_splitkv_kernel<Flash_fwd_kernel_traits<128, 64, 64, 4, false, false, cutlass::bfloat16_t, Flash_kernel_traits<128, 64,",
+            "cat": "gemm",
+            "n": 896,
+            "us": 165116.99800000014
+          },
+          {
+            "name": "void cutlass::Kernel2<enable_sm89_to_sm90<cutlass::gemm::kernel::DefaultGemmWithVisitor<signed char, cutlass::layout::RowMajor, (cutlass::Co",
+            "cat": "gemm",
+            "n": 2688,
+            "us": 153223.66199999957
+          },
+          {
+            "name": "void cutlass::Kernel2<enable_sm89_to_sm90<cutlass::gemm::kernel::DefaultGemmWithVisitor<signed char, cutlass::layout::RowMajor, (cutlass::Co",
+            "cat": "gemm",
+            "n": 896,
+            "us": 116123.18499999992
+          },
+          {
+            "name": "void cutlass::Kernel2<cutlass_80_tensorop_bf16_s16816gemm_relu_bf16_256x128_32x3_tn_align8>(cutlass_80_tensorop_bf16_s16816gemm_relu_bf16_25",
+            "cat": "gemm",
+            "n": 33,
+            "us": 95440.00300000003
+          },
+          {
+            "name": "void vllm::dynamic_scaled_int8_quant_kernel<c10::BFloat16, float>(c10::BFloat16 const*, signed char*, float*, int)",
+            "cat": "quant",
+            "n": 3696,
+            "us": 43551.60500000411
+          },
+          {
+            "name": "void vllm::act_and_mul_kernel<c10::BFloat16, __nv_bfloat162, &(c10::BFloat16 vllm::silu_kernel<c10::BFloat16>(c10::BFloat16 const&, float)),",
+            "cat": "activation",
+            "n": 924,
+            "us": 40344.744000000035
+          },
+          {
+            "name": "std::enable_if<(((8)>(0)))&&vllm::_typeConvert<c10::BFloat16>::exists, void>::type vllm::fused_add_rms_norm_kernel<c10::BFloat16, 8, true>(c",
+            "cat": "norm",
+            "n": 1848,
+            "us": 39001.21300000036
+          },
+          {
+            "name": "void vllm::rms_norm_kernel<c10::BFloat16, 8, 3, true>(c10::BFloat16*, c10::BFloat16 const*, long, long, long, long, long, c10::BFloat16 cons",
+            "cat": "norm",
+            "n": 1848,
+            "us": 18195.08800000015
+          },
+          {
+            "name": "void vllm::rotary_embedding_kernel<c10::BFloat16, c10::BFloat16, true>(long const*, c10::BFloat16*, c10::BFloat16*, c10::BFloat16 const*, in",
+            "cat": "rope",
+            "n": 924,
+            "us": 13689.695000000078
+          },
+          {
+            "name": "void flash::flash_fwd_splitkv_kernel<Flash_fwd_kernel_traits<128, 64, 128, 4, false, false, cutlass::bfloat16_t, Flash_kernel_traits<128, 64",
+            "cat": "gemm",
+            "n": 28,
+            "us": 12074.079000000002
+          },
+          {
+            "name": "void vllm::reshape_and_cache_flash_kernel<__nv_bfloat16, __nv_bfloat16, (vllm::Fp8KVCacheDataType)0>(__nv_bfloat16 const*, __nv_bfloat16 con",
+            "cat": "attention",
+            "n": 924,
+            "us": 10366.906999999987
+          },
+          {
+            "name": "void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&):",
+            "cat": "other",
+            "n": 1792,
+            "us": 7526.77299999986
+          },
+          {
+            "name": "void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const:",
+            "cat": "other",
+            "n": 33,
+            "us": 4709.373
+          },
+          {
+            "name": "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&):",
+            "cat": "other",
+            "n": 896,
+            "us": 2719.45499999999
+          },
+          {
+            "name": "_gumbel_sample_kernel",
+            "cat": "other",
+            "n": 33,
+            "us": 1747.1029999999998
+          },
+          {
+            "name": "_bias_kernel",
+            "cat": "other",
+            "n": 33,
+            "us": 445.44399999999996
+          },
+          {
+            "name": "void at::native::vectorized_gather_kernel<16, long>(char*, char*, long*, int, long, long, long, long, bool)",
+            "cat": "other",
+            "n": 66,
+            "us": 330.2760000000002
+          },
+          {
+            "name": "void vllm::rms_norm_kernel<c10::BFloat16, 8, 2, true>(c10::BFloat16*, c10::BFloat16 const*, long, long, long, long, long, c10::BFloat16 cons",
+            "cat": "norm",
+            "n": 33,
+            "us": 316.42000000000013
+          },
+          {
+            "name": "_gather_block_tables_kernel",
+            "cat": "other",
+            "n": 33,
+            "us": 218.75099999999992
+          },
+          {
+            "name": "void at::native::index_elementwise_kernel<128, 4, at::native::gpu_index_kernel<at::native::index_kernel_impl<at::native::OpaqueType<8> >(at:",
+            "cat": "other",
+            "n": 33,
+            "us": 197.43999999999997
+          },
+          {
+            "name": "_get_num_sampled_and_rejected_kernel",
+            "cat": "other",
+            "n": 33,
+            "us": 195.00999999999996
+          },
+          {
+            "name": "_combine_sampled_and_draft_tokens_kernel",
+            "cat": "other",
+            "n": 33,
+            "us": 192.608
+          },
+          {
+            "name": "_post_update_kernel",
+            "cat": "other",
+            "n": 33,
+            "us": 178.75
+          },
+          {
+            "name": "void at::native::index_elementwise_kernel<128, 4, at::native::gpu_index_kernel<at::native::index_kernel_impl<at::native::OpaqueType<4> >(at:",
+            "cat": "other",
+            "n": 33,
+            "us": 157.856
+          }
+        ]
+      },
+      "shares": {
+        "norm": 0.0307924266991757,
+        "quant": 0.021866853762410293,
+        "norm_quant_fused": 0.0,
+        "norm_plus_quant": 0.052659280461585994,
+        "fusable_region": 0.02797182046139413,
+        "gemm": 0.8928839790394715,
+        "attention": 0.006682275609355089,
+        "activation": 0.008261822829859244,
+        "rope": 0.007210715842476623,
+        "memory": 0.0002254774806821208,
+        "other": 0.03207644873657626
+      },
+      "wall_s": 1.3145257720007066,
+      "gpu_busy_frac_of_wall": 0.44891637620907954,
+      "decode_steps": 32
+    }
+  }
+}

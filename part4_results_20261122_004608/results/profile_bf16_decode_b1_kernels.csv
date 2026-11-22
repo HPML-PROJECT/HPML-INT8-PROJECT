@@ -1,0 +1,26 @@
+kernel,category,calls,total_us,share_of_gpu_time
+"std::enable_if<!(false), void>::type internal::gemvx::kernel<int, int, __nv_bfloat16, __nv_bfloat16, __nv_bfloat16, float, false, true, true",gemm,2721,356549.1,0.73981
+"std::enable_if<!(false), void>::type internal::gemvx::kernel<int, int, __nv_bfloat16, __nv_bfloat16, __nv_bfloat16, float, false, true, true",gemm,896,89856.9,0.18644
+"void flash::flash_fwd_splitkv_kernel<Flash_fwd_kernel_traits<128, 64, 128, 4, false, false, cutlass::bfloat16_t, Flash_kernel_traits<128, 64",gemm,896,9924.3,0.02059
+"void flash::flash_fwd_splitkv_combine_kernel<Flash_fwd_kernel_traits<128, 64, 128, 4, false, false, cutlass::bfloat16_t, Flash_kernel_traits",gemm,896,7438.7,0.01543
+ampere_bf16_s16816gemm_bf16_256x128_ldg8_f2f_stages_32x3_tn,gemm,28,6939.7,0.0144
+triton_per_fused_add_cat_index_select_mul_rms_norm_split_split_with_sizes_sub_unsqueeze_view_3,norm,891,3369.2,0.00699
+void cutlass::Kernel2<cutlass_80_tensorop_bf16_s16816gemm_relu_bf16_128x128_32x4_tn_align8>(cutlass_80_tensorop_bf16_s16816gemm_relu_bf16_12,gemm,28,3309.1,0.00687
+triton_per_fused_add_cat_index_select_mul_rms_norm_split_split_with_sizes_sub_unsqueeze_view_4,norm,891,3304.5,0.00686
+"void vllm::reshape_and_cache_flash_kernel<__nv_bfloat16, __nv_bfloat16, (vllm::Fp8KVCacheDataType)0>(__nv_bfloat16 const*, __nv_bfloat16 con",attention,924,2989.4,0.0062
+triton_red_fused_fused_add_rms_norm_2,norm,924,2935.4,0.00609
+triton_red_fused_fused_add_rms_norm_0,norm,924,2679.7,0.00556
+ampere_bf16_s16816gemm_bf16_128x128_ldg8_f2f_stages_64x3_tn,gemm,28,2582.1,0.00536
+triton_poi_fused_mul_silu_slice_1,activation,924,1803.3,0.00374
+memcpy32_post,other,928,1559.7,0.00324
+ampere_bf16_s16816gemm_bf16_128x64_ldg8_f2f_stages_32x6_tn,gemm,28,1296.1,0.00269
+"void flash::flash_fwd_splitkv_kernel<Flash_fwd_kernel_traits<128, 64, 128, 4, false, false, cutlass::bfloat16_t, Flash_kernel_traits<128, 64",gemm,28,426.5,0.00088
+_gumbel_sample_kernel,other,33,310.4,0.00064
+_bias_kernel,other,33,233.0,0.00048
+"void at::native::index_elementwise_kernel<128, 4, at::native::gpu_index_kernel<at::native::index_kernel_impl<at::native::OpaqueType<2> >(at:",other,33,211.3,0.00044
+"void cublasLt::splitKreduce_kernel<32, 16, int, __nv_bfloat16, __nv_bfloat16, float, __nv_bfloat16, false, __nv_bfloat16, __nv_bfloat16, __n",gemm,28,165.5,0.00034
+void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const:,other,33,159.4,0.00033
+_gather_block_tables_kernel,other,33,159.3,0.00033
+_post_update_kernel,other,33,154.7,0.00032
+_combine_sampled_and_draft_tokens_kernel,other,33,146.8,0.0003
+_get_num_sampled_and_rejected_kernel,other,33,144.1,0.0003

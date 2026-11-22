@@ -1,0 +1,24 @@
+{
+  "tag": "w8a8",
+  "model": "nytopop/Qwen3-1.7B.w8a8",
+  "gpu": "NVIDIA L4",
+  "quantization": "compressed-tensors",
+  "dataset": "wikitext-2-raw-v1/test",
+  "seq_len": 2048,
+  "n_windows": 146,
+  "n_tokens_scored": 298862,
+  "total_tokens": 299078,
+  "mean_nll": 2.797374513655732,
+  "ppl": 16.401528203936522,
+  "partial_run": false,
+  "env": {
+    "python": "3.13.5",
+    "torch": "2.14.0+cu130",
+    "cuda": "13.0",
+    "gpu": "NVIDIA L4",
+    "compute_capability": "8.9",
+    "smi": "NVIDIA L4, 620.70.06, 975 MHz, 2040 MHz, 6251 MHz, 69.06 W, 72.00 W, 80.25, 18330 MiB, 23034 MiB",
+    "vllm": "0.34.0",
+    "transformers": "5.22.2"
+  }
+}

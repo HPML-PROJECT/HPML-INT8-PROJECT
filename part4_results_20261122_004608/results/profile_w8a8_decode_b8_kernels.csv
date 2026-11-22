@@ -1,0 +1,26 @@
+kernel,category,calls,total_us,share_of_gpu_time
+"void cutlass::Kernel2<enable_sm89_to_sm90<cutlass::gemm::kernel::DefaultGemmWithVisitor<signed char, cutlass::layout::RowMajor, (cutlass::Co",gemm,2688,114001.2,0.30687
+"void cutlass::Kernel2<enable_sm89_to_sm90<cutlass::gemm::kernel::DefaultGemmWithVisitor<signed char, cutlass::layout::RowMajor, (cutlass::Co",gemm,896,105972.8,0.28526
+void cutlass::Kernel2<cutlass_80_wmma_tensorop_bf16_s161616gemm_bf16_16x16_128x2_tn_align8>(cutlass_80_wmma_tensorop_bf16_s161616gemm_bf16_1,gemm,33,83153.5,0.22384
+"void cutlass::Kernel2<enable_sm89_to_sm90<cutlass::gemm::kernel::DefaultGemmWithVisitor<signed char, cutlass::layout::RowMajor, (cutlass::Co",gemm,112,37128.9,0.09995
+"void flash::flash_fwd_splitkv_kernel<Flash_fwd_kernel_traits<128, 64, 128, 4, false, false, cutlass::bfloat16_t, Flash_kernel_traits<128, 64",gemm,896,27970.4,0.07529
+"void vllm::dynamic_scaled_int8_quant_kernel<c10::BFloat16, float>(c10::BFloat16 const*, signed char*, float*, int)",quant,3696,11719.1,0.03155
+"void flash::flash_fwd_splitkv_combine_kernel<Flash_fwd_kernel_traits<128, 64, 128, 4, false, false, cutlass::bfloat16_t, Flash_kernel_traits",gemm,896,6064.4,0.01632
+"void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&):",other,1792,5837.5,0.01571
+triton_poi_fused_dynamic_scaled_int8_quant_mul_silu_slice_1,activation,924,4524.5,0.01218
+triton_per_fused_add_cat_index_select_mul_rms_norm_split_split_with_sizes_sub_unsqueeze_view_3,norm,891,3742.7,0.01007
+triton_red_fused_dynamic_scaled_int8_quant_fused_add_rms_norm_2,norm,891,3715.1,0.01
+triton_red_fused_dynamic_scaled_int8_quant_fused_add_rms_norm_0,norm,924,3518.4,0.00947
+triton_per_fused_add_cat_index_select_mul_rms_norm_split_split_with_sizes_sub_unsqueeze_view_4,norm,891,3498.6,0.00942
+"void vllm::reshape_and_cache_flash_kernel<__nv_bfloat16, __nv_bfloat16, (vllm::Fp8KVCacheDataType)0>(__nv_bfloat16 const*, __nv_bfloat16 con",attention,924,3455.0,0.0093
+"void flash::flash_fwd_splitkv_kernel<Flash_fwd_kernel_traits<128, 64, 128, 4, false, false, cutlass::bfloat16_t, Flash_kernel_traits<128, 64",gemm,28,1498.4,0.00403
+void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const:,other,33,556.5,0.0015
+_gumbel_sample_kernel,other,33,475.5,0.00128
+_bias_kernel,other,33,264.2,0.00071
+"void at::native::index_elementwise_kernel<128, 4, at::native::gpu_index_kernel<at::native::index_kernel_impl<at::native::OpaqueType<8> >(at:",other,33,196.1,0.00053
+_gather_block_tables_kernel,other,33,184.5,0.0005
+_post_update_kernel,other,33,176.0,0.00047
+_combine_sampled_and_draft_tokens_kernel,other,33,165.6,0.00045
+triton_per_fused_add_cat_index_select_mul_rms_norm_split_split_with_sizes_sub_unsqueeze_view_1,norm,33,159.4,0.00043
+_get_num_sampled_and_rejected_kernel,other,33,158.1,0.00043
+triton_red_fused__to_copy_dynamic_scaled_int8_quant_embedding_rms_norm_0,norm,33,155.3,0.00042

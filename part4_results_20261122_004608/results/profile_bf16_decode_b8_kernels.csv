@@ -1,0 +1,26 @@
+kernel,category,calls,total_us,share_of_gpu_time
+void cutlass::Kernel2<cutlass_80_wmma_tensorop_bf16_s161616gemm_bf16_16x16_128x2_tn_align8>(cutlass_80_wmma_tensorop_bf16_s161616gemm_bf16_1,gemm,3617,467162.9,0.89006
+"void flash::flash_fwd_splitkv_kernel<Flash_fwd_kernel_traits<128, 64, 128, 4, false, false, cutlass::bfloat16_t, Flash_kernel_traits<128, 64",gemm,896,28237.8,0.0538
+ampere_bf16_s1688gemm_bf16_128x128_ldg8_f2f_stages_32x1_tn,gemm,84,25444.3,0.04848
+void cutlass::Kernel2<cutlass_80_tensorop_bf16_s16816gemm_relu_bf16_256x128_32x3_tn_align8>(cutlass_80_tensorop_bf16_s16816gemm_relu_bf16_25,gemm,28,23932.2,0.0456
+"void flash::flash_fwd_splitkv_combine_kernel<Flash_fwd_kernel_traits<128, 64, 128, 4, false, false, cutlass::bfloat16_t, Flash_kernel_traits",gemm,896,6121.4,0.01166
+"void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&):",other,1792,5860.4,0.01117
+triton_poi_fused_mul_silu_slice_1,activation,924,4484.3,0.00854
+triton_red_fused_fused_add_rms_norm_2,norm,924,4057.5,0.00773
+triton_per_fused_add_cat_index_select_mul_rms_norm_split_split_with_sizes_sub_unsqueeze_view_3,norm,891,3774.0,0.00719
+triton_red_fused_fused_add_rms_norm_0,norm,924,3730.7,0.00711
+triton_per_fused_add_cat_index_select_mul_rms_norm_split_split_with_sizes_sub_unsqueeze_view_4,norm,891,3594.4,0.00685
+"void vllm::reshape_and_cache_flash_kernel<__nv_bfloat16, __nv_bfloat16, (vllm::Fp8KVCacheDataType)0>(__nv_bfloat16 const*, __nv_bfloat16 con",attention,924,3508.7,0.00668
+"void flash::flash_fwd_splitkv_kernel<Flash_fwd_kernel_traits<128, 64, 128, 4, false, false, cutlass::bfloat16_t, Flash_kernel_traits<128, 64",gemm,28,1534.3,0.00292
+void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const:,other,33,569.5,0.00108
+_gumbel_sample_kernel,other,33,494.8,0.00094
+_bias_kernel,other,33,266.4,0.00051
+"void at::native::index_elementwise_kernel<128, 4, at::native::gpu_index_kernel<at::native::index_kernel_impl<at::native::OpaqueType<8> >(at:",other,33,196.3,0.00037
+_gather_block_tables_kernel,other,33,188.7,0.00036
+_post_update_kernel,other,33,174.2,0.00033
+_combine_sampled_and_draft_tokens_kernel,other,33,168.3,0.00032
+triton_red_fused__to_copy_embedding_rms_norm_0,norm,33,160.6,0.00031
+_get_num_sampled_and_rejected_kernel,other,33,159.4,0.0003
+"void at::native::index_elementwise_kernel<128, 4, at::native::gpu_index_kernel<at::native::index_kernel_impl<at::native::OpaqueType<4> >(at:",other,33,158.9,0.0003
+triton_per_fused_add_cat_index_select_mul_rms_norm_split_split_with_sizes_sub_unsqueeze_view_1,norm,33,142.3,0.00027
+_compute_slot_mappings_kernel,other,33,141.2,0.00027

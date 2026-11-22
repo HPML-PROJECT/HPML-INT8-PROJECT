@@ -1,0 +1,26 @@
+kernel,category,calls,total_us,share_of_gpu_time
+"void cutlass::Kernel2<enable_sm89_to_sm90<cutlass::gemm::kernel::DefaultGemmWithVisitor<signed char, cutlass::layout::RowMajor, (cutlass::Co",gemm,112,128766.2,0.6796
+triton_poi_fused_dynamic_scaled_int8_quant_mul_silu_slice_1,activation,28,17184.5,0.0907
+"void vllm::dynamic_scaled_int8_quant_kernel<c10::BFloat16, float>(c10::BFloat16 const*, signed char*, float*, int)",quant,112,12076.0,0.06373
+"void flash::flash_fwd_splitkv_kernel<Flash_fwd_kernel_traits<128, 64, 128, 4, false, false, cutlass::bfloat16_t, Flash_kernel_traits<128, 64",gemm,28,9170.0,0.0484
+triton_red_fused_dynamic_scaled_int8_quant_fused_add_rms_norm_2,norm,27,8172.2,0.04313
+triton_red_fused_dynamic_scaled_int8_quant_fused_add_rms_norm_0,norm,28,3922.2,0.0207
+"void vllm::reshape_and_cache_flash_kernel<__nv_bfloat16, __nv_bfloat16, (vllm::Fp8KVCacheDataType)0>(__nv_bfloat16 const*, __nv_bfloat16 con",attention,28,2872.0,0.01516
+void cutlass::Kernel2<cutlass_80_wmma_tensorop_bf16_s161616gemm_bf16_16x16_128x2_tn_align8>(cutlass_80_wmma_tensorop_bf16_s161616gemm_bf16_1,gemm,1,2554.5,0.01348
+triton_per_fused_add_cat_index_select_mul_rms_norm_split_split_with_sizes_sub_unsqueeze_view_3,norm,27,2460.7,0.01299
+triton_per_fused_add_cat_index_select_mul_rms_norm_split_split_with_sizes_sub_unsqueeze_view_4,norm,27,1668.0,0.0088
+triton_red_fused_fused_add_rms_norm_2,norm,1,270.8,0.00143
+triton_per_fused_add_cat_index_select_mul_rms_norm_split_split_with_sizes_sub_unsqueeze_view_1,norm,1,103.6,0.00055
+triton_red_fused__to_copy_dynamic_scaled_int8_quant_embedding_rms_norm_0,norm,1,82.8,0.00044
+triton_per_fused_add_cat_index_select_mul_rms_norm_split_split_with_sizes_sub_unsqueeze_view_2,norm,1,64.2,0.00034
+_apply_write_kernel,other,4,25.3,0.00013
+_gumbel_sample_kernel,other,1,16.0,8e-05
+_prepare_prefill_inputs_kernel,other,1,7.3,4e-05
+"void at::native::index_elementwise_kernel<128, 4, at::native::gpu_index_kernel<at::native::index_kernel_impl<at::native::OpaqueType<8> >(at:",other,1,6.1,3e-05
+_gather_block_tables_kernel,other,1,5.4,3e-05
+_post_update_kernel,other,1,5.2,3e-05
+"void at::native::index_elementwise_kernel<128, 4, at::native::gpu_index_kernel<at::native::index_kernel_impl<at::native::OpaqueType<4> >(at:",other,1,4.8,3e-05
+_get_num_sampled_and_rejected_kernel,other,1,4.7,2e-05
+"void at::native::vectorized_gather_kernel<16, long>(char*, char*, long*, int, long, long, long, long, bool)",other,1,4.7,2e-05
+_combine_sampled_and_draft_tokens_kernel,other,1,4.5,2e-05
+_compute_slot_mappings_kernel,other,1,4.4,2e-05

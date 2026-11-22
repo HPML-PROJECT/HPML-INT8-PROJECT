@@ -1,0 +1,830 @@
+{
+  "tag": "w8a8",
+  "model": "nytopop/Qwen3-1.7B.w8a8",
+  "gpu": "NVIDIA L4",
+  "mode": "graphs",
+  "quantization": "compressed-tensors",
+  "env": {
+    "python": "3.13.5",
+    "torch": "2.14.0+cu130",
+    "cuda": "13.0",
+    "gpu": "NVIDIA L4",
+    "compute_capability": "8.9",
+    "smi": "NVIDIA L4, 620.70.06, 1200 MHz, 2040 MHz, 6251 MHz, 26.36 W, 72.00 W, 67.62, 18860 MiB, 23034 MiB",
+    "vllm": "0.34.0",
+    "transformers": "5.22.2"
+  },
+  "phases": {
+    "prefill_8x512": {
+      "metrics": {
+        "total_us": 189472.405,
+        "span_us": 192652.2685546875,
+        "n_kernels": 446,
+        "by_cat_us": {
+          "quant": 12076.004000000003,
+          "norm": 16744.45,
+          "norm_quant_fused": 0.0,
+          "gemm": 140490.73099999997,
+          "attention": 2871.9990000000003,
+          "activation": 17184.483,
+          "rope": 0.0,
+          "memory": 4.288,
+          "other": 100.45
+        },
+        "by_cat_n": {
+          "quant": 112,
+          "norm": 113,
+          "norm_quant_fused": 0,
+          "gemm": 141,
+          "attention": 28,
+          "activation": 28,
+          "rope": 0,
+          "memory": 4,
+          "other": 20
+        },
+        "fusable": {
+          "norm_us": 12177.214000000002,
+          "norm_n": 56,
+          "quant_us": 2173.2209999999995,
+          "quant_n": 56
+        },
+        "top": [
+          {
+            "name": "void cutlass::Kernel2<enable_sm89_to_sm90<cutlass::gemm::kernel::DefaultGemmWithVisitor<signed char, cutlass::layout::RowMajor, (cutlass::Co",
+            "cat": "gemm",
+            "n": 112,
+            "us": 128766.24899999998
+          },
+          {
+            "name": "triton_poi_fused_dynamic_scaled_int8_quant_mul_silu_slice_1",
+            "cat": "activation",
+            "n": 28,
+            "us": 17184.483
+          },
+          {
+            "name": "void vllm::dynamic_scaled_int8_quant_kernel<c10::BFloat16, float>(c10::BFloat16 const*, signed char*, float*, int)",
+            "cat": "quant",
+            "n": 112,
+            "us": 12076.004000000003
+          },
+          {
+            "name": "void flash::flash_fwd_splitkv_kernel<Flash_fwd_kernel_traits<128, 64, 128, 4, false, false, cutlass::bfloat16_t, Flash_kernel_traits<128, 64",
+            "cat": "gemm",
+            "n": 28,
+            "us": 9169.953000000003
+          },
+          {
+            "name": "triton_red_fused_dynamic_scaled_int8_quant_fused_add_rms_norm_2",
+            "cat": "norm",
+            "n": 27,
+            "us": 8172.223000000001
+          },
+          {
+            "name": "triton_red_fused_dynamic_scaled_int8_quant_fused_add_rms_norm_0",
+            "cat": "norm",
+            "n": 28,
+            "us": 3922.239000000001
+          },
+          {
+            "name": "void vllm::reshape_and_cache_flash_kernel<__nv_bfloat16, __nv_bfloat16, (vllm::Fp8KVCacheDataType)0>(__nv_bfloat16 const*, __nv_bfloat16 con",
+            "cat": "attention",
+            "n": 28,
+            "us": 2871.9990000000003
+          },
+          {
+            "name": "void cutlass::Kernel2<cutlass_80_wmma_tensorop_bf16_s161616gemm_bf16_16x16_128x2_tn_align8>(cutlass_80_wmma_tensorop_bf16_s161616gemm_bf16_1",
+            "cat": "gemm",
+            "n": 1,
+            "us": 2554.529
+          },
+          {
+            "name": "triton_per_fused_add_cat_index_select_mul_rms_norm_split_split_with_sizes_sub_unsqueeze_view_3",
+            "cat": "norm",
+            "n": 27,
+            "us": 2460.672
+          },
+          {
+            "name": "triton_per_fused_add_cat_index_select_mul_rms_norm_split_split_with_sizes_sub_unsqueeze_view_4",
+            "cat": "norm",
+            "n": 27,
+            "us": 1667.972
+          },
+          {
+            "name": "triton_red_fused_fused_add_rms_norm_2",
+            "cat": "norm",
+            "n": 1,
+            "us": 270.817
+          },
+          {
+            "name": "triton_per_fused_add_cat_index_select_mul_rms_norm_split_split_with_sizes_sub_unsqueeze_view_1",
+            "cat": "norm",
+            "n": 1,
+            "us": 103.615
+          },
+          {
+            "name": "triton_red_fused__to_copy_dynamic_scaled_int8_quant_embedding_rms_norm_0",
+            "cat": "norm",
+            "n": 1,
+            "us": 82.752
+          },
+          {
+            "name": "triton_per_fused_add_cat_index_select_mul_rms_norm_split_split_with_sizes_sub_unsqueeze_view_2",
+            "cat": "norm",
+            "n": 1,
+            "us": 64.16
+          },
+          {
+            "name": "_apply_write_kernel",
+            "cat": "other",
+            "n": 4,
+            "us": 25.313
+          },
+          {
+            "name": "_gumbel_sample_kernel",
+            "cat": "other",
+            "n": 1,
+            "us": 16.032
+          },
+          {
+            "name": "_prepare_prefill_inputs_kernel",
+            "cat": "other",
+            "n": 1,
+            "us": 7.328
+          },
+          {
+            "name": "void at::native::index_elementwise_kernel<128, 4, at::native::gpu_index_kernel<at::native::index_kernel_impl<at::native::OpaqueType<8> >(at:",
+            "cat": "other",
+            "n": 1,
+            "us": 6.144
+          },
+          {
+            "name": "_gather_block_tables_kernel",
+            "cat": "other",
+            "n": 1,
+            "us": 5.408
+          },
+          {
+            "name": "_post_update_kernel",
+            "cat": "other",
+            "n": 1,
+            "us": 5.184
+          },
+          {
+            "name": "void at::native::index_elementwise_kernel<128, 4, at::native::gpu_index_kernel<at::native::index_kernel_impl<at::native::OpaqueType<4> >(at:",
+            "cat": "other",
+            "n": 1,
+            "us": 4.8
+          },
+          {
+            "name": "_get_num_sampled_and_rejected_kernel",
+            "cat": "other",
+            "n": 1,
+            "us": 4.736
+          },
+          {
+            "name": "void at::native::vectorized_gather_kernel<16, long>(char*, char*, long*, int, long, long, long, long, bool)",
+            "cat": "other",
+            "n": 1,
+            "us": 4.673
+          },
+          {
+            "name": "_combine_sampled_and_draft_tokens_kernel",
+            "cat": "other",
+            "n": 1,
+            "us": 4.544
+          },
+          {
+            "name": "_compute_slot_mappings_kernel",
+            "cat": "other",
+            "n": 1,
+            "us": 4.384
+          }
+        ]
+      },
+      "shares": {
+        "norm": 0.08837408275891152,
+        "quant": 0.06373489585462327,
+        "norm_quant_fused": 0.0,
+        "norm_plus_quant": 0.1521089786135348,
+        "fusable_region": 0.07573891828733584,
+        "gemm": 0.7414838641014768,
+        "attention": 0.015157874836707753,
+        "activation": 0.09069649482730743,
+        "rope": 0.0,
+        "memory": 2.263126390357477e-05,
+        "other": 0.0005301563570695163
+      },
+      "wall_s": 0.2015858169997955,
+      "gpu_busy_frac_of_wall": 0.939909403448717
+    },
+    "decode_b1": {
+      "metrics": {
+        "total_us": 344892.642,
+        "span_us": 348718.5869140625,
+        "n_kernels": 16004,
+        "by_cat_us": {
+          "quant": 10387.050000000016,
+          "norm": 12082.856000000247,
+          "norm_quant_fused": 0.0,
+          "gemm": 313646.99999999965,
+          "attention": 3006.5170000000007,
+          "activation": 1608.7019999999827,
+          "rope": 0.0,
+          "memory": 187.8129999999999,
+          "other": 3972.7040000000493
+        },
+        "by_cat_n": {
+          "quant": 3584,
+          "norm": 3616,
+          "norm_quant_fused": 0,
+          "gemm": 5408,
+          "attention": 896,
+          "activation": 896,
+          "rope": 0,
+          "memory": 128,
+          "other": 1476
+        },
+        "fusable": {
+          "norm_us": 5322.237999999973,
+          "norm_n": 1792,
+          "quant_us": 4760.8739999998825,
+          "quant_n": 1792
+        },
+        "top": [
+          {
+            "name": "void cutlass::Kernel2<enable_sm89_to_sm90<cutlass::gemm::kernel::DefaultGemmWithVisitor<signed char, cutlass::layout::RowMajor, (cutlass::Co",
+            "cat": "gemm",
+            "n": 2688,
+            "us": 112812.82800000015
+          },
+          {
+            "name": "void cutlass::Kernel2<enable_sm89_to_sm90<cutlass::gemm::kernel::DefaultGemmWithVisitor<signed char, cutlass::layout::RowMajor, (cutlass::Co",
+            "cat": "gemm",
+            "n": 896,
+            "us": 104684.4119999999
+          },
+          {
+            "name": "std::enable_if<!(false), void>::type internal::gemvx::kernel<int, int, __nv_bfloat16, __nv_bfloat16, __nv_bfloat16, float, false, true, true",
+            "cat": "gemm",
+            "n": 33,
+            "us": 80839.75600000001
+          },
+          {
+            "name": "void vllm::dynamic_scaled_int8_quant_kernel<c10::BFloat16, float>(c10::BFloat16 const*, signed char*, float*, int)",
+            "cat": "quant",
+            "n": 3696,
+            "us": 10827.079000000016
+          },
+          {
+            "name": "void flash::flash_fwd_splitkv_kernel<Flash_fwd_kernel_traits<128, 64, 128, 4, false, false, cutlass::bfloat16_t, Flash_kernel_traits<128, 64",
+            "cat": "gemm",
+            "n": 896,
+            "us": 10335.70600000002
+          },
+          {
+            "name": "void flash::flash_fwd_splitkv_combine_kernel<Flash_fwd_kernel_traits<128, 64, 128, 4, false, false, cutlass::bfloat16_t, Flash_kernel_traits",
+            "cat": "gemm",
+            "n": 896,
+            "us": 7415.205999999987
+          },
+          {
+            "name": "void cutlass::Kernel2<enable_sm89_to_sm90<cutlass::gemm::kernel::DefaultGemmWithVisitor<signed char, cutlass::layout::RowMajor, (cutlass::Co",
+            "cat": "gemm",
+            "n": 84,
+            "us": 4871.425
+          },
+          {
+            "name": "void cutlass::Kernel2<enable_sm89_to_sm90<cutlass::gemm::kernel::DefaultGemmWithVisitor<signed char, cutlass::layout::RowMajor, (cutlass::Co",
+            "cat": "gemm",
+            "n": 28,
+            "us": 4597.151999999999
+          },
+          {
+            "name": "triton_per_fused_add_cat_index_select_mul_rms_norm_split_split_with_sizes_sub_unsqueeze_view_3",
+            "cat": "norm",
+            "n": 891,
+            "us": 3355.5110000000095
+          },
+          {
+            "name": "triton_per_fused_add_cat_index_select_mul_rms_norm_split_split_with_sizes_sub_unsqueeze_view_4",
+            "cat": "norm",
+            "n": 891,
+            "us": 3289.066999999973
+          },
+          {
+            "name": "void vllm::reshape_and_cache_flash_kernel<__nv_bfloat16, __nv_bfloat16, (vllm::Fp8KVCacheDataType)0>(__nv_bfloat16 const*, __nv_bfloat16 con",
+            "cat": "attention",
+            "n": 924,
+            "us": 3149.0140000000006
+          },
+          {
+            "name": "triton_red_fused_dynamic_scaled_int8_quant_fused_add_rms_norm_2",
+            "cat": "norm",
+            "n": 891,
+            "us": 2792.147999999981
+          },
+          {
+            "name": "triton_red_fused_dynamic_scaled_int8_quant_fused_add_rms_norm_0",
+            "cat": "norm",
+            "n": 924,
+            "us": 2669.6759999999936
+          },
+          {
+            "name": "triton_poi_fused_dynamic_scaled_int8_quant_mul_silu_slice_1",
+            "cat": "activation",
+            "n": 924,
+            "us": 1786.4279999999826
+          },
+          {
+            "name": "memcpy32_post",
+            "cat": "other",
+            "n": 928,
+            "us": 1549.621999999989
+          },
+          {
+            "name": "void flash::flash_fwd_splitkv_kernel<Flash_fwd_kernel_traits<128, 64, 128, 4, false, false, cutlass::bfloat16_t, Flash_kernel_traits<128, 64",
+            "cat": "gemm",
+            "n": 28,
+            "us": 421.858
+          },
+          {
+            "name": "_gumbel_sample_kernel",
+            "cat": "other",
+            "n": 33,
+            "us": 309.28000000000003
+          },
+          {
+            "name": "void at::native::index_elementwise_kernel<128, 4, at::native::gpu_index_kernel<at::native::index_kernel_impl<at::native::OpaqueType<2> >(at:",
+            "cat": "other",
+            "n": 33,
+            "us": 259.486
+          },
+          {
+            "name": "_bias_kernel",
+            "cat": "other",
+            "n": 33,
+            "us": 246.887
+          },
+          {
+            "name": "_gather_block_tables_kernel",
+            "cat": "other",
+            "n": 33,
+            "us": 177.92299999999997
+          },
+          {
+            "name": "_post_update_kernel",
+            "cat": "other",
+            "n": 33,
+            "us": 177.37599999999992
+          },
+          {
+            "name": "void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const:",
+            "cat": "other",
+            "n": 33,
+            "us": 164.63799999999998
+          },
+          {
+            "name": "_combine_sampled_and_draft_tokens_kernel",
+            "cat": "other",
+            "n": 33,
+            "us": 151.74099999999999
+          },
+          {
+            "name": "void at::native::index_elementwise_kernel<128, 4, at::native::gpu_index_kernel<at::native::index_kernel_impl<at::native::OpaqueType<4> >(at:",
+            "cat": "other",
+            "n": 33,
+            "us": 149.123
+          },
+          {
+            "name": "_get_num_sampled_and_rejected_kernel",
+            "cat": "other",
+            "n": 33,
+            "us": 147.84000000000003
+          }
+        ]
+      },
+      "shares": {
+        "norm": 0.03503367288421377,
+        "quant": 0.03011676311726017,
+        "norm_quant_fused": 0.0,
+        "norm_plus_quant": 0.06515043600147395,
+        "fusable_region": 0.02923550917621448,
+        "gemm": 0.9094047300666961,
+        "attention": 0.008717254687039686,
+        "activation": 0.004664355814236196,
+        "rope": 0.0,
+        "memory": 0.0005445549632804283,
+        "other": 0.011518668467273504
+      },
+      "wall_s": 0.3486001829996894,
+      "gpu_busy_frac_of_wall": 0.9893644892329482,
+      "decode_steps": 32
+    },
+    "decode_b8": {
+      "metrics": {
+        "total_us": 371491.114,
+        "span_us": 374357.994140625,
+        "n_kernels": 16900,
+        "by_cat_us": {
+          "quant": 10354.104000000158,
+          "norm": 12811.826000000146,
+          "norm_quant_fused": 0.0,
+          "gemm": 334589.0729999972,
+          "attention": 2967.578999999985,
+          "activation": 1797.2209999999686,
+          "rope": 0.0,
+          "memory": 172.35200000000015,
+          "other": 8798.958999999957
+        },
+        "by_cat_n": {
+          "quant": 3584,
+          "norm": 3616,
+          "norm_quant_fused": 0,
+          "gemm": 5408,
+          "attention": 896,
+          "activation": 896,
+          "rope": 0,
+          "memory": 128,
+          "other": 2372
+        },
+        "fusable": {
+          "norm_us": 6031.359999999993,
+          "norm_n": 1792,
+          "quant_us": 4766.83199999986,
+          "quant_n": 1792
+        },
+        "top": [
+          {
+            "name": "void cutlass::Kernel2<enable_sm89_to_sm90<cutlass::gemm::kernel::DefaultGemmWithVisitor<signed char, cutlass::layout::RowMajor, (cutlass::Co",
+            "cat": "gemm",
+            "n": 2688,
+            "us": 114001.18800000036
+          },
+          {
+            "name": "void cutlass::Kernel2<enable_sm89_to_sm90<cutlass::gemm::kernel::DefaultGemmWithVisitor<signed char, cutlass::layout::RowMajor, (cutlass::Co",
+            "cat": "gemm",
+            "n": 896,
+            "us": 105972.82300000008
+          },
+          {
+            "name": "void cutlass::Kernel2<cutlass_80_wmma_tensorop_bf16_s161616gemm_bf16_16x16_128x2_tn_align8>(cutlass_80_wmma_tensorop_bf16_s161616gemm_bf16_1",
+            "cat": "gemm",
+            "n": 33,
+            "us": 83153.46300000002
+          },
+          {
+            "name": "void cutlass::Kernel2<enable_sm89_to_sm90<cutlass::gemm::kernel::DefaultGemmWithVisitor<signed char, cutlass::layout::RowMajor, (cutlass::Co",
+            "cat": "gemm",
+            "n": 112,
+            "us": 37128.89900000002
+          },
+          {
+            "name": "void flash::flash_fwd_splitkv_kernel<Flash_fwd_kernel_traits<128, 64, 128, 4, false, false, cutlass::bfloat16_t, Flash_kernel_traits<128, 64",
+            "cat": "gemm",
+            "n": 896,
+            "us": 27970.38200000002
+          },
+          {
+            "name": "void vllm::dynamic_scaled_int8_quant_kernel<c10::BFloat16, float>(c10::BFloat16 const*, signed char*, float*, int)",
+            "cat": "quant",
+            "n": 3696,
+            "us": 11719.134000000158
+          },
+          {
+            "name": "void flash::flash_fwd_splitkv_combine_kernel<Flash_fwd_kernel_traits<128, 64, 128, 4, false, false, cutlass::bfloat16_t, Flash_kernel_traits",
+            "cat": "gemm",
+            "n": 896,
+            "us": 6064.3930000000155
+          },
+          {
+            "name": "void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&):",
+            "cat": "other",
+            "n": 1792,
+            "us": 5837.481999999966
+          },
+          {
+            "name": "triton_poi_fused_dynamic_scaled_int8_quant_mul_silu_slice_1",
+            "cat": "activation",
+            "n": 924,
+            "us": 4524.482999999968
+          },
+          {
+            "name": "triton_per_fused_add_cat_index_select_mul_rms_norm_split_split_with_sizes_sub_unsqueeze_view_3",
+            "cat": "norm",
+            "n": 891,
+            "us": 3742.6530000000066
+          },
+          {
+            "name": "triton_red_fused_dynamic_scaled_int8_quant_fused_add_rms_norm_2",
+            "cat": "norm",
+            "n": 891,
+            "us": 3715.098999999985
+          },
+          {
+            "name": "triton_red_fused_dynamic_scaled_int8_quant_fused_add_rms_norm_0",
+            "cat": "norm",
+            "n": 924,
+            "us": 3518.3779999999865
+          },
+          {
+            "name": "triton_per_fused_add_cat_index_select_mul_rms_norm_split_split_with_sizes_sub_unsqueeze_view_4",
+            "cat": "norm",
+            "n": 891,
+            "us": 3498.614999999981
+          },
+          {
+            "name": "void vllm::reshape_and_cache_flash_kernel<__nv_bfloat16, __nv_bfloat16, (vllm::Fp8KVCacheDataType)0>(__nv_bfloat16 const*, __nv_bfloat16 con",
+            "cat": "attention",
+            "n": 924,
+            "us": 3455.002999999985
+          },
+          {
+            "name": "void flash::flash_fwd_splitkv_kernel<Flash_fwd_kernel_traits<128, 64, 128, 4, false, false, cutlass::bfloat16_t, Flash_kernel_traits<128, 64",
+            "cat": "gemm",
+            "n": 28,
+            "us": 1498.4320000000002
+          },
+          {
+            "name": "void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const:",
+            "cat": "other",
+            "n": 33,
+            "us": 556.546
+          },
+          {
+            "name": "_gumbel_sample_kernel",
+            "cat": "other",
+            "n": 33,
+            "us": 475.48700000000014
+          },
+          {
+            "name": "_bias_kernel",
+            "cat": "other",
+            "n": 33,
+            "us": 264.225
+          },
+          {
+            "name": "void at::native::index_elementwise_kernel<128, 4, at::native::gpu_index_kernel<at::native::index_kernel_impl<at::native::OpaqueType<8> >(at:",
+            "cat": "other",
+            "n": 33,
+            "us": 196.06199999999998
+          },
+          {
+            "name": "_gather_block_tables_kernel",
+            "cat": "other",
+            "n": 33,
+            "us": 184.547
+          },
+          {
+            "name": "_post_update_kernel",
+            "cat": "other",
+            "n": 33,
+            "us": 175.96800000000002
+          },
+          {
+            "name": "_combine_sampled_and_draft_tokens_kernel",
+            "cat": "other",
+            "n": 33,
+            "us": 165.59899999999996
+          },
+          {
+            "name": "triton_per_fused_add_cat_index_select_mul_rms_norm_split_split_with_sizes_sub_unsqueeze_view_1",
+            "cat": "norm",
+            "n": 33,
+            "us": 159.36
+          },
+          {
+            "name": "_get_num_sampled_and_rejected_kernel",
+            "cat": "other",
+            "n": 33,
+            "us": 158.07999999999998
+          },
+          {
+            "name": "triton_red_fused__to_copy_dynamic_scaled_int8_quant_embedding_rms_norm_0",
+            "cat": "norm",
+            "n": 33,
+            "us": 155.32300000000004
+          }
+        ]
+      },
+      "shares": {
+        "norm": 0.03448757054253563,
+        "quant": 0.027871740695257,
+        "norm_quant_fused": 0.0,
+        "norm_plus_quant": 0.06235931123779264,
+        "fusable_region": 0.029067160944258423,
+        "gemm": 0.900665077550138,
+        "attention": 0.007988290670123499,
+        "activation": 0.004837857306056501,
+        "rope": 0.0,
+        "memory": 0.0004639464942894977,
+        "other": 0.023685516741592794
+      },
+      "wall_s": 0.3734431279990531,
+      "gpu_busy_frac_of_wall": 0.994772928318397,
+      "decode_steps": 32
+    },
+    "decode_b64": {
+      "metrics": {
+        "total_us": 570773.3330000001,
+        "span_us": 573507.6240234375,
+        "n_kernels": 16900,
+        "by_cat_us": {
+          "quant": 12083.91100000176,
+          "norm": 13745.604999999792,
+          "norm_quant_fused": 0.0,
+          "gemm": 519616.6249999951,
+          "attention": 3450.132000000034,
+          "activation": 3766.627999999757,
+          "rope": 0.0,
+          "memory": 184.314,
+          "other": 17926.11800000011
+        },
+        "by_cat_n": {
+          "quant": 3584,
+          "norm": 3616,
+          "norm_quant_fused": 0,
+          "gemm": 4512,
+          "attention": 896,
+          "activation": 896,
+          "rope": 0,
+          "memory": 128,
+          "other": 3268
+        },
+        "fusable": {
+          "norm_us": 6634.5910000001895,
+          "norm_n": 1792,
+          "quant_us": 5419.160000000327,
+          "quant_n": 1792
+        },
+        "top": [
+          {
+            "name": "void cutlass::Kernel2<enable_sm89_to_sm90<cutlass::gemm::kernel::DefaultGemmWithVisitor<signed char, cutlass::layout::RowMajor, (cutlass::Co",
+            "cat": "gemm",
+            "n": 112,
+            "us": 254559.115
+          },
+          {
+            "name": "void flash::flash_fwd_splitkv_kernel<Flash_fwd_kernel_traits<128, 64, 64, 4, false, false, cutlass::bfloat16_t, Flash_kernel_traits<128, 64,",
+            "cat": "gemm",
+            "n": 896,
+            "us": 165762.61299999987
+          },
+          {
+            "name": "void cutlass::Kernel2<enable_sm89_to_sm90<cutlass::gemm::kernel::DefaultGemmWithVisitor<signed char, cutlass::layout::RowMajor, (cutlass::Co",
+            "cat": "gemm",
+            "n": 2688,
+            "us": 148039.47700000007
+          },
+          {
+            "name": "void cutlass::Kernel2<enable_sm89_to_sm90<cutlass::gemm::kernel::DefaultGemmWithVisitor<signed char, cutlass::layout::RowMajor, (cutlass::Co",
+            "cat": "gemm",
+            "n": 896,
+            "us": 113277.94699999994
+          },
+          {
+            "name": "void cutlass::Kernel2<cutlass_80_tensorop_bf16_s16816gemm_relu_bf16_256x128_32x3_tn_align8>(cutlass_80_tensorop_bf16_s16816gemm_relu_bf16_25",
+            "cat": "gemm",
+            "n": 33,
+            "us": 95370.512
+          },
+          {
+            "name": "void vllm::dynamic_scaled_int8_quant_kernel<c10::BFloat16, float>(c10::BFloat16 const*, signed char*, float*, int)",
+            "cat": "quant",
+            "n": 3696,
+            "us": 43501.52200000176
+          },
+          {
+            "name": "triton_poi_fused_dynamic_scaled_int8_quant_mul_silu_slice_1",
+            "cat": "activation",
+            "n": 924,
+            "us": 38512.68399999976
+          },
+          {
+            "name": "triton_red_fused_dynamic_scaled_int8_quant_fused_add_rms_norm_2",
+            "cat": "norm",
+            "n": 891,
+            "us": 20761.573000000473
+          },
+          {
+            "name": "triton_red_fused_dynamic_scaled_int8_quant_fused_add_rms_norm_0",
+            "cat": "norm",
+            "n": 924,
+            "us": 14628.771000000046
+          },
+          {
+            "name": "void flash::flash_fwd_splitkv_kernel<Flash_fwd_kernel_traits<128, 64, 128, 4, false, false, cutlass::bfloat16_t, Flash_kernel_traits<128, 64",
+            "cat": "gemm",
+            "n": 28,
+            "us": 12349.823
+          },
+          {
+            "name": "void vllm::reshape_and_cache_flash_kernel<__nv_bfloat16, __nv_bfloat16, (vllm::Fp8KVCacheDataType)0>(__nv_bfloat16 const*, __nv_bfloat16 con",
+            "cat": "attention",
+            "n": 924,
+            "us": 10592.948000000035
+          },
+          {
+            "name": "triton_per_fused_add_cat_index_select_mul_rms_norm_split_split_with_sizes_sub_unsqueeze_view_3",
+            "cat": "norm",
+            "n": 891,
+            "us": 9686.069999999982
+          },
+          {
+            "name": "triton_per_fused_add_cat_index_select_mul_rms_norm_split_split_with_sizes_sub_unsqueeze_view_4",
+            "cat": "norm",
+            "n": 891,
+            "us": 7131.183000000093
+          },
+          {
+            "name": "void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&):",
+            "cat": "other",
+            "n": 1792,
+            "us": 6554.409999999982
+          },
+          {
+            "name": "void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const:",
+            "cat": "other",
+            "n": 33,
+            "us": 4784.963
+          },
+          {
+            "name": "_gumbel_sample_kernel",
+            "cat": "other",
+            "n": 33,
+            "us": 2203.1050000000005
+          },
+          {
+            "name": "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&):",
+            "cat": "other",
+            "n": 896,
+            "us": 2175.484000000009
+          },
+          {
+            "name": "triton_red_fused_fused_add_rms_norm_2",
+            "cat": "norm",
+            "n": 33,
+            "us": 657.3450000000001
+          },
+          {
+            "name": "_bias_kernel",
+            "cat": "other",
+            "n": 33,
+            "us": 453.823
+          },
+          {
+            "name": "triton_red_fused__to_copy_dynamic_scaled_int8_quant_embedding_rms_norm_0",
+            "cat": "norm",
+            "n": 33,
+            "us": 432.831
+          },
+          {
+            "name": "triton_per_fused_add_cat_index_select_mul_rms_norm_split_split_with_sizes_sub_unsqueeze_view_1",
+            "cat": "norm",
+            "n": 33,
+            "us": 398.75100000000015
+          },
+          {
+            "name": "triton_per_fused_add_cat_index_select_mul_rms_norm_split_split_with_sizes_sub_unsqueeze_view_2",
+            "cat": "norm",
+            "n": 33,
+            "us": 261.44300000000004
+          },
+          {
+            "name": "_gather_block_tables_kernel",
+            "cat": "other",
+            "n": 33,
+            "us": 221.215
+          },
+          {
+            "name": "_combine_sampled_and_draft_tokens_kernel",
+            "cat": "other",
+            "n": 33,
+            "us": 197.88500000000002
+          },
+          {
+            "name": "void at::native::index_elementwise_kernel<128, 4, at::native::gpu_index_kernel<at::native::index_kernel_impl<at::native::OpaqueType<8> >(at:",
+            "cat": "other",
+            "n": 33,
+            "us": 196.41699999999994
+          }
+        ]
+      },
+      "shares": {
+        "norm": 0.02408242327607094,
+        "quant": 0.021171120480503874,
+        "norm_quant_fused": 0.0,
+        "norm_plus_quant": 0.04525354375657482,
+        "fusable_region": 0.021118279889927014,
+        "gemm": 0.910372988641351,
+        "attention": 0.0060446622162006886,
+        "activation": 0.00659916604758365,
+        "rope": 0.0,
+        "memory": 0.00032291978153786656,
+        "other": 0.031406719556745843
+      },
+      "wall_s": 0.5726453749994107,
+      "gpu_busy_frac_of_wall": 0.9967308877690446,
+      "decode_steps": 32
+    }
+  }
+}
