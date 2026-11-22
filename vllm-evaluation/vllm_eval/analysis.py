@@ -25,7 +25,15 @@ def classify(name: str, cat: str = "kernel") -> str:
         return "memory"
     n = name.lower()
     has_norm = bool(_NORM.search(n))
-    has_quant = bool(_QUANT.search(n)) or ("round" in n and ("amax" in n or "clamp" in n))
+    quant_math = "round" in n and ("amax" in n or "clamp" in n)
+    if n.startswith("triton_"):
+        # torch.compile (Inductor) names a kernel after every FX op in its region, including the allocation of
+        # the INT8 output/scales for vLLM's *extern* quant op. So "dynamic_scaled_int8_quant" in an Inductor
+        # name does not mean the kernel quantizes (vLLM still launches its CUDA quant kernel at every GEMM).
+        # Count an Inductor kernel as quant only if it contains the quantization math itself.
+        has_quant = quant_math
+    else:
+        has_quant = bool(_QUANT.search(n)) or quant_math
     if has_norm and has_quant: return "norm_quant_fused"
     if has_quant: return "quant"
     if has_norm: return "norm"

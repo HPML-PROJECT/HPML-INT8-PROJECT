@@ -24,7 +24,7 @@ def main():
     from datasets import load_dataset
     from transformers import AutoTokenizer
     tok = AutoTokenizer.from_pretrained(model)
-    ds = load_dataset("wikitext", "wikitext-2-raw-v1", split="test")
+    ds = load_dataset("Salesforce/wikitext", "wikitext-2-raw-v1", split="test")
     ids = tok("\n\n".join(ds["text"]), add_special_tokens=False)["input_ids"]
     n_win = len(ids) // a.seq_len
     if a.max_windows: n_win = min(n_win, a.max_windows)

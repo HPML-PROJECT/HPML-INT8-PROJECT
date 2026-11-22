@@ -161,6 +161,7 @@ Results cover one operation, one serving system, one main model and up to three 
 └── vllm-evaluation/                   WS4: model-level evaluation and integration feasibility
     ├── README.md                      setup, run, and how to read each step
     ├── INTEGRATION_PROPOSAL.md        where and how a fused kernel would plug into vLLM
+    ├── run_l4_vm.sh                   L4 driver: Part 1 venv, 1200 MHz lock, results tarball
     ├── setup_env.sh, run_all.sh, requirements.txt
     └── vllm_eval/                     bench (throughput, latency, perplexity), profile (time breakdown),
                                        reporting (Amdahl, report), integration (scan of installed vLLM)
@@ -177,7 +178,7 @@ Generated outputs of new runs (`logs/`, `reports/`, `tables/`, `results/` in the
 | See why V1 is slow | [WS2 bottleneck analysis](<gpu profling - bottleneck/results/l4_20261121/README.md>) |
 | Rerun the kernel benchmark | `cd baseline-benchmark && VLLM_VERSION=0.34.0 bash run_l4.sh` (`--quick` for a smoke test; see its [README](baseline-benchmark/README.md)) |
 | Rerun the profiling | `cd "gpu profling - bottleneck" && bash run_l4_vm.sh` (see its [README](<gpu profling - bottleneck/README.md>)) |
-| Run the end-to-end evaluation | `cd vllm-evaluation && VLLM_VERSION=0.34.0 ./setup_env.sh && source .venv/bin/activate && ./run_all.sh` (`QUICK=1` for a smoke test; see its [README](vllm-evaluation/README.md)) |
+| Run the end-to-end evaluation | `cd vllm-evaluation && bash run_l4_vm.sh` (`QUICK=1` for a smoke test; reuses the Part 1 venv. See its [README](vllm-evaluation/README.md)) |
 | Regenerate plots from committed data (no GPU) | `python baseline-benchmark/plot_l2_crossover.py baseline-benchmark/results/l4_20261121`, `python "gpu profling - bottleneck/analysis/make_plots.py"`, `python "gpu profling - bottleneck/analysis/make_roofline.py"` |
 
 ### Running on the L4 VM
@@ -186,3 +187,19 @@ Generated outputs of new runs (`logs/`, `reports/`, `tables/`, `results/` in the
 2. `git clone` this repository on the VM, so the shell scripts keep their Linux line endings.
 3. Each workstream's README has the exact setup. The kernel benchmark and the profiling share one vLLM environment; profiling also needs Nsight Compute and Nsight Systems and permission to read GPU counters (run with `sudo`, or set `NVreg_RestrictProfilingToAdminUsers=0`).
 4. Stop the VM when done; a stopped VM only costs its disk.
+
+## Key references
+
+- vLLM Issue [#60499](https://github.com/vllm-project/vllm/issues/60499): RMSNorm and INT8 quant are never fused for W8A8 models; the fused kernel is up to 2× slower at prefill (sm_89)
+- vLLM [fusion `torch.compile` passes](https://docs.vllm.ai/en/latest/design/fusions/)
+- vLLM PRs [#26234](https://github.com/vllm-project/vllm/pull/26234) (vectorized RMSNorm variance read), [#38026](https://github.com/vllm-project/vllm/pull/38026) (Inductor quant fusion), [#45364](https://github.com/vllm-project/vllm/pull/45364) (manual RMSNorm-quant fusion), [#60224](https://github.com/vllm-project/vllm/pull/60224) (vectorized RMSNorm-quant kernel)
+- [AshrithaG/int8-linear](https://github.com/AshrithaG/int8-linear): Triton W8A8 INT8 kernels benchmarked against vLLM
+- Zhang & Sennrich, *Root Mean Square Layer Normalization*, NeurIPS 2019
+- Xiao et al., *SmoothQuant*, ICML 2023
+- Dettmers et al., *LLM.int8()*, NeurIPS 2022
+- Yao et al., *ZeroQuant*, NeurIPS 2022
+- Ivanov et al., *Data Movement Is All You Need*, MLSys 2021
+- Lin et al., *QServe*, MLSys 2025
+- Kwon et al., *PagedAttention (vLLM)*, SOSP 2023
+- Tillet et al., *Triton*, MAPL 2019
+- Williams et al., *Roofline*, CACM 2009

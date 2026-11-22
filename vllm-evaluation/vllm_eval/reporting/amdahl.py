@@ -33,7 +33,8 @@ def main():
               "f_fusable_wall": (m["fusable"]["norm_us"] + m["fusable"]["quant_us"]) / wall_us if wall_us > 0 else float("nan")}
         res = {name: {("inf" if s == math.inf else f"{s:g}"): A.amdahl(f, s) for s in s_list} for name, f in fr.items()}
         rows[phase] = {"fractions": fr, "speedup": res, "gpu_busy_frac_of_wall": p["gpu_busy_frac_of_wall"]}
-        md.append(f"\n## {phase}\nGPU busy fraction of wall time: {p['gpu_busy_frac_of_wall']:.2f}\n")
+        gb = p.get("gpu_busy_frac_of_wall")
+        md.append(f"\n## {phase}\nGPU busy fraction of wall time: {'n/a' if gb is None else f'{gb:.2f}'}\n")
         md.append("| basis | f | " + " | ".join("s=inf" if s == math.inf else f"s={s:g}" for s in s_list) + " |")
         md.append("|---|---|" + "---|" * len(s_list))
         for name, f in fr.items():
