@@ -1,4 +1,0 @@
-# Versions used for the L4 runs (recorded in results/*/env.json). Python 3.13.5.
-vllm==0.34.0        # installs torch 2.14.0 (CUDA 13.0 build); provides V0 and V1 via torch.ops._C
-triton==3.8.0       # V2 (built-in Triton kernel)
-matplotlib          # plots (plot_results.py)

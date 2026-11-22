@@ -50,6 +50,19 @@
 | r2w2 | 1.31× | 0.80× | 1.27× | 0.93× |
 | r4w4 | 1.22× | 0.75× | 1.23× | 0.90× |
 
+## Plots (`plots/`)
+
+| Plot | What it shows |
+|---|---|
+| [speedup_bf16_res1_warm.png](plots/speedup_bf16_res1_warm.png), [cold](plots/speedup_bf16_res1_cold.png) | V1, V2 and V3 speedup over V0 vs. tokens |
+| [latency_bf16_res1_warm.png](plots/latency_bf16_res1_warm.png), [cold](plots/latency_bf16_res1_cold.png) | median time per call vs. tokens, V0–V3 |
+| [v3_configs.png](plots/v3_configs.png) | geo-mean speedup of each V3 config over V2, warm and cold (finding 2) |
+
+In the first two, V3 is the fastest config at each shape, and the shaded band spans all seven configs.
+Regenerate with `python ../../plot_results.py bench_results.csv plots` (from this folder).
+
+![V3 speedup over V0, warm](plots/speedup_bf16_res1_warm.png)
+
 ## Findings
 1. **V3 beats both vLLM paths, but only matches V2, not beats it.** V3 vs V0: 1.3–2.0× warm, 1.2–1.6× cold.
    V3 vs V1: up to 5.25× warm. The best V3 config is within about ±5% of V2 everywhere, outside the bimodal shapes.

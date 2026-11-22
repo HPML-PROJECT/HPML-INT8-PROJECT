@@ -18,8 +18,7 @@ and cold-cache flush as V0–V2 (see `../baseline-benchmark/README.md`).
 | `test_edge_cases.py` | V3 correctness on edge cases (V0/V1/V2 alongside for reference) |
 | `run_part3_l4.sh` | runs everything on the L4 VM: locked clock, clock/power log, benchmark, summary, results tarball |
 | `summarize_v3.py` | best V3 config per shape, each config vs V0/V1/V2, correctness and clock-stability summary → `part3_summary.md` |
-| `plot_results.py` | thin wrapper that reuses `../baseline-benchmark/plot_results.py` |
-| `requirements.txt` | same pinned versions as WS1 (vLLM 0.34.0, Triton 3.8.0, torch 2.14.0) |
+| `plot_results.py` | latency and speedup plots for V0–V3 (V3 = best config per shape, band = range over configs), and `v3_configs.png` comparing the configs |
 | `results/l4_part3/` | L4 results; its `README.md` has the findings |
 
 ## V3 configurations

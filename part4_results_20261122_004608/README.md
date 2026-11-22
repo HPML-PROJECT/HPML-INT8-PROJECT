@@ -56,7 +56,7 @@ Repeat-to-repeat variation is small: under 0.1% for W8A8, and up to 3.5% for BF1
 | Phase | Fusable share f | Bandwidth-model bound (s = 1.57×) | **Measured V3 vs V0 kernel speedup*** | Fused region free (s = ∞) |
 |---|---|---|---|---|
 | Prefill 8×512 (4,096 tokens, H=2048) | 7.6% | 1.028× | **1.017–1.039×** (s = 1.28× cold – 1.99× warm) | 1.082× |
-| Decode b=1–64 (T = 1–64) | 2.1–2.9% | 1.008–1.011× | **~1.010–1.014×** (s ≈ 1.5–1.96×) | 1.022–1.030× |
+| Decode b=1–64 (T = 1–64) | 2.1–2.9% | 1.008–1.011× | **1.007–1.014×** (s = 1.43× cold – 1.96× warm) | 1.022–1.030× |
 
 \* From the Part 1/3 kernel benchmarks at the matching token counts (H=2048). **Caveat:** those speedups are against
 vLLM's *CUDA* norm and quant kernels (V0). In the default compiled model, the norm half is an Inductor-generated
@@ -65,10 +65,10 @@ how fast Inductor's norm kernel already is, and these columns are estimates, not
 
 **H4 is supported.** Even a perfect fused kernel can speed up end-to-end inference by at most ~8% (prefill) and ~2–3%
 (decode) on this model and GPU. With the measured kernel speedups, it is about **1.7–3.9% (prefill)** and
-**1.0–1.4% (decode)**. Kernel-level
+**0.7–1.4% (decode)**. Kernel-level
 gains of 1.5–2× (Parts 1 and 3) shrink to a few percent end to end, because INT8 GEMMs take 74–91% of the time.
 
-## 4. Integration (see [`INTEGRATION_PROPOSAL.md`](INTEGRATION_PROPOSAL.md), [`results/integration_map.md`](results/integration_map.md))
+## 4. Integration (see [`INTEGRATION_PROPOSAL.md`](../vllm-evaluation/INTEGRATION_PROPOSAL.md), [`results/integration_map.md`](results/integration_map.md))
 - The hooks were found in the installed vLLM 0.34.0: the RMSNorm layer, `scaled_int8_quant`, the
   `CompressedTensorsW8A8Int8` scheme with `CutlassInt8ScaledMMLinearKernel`, the fusion-pass modules, custom-op
   registration and plugin entry points.
@@ -91,6 +91,18 @@ gains of 1.5–2× (Parts 1 and 3) shrink to a few percent end to end, because I
   steady 1200 MHz.
 - TPOT and decode profiles use subtraction, so small noise is possible at batch 1.
 - The model-level gain is a bound, not a measurement: V3 is not yet integrated (next step).
+
+## Plots (in `plots/`)
+
+| Plot | What it shows |
+|---|---|
+| [time_breakdown_amdahl.png](plots/time_breakdown_amdahl.png) | Share of W8A8 GPU time per kernel type (sections 2 and 3), next to the expected end-to-end gain from fusion: with the measured V3 kernel speedup and with a fused region that takes zero time |
+| [w8a8_vs_bf16.png](plots/w8a8_vs_bf16.png) | W8A8 speedup over BF16 for each workload (section 1), with the raw throughput and time per token |
+
+![Time breakdown and Amdahl bound](plots/time_breakdown_amdahl.png)
+
+Regenerate (no GPU): `cd vllm-evaluation && python -m vllm_eval.reporting.make_plots ../part4_results_20261122_004608/results`.
+The kernel speedups are read from the WS3 run (`triton-v3/results/l4_part3/bench_results.csv`).
 
 ## Files (in `results/`)
 | File | Content |
