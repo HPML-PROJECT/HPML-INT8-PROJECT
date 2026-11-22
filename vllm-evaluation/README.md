@@ -38,7 +38,7 @@ clocks/power to `results/gpu_log.csv`. State the clock setting next to every num
 | `vllm_eval/analysis.py` | kernel classifier, fusable-region detection, Amdahl (pure Python) |
 | `vllm_eval/bench/` | `env_info`, prefill/decode benchmark, WikiText-2 perplexity |
 | `vllm_eval/profile/` | torch.profiler GPU-kernel breakdown (prefill, decode b1/8/64) |
-| `vllm_eval/reporting/` | Amdahl tables, aggregated report, offline self-test |
+| `vllm_eval/reporting/` | Amdahl tables, aggregated report, plots (`make_plots.py`), offline self-test |
 | `vllm_eval/integration/` | maps the integration hooks in the installed vLLM |
 | `INTEGRATION_PROPOSAL.md` | proposed approach for V3 |
 
@@ -112,6 +112,11 @@ registration, plugin entry points) and checks which ops exist in `torch.ops._C`.
 `INTEGRATION_PROPOSAL.md` (options A layer-level plugin, B compile fusion pass, C kernel swap; recommended A then B).
 
 ### 4.7 Report: `python -m vllm_eval.reporting.make_report` -> `results/REPORT.md`
+
+### 4.8 Plots: `python -m vllm_eval.reporting.make_plots <results_dir>` -> `<results_dir>/../plots/`
+Needs only matplotlib (no GPU). Writes `time_breakdown_amdahl.png` (W8A8 time per kernel type, plus the expected
+end-to-end gain from fusion) and `w8a8_vs_bf16.png`. The kernel speedups for the Amdahl estimate come from the WS3 run
+(`--ws3-csv`, default `../triton-v3/results/l4_part3/bench_results.csv`).
 
 ## 5. Output layout
 ```
