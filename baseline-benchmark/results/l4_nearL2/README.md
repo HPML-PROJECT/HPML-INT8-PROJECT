@@ -16,7 +16,7 @@
 | Shapes | BF16; H = 2048, 4096; T = 1024, 2048, 4096, 8192; residual off and on |
 | Variants | V0 (vLLM unfused), V1 (vLLM fused CUDA), V2 (built-in Triton kernel, see main-run caveats) |
 | Timing | CUDA graphs + CUDA events; warm: **200** samples (main run: 50); cold: 100 single calls with an 8×L2 flush |
-| Clock | SM clock locked at 2040 MHz (`LOCK_CLOCKS=1`); nvidia-smi logged every 0.5 s → `gpu_log.csv` |
+| Clock | SM clock requested at 2040 MHz (`LOCK_CLOCKS=1`), but the 72 W power cap still lowered it (see below); nvidia-smi logged every 0.5 s → `gpu_log.csv` |
 | Command | `LOCK_CLOCKS=1 bash run_l4.sh --dtypes bf16 --hidden 2048 4096 --tokens 1024 2048 4096 8192 --reps 200 --out-dir results_l4_nearL2` |
 
 Correctness: **96/96** cross-checks passed.
