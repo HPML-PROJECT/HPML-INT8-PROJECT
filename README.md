@@ -87,7 +87,7 @@ All numbers are BF16 with residual on and a warm cache unless stated. The resear
 - **H3 is open.** It needs the other GPUs.
 - **H4 is supported.** Kernel gains of 1.5–2× shrink to a few percent end to end, because INT8 GEMMs take 74–91% of the time.
 
-**Caveats:** V2 is our built-in Triton kernel, not yet the issue author's. The WS1 timings ran at 2040 MHz, where the L4 hits its power cap; WS3 and WS4 used a 1200 MHz lock. W8A8 perplexity (16.40) is lower than BF16 (16.70); we are checking whether the two checkpoints come from the same base model.
+**Caveats:** V2 is our built-in Triton kernel, not yet the issue author's. The WS1 timings ran at 2040 MHz, where the L4 hits its power cap; WS3 and WS4 used a 1200 MHz lock. W8A8 perplexity (16.40) is lower than BF16 (16.70); both checkpoints come from the same model (the W8A8 one is quantized from Qwen/Qwen3-1.7B), so the 1.8% difference is not a model mismatch; it may come from the quantization calibration data. We report both values and make no accuracy-gain claim.
 
 ## Methodology
 
