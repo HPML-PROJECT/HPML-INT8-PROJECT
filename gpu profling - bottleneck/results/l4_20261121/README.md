@@ -14,10 +14,11 @@ Bottleneck analysis for V0 (unfused `fused_add_rms_norm` → `dynamic_scaled_int
 
 ## Plots
 
-Regenerate with `python analysis/make_plots.py results/l4_20261121` (needs only matplotlib).
+Regenerate with `python analysis/make_plots.py results/l4_20261121` and `python analysis/make_roofline.py results/l4_20261121` (both need only matplotlib).
 
 | Plot | What it shows |
 |---|---|
+| [roofline.png](plots/roofline.png) | Roofline for V0 and V1: DRAM roofline for cold runs, L2 roofline for warm runs whose data stayed in L2 (section 6) |
 | [time_ratio_vs_tokens.png](plots/time_ratio_vs_tokens.png) | V1/V0 time vs. tokens, warm and cold: V1 is slower only in warm runs, before the working set outgrows the 48 MB L2 |
 | [bytes_v1_vs_v0.png](plots/bytes_v1_vs_v0.png) | V1's DRAM and L2 traffic relative to V0 (0.59–0.67×) at every shape |
 | [execution_v0_vs_v1.png](plots/execution_v0_vs_v1.png) | Instructions, load instructions, bytes per load and occupancy at H=2048, T=1024 |
@@ -107,6 +108,34 @@ V0's numbers are summed over its two kernels. V0's norm kernel is `fused_add_rms
 2. **Block size and rows per block:** 256-thread blocks, or several rows per 1,024-thread block, to lift the 66.7% occupancy cap.
 3. **Reduction cost:** warp-shuffle reductions with fewer block-wide barriers, and computing the sum of squares and the absmax in fewer passes.
 4. **Reference point:** Part 1's built-in Triton kernel (V2) is fastest when data is in L2. Profiling it the same way would show which of 1–3 it already avoids.
+
+## 6. Roofline (`plots/roofline.png`, `tables/roofline_table.md`)
+
+![Roofline](plots/roofline.png)
+
+**Model.** Both variants do the same arithmetic, about 9 FP32 operations per element (residual add, square, sum, ×rstd, ×weight, abs, max, ÷scale, round), so work is counted analytically as 9 × T × H. Intensity differences between V0 and V1 therefore come only from the bytes each moves, which Nsight Compute measured.
+
+| Roof | Value | Source |
+|---|---|---|
+| DRAM bandwidth | 300 GB/s | L4 spec (highest measured: 288 GB/s) |
+| L2 bandwidth | 1,982 GB/s | Highest L2 throughput measured by any kernel in this run (V0's norm kernel, H=4096, T=1024, warm); NVIDIA does not publish the L4's L2 bandwidth |
+| FP32 compute | 30.3 TFLOP/s | L4 spec |
+
+Cold runs are placed on the DRAM roofline. Warm runs are placed on the L2 roofline when their data stayed in L2 (DRAM traffic under 5% of L2 traffic: all T ≤ 1024); warm runs at larger T are DRAM-bound and are measured against the DRAM roof in the table.
+
+**Results** (% of the applicable roof, from `tables/roofline_table.md`):
+
+| Regime | V0 | V1 |
+|---|---|---|
+| Cold, T = 1024–16384 (DRAM roof) | 87–95% | 68–93% |
+| Warm, data in L2, T = 1024 (L2 roof) | **73–93%** | **20–31%** |
+| Warm, data in L2, T = 256 (L2 roof) | 44–57% | 18–27% |
+| T = 8 (either roof) | 3–12% | 4–12% |
+
+- **Both variants are firmly memory-bound.** Intensity is 0.4–3.2 FLOP per byte, far left of the ridge points (101 FLOP/byte for DRAM, 15 for L2). Compute is never the limit.
+- **From DRAM, both run close to the roof.** At T ≥ 1024, V0 reaches 87–95% of DRAM bandwidth and V1 68–93%. V1 sits at higher intensity because it moves fewer bytes, so at the same bandwidth it finishes sooner. That is why it wins cold.
+- **From L2, V1 is far below the roof.** At T = 1024, V0 reaches 73–93% of the measured L2 bandwidth, while V1 reaches only 20–31%. The L2 can deliver data about 3–4× faster than V1 consumes it. This is the roofline view of section 3: V1's narrower loads, extra instructions and lower occupancy cap its throughput, and the cap only matters once memory is fast enough to expose it.
+- **At T = 8**, both kernels reach under 12% of either roof. With 8 rows there is too little work to fill 58 SMs, so these runs are limited by launch and latency, not bandwidth.
 
 ## Caveats
 
