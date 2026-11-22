@@ -104,7 +104,7 @@ We confirm cache state with measured L2 hit rates and DRAM traffic rather than i
 
 ### Metrics
 
-Saved as CSV and JSON in each workstream's `results/` folder (a Weights & Biases dashboard is planned):
+Saved as CSV and JSON in each workstream's `results/` folder, and on the [Weights & Biases dashboard](https://forge.coreweave.com/wandb/ta2828-columbia-university/hpml-int8):
 
 
 - Time per call (µs)
@@ -120,7 +120,7 @@ Saved as CSV and JSON in each workstream's `results/` folder (a Weights & Biases
 ## Setup
 
 - **Hardware:** NVIDIA L4 on Google Cloud Platform (Ada, sm_89; 24 GB GDDR6, ~300 GB/s, 48 MB L2, 58 SMs, 72 W power limit). It has the same architecture as the RTX 4090 in vLLM #60499, so the kernel code paths match, but its memory bandwidth is about 3× lower. We therefore compare fused/unfused ratios and break-even token counts with the issue, not absolute µs. Roofline and %-of-peak figures use the L4's own peak bandwidth. The L4 is power-limited (72 W): at its 2040 MHz boost clock it hits the power cap under load, so clock locks at 2040 MHz do not hold. Runs log the SM clock and power; the steadiest timings come from a clock below the power limit (1200 MHz, used for WS3 and WS4). All variants are compared on the same GPU. Other generations (e.g. A6000 sm_86, L40S sm_89, H100 sm_90) are added for cross-GPU comparison if available.
-- **Software:** vLLM 0.34.0, PyTorch 2.14.0 (CUDA 13.0 build), Triton 3.8.0, Python 3.13; PyTorch Profiler, Nsight Systems 2025.6, Nsight Compute 2026.1. Weights & Biases is planned for the dashboard.
+- **Software:** vLLM 0.34.0, PyTorch 2.14.0 (CUDA 13.0 build), Triton 3.8.0, Python 3.13; PyTorch Profiler, Nsight Systems 2025.6, Nsight Compute 2026.1. Results dashboard: [Weights & Biases](https://forge.coreweave.com/wandb/ta2828-columbia-university/hpml-int8), uploaded with `python wandb_upload.py`.
 - **Models:** the Qwen3-1.7B W8A8 INT8 checkpoint used in vLLM #60499 ([`nytopop/Qwen3-1.7B.w8a8`](https://huggingface.co/nytopop/Qwen3-1.7B.w8a8)), so our results are directly comparable, and the BF16 model ([`Qwen/Qwen3-1.7B`](https://huggingface.co/Qwen/Qwen3-1.7B)) for the precision comparison. Secondary, if compatible and time allows: an 8B-class W8A8 model with hidden size 4096 (e.g. Llama-3.1-8B-Instruct-quantized.w8a8).
 - **Workloads:** offline, non-concurrent runs.
   - Prefill: 8 prompts of 512 tokens, and 1 prompt of 2,048 tokens.
