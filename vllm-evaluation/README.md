@@ -16,6 +16,19 @@ that implies for a fused Triton kernel (V3).
 | Where V3 could be integrated | `inspect_integration.py`, `INTEGRATION_PROPOSAL.md` |
 | Everything in one report | `make_report.py` -> `results/REPORT.md` |
 
+
+## 0. On the team's Google Cloud L4 VM (recommended)
+Reuse the Part 1 environment (`~/rmsnorm_int8_bench/.venv`, vLLM 0.34.0) so Parts 1–4 use the same vLLM and no second
+multi-GB venv fills the disk:
+```bash
+cd ~/vllm-evaluation
+QUICK=1 bash run_l4_vm.sh     # smoke test; check results/REPORT.md
+bash run_l4_vm.sh             # full run; prints a results bundle path at the end
+```
+It locks the SM clock at 1200 MHz (the L4 throttles at its 72 W power cap at 2040 MHz; `CLOCK=0` to skip) and logs
+clocks/power to `results/gpu_log.csv`. State the clock setting next to every number in the report.
+`setup_env.sh` (below) is only for a fresh machine without the Part 1 environment.
+
 ## 1. Files
 | File | Purpose |
 |---|---|

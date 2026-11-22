@@ -15,6 +15,10 @@ K = {
     "inductor_norm": "triton_red_fused__to_copy_add_mean_mul_pow_rsqrt_0",
     "inductor_quant": "triton_per_fused__to_copy_abs_amax_clamp_div_round_1",
     "memcpy": "Memcpy DtoD",
+    # names seen with vLLM 0.34 + torch.compile on the L4 (quant op stays an extern CUDA kernel)
+    "ind_addnorm": "triton_red_fused_dynamic_scaled_int8_quant_fused_add_rms_norm_2",
+    "ind_silu": "triton_poi_fused_dynamic_scaled_int8_quant_mul_silu_slice_1",
+    "ind_qknorm_rope": "triton_per_fused_add_cat_index_select_mul_rms_norm_split_split_with_sizes_sub_unsqueeze_view_3",
 }
 
 
@@ -31,7 +35,8 @@ def synth_layer(t0):
 def main():
     # classification
     exp = {"addnorm": "norm", "norm": "norm", "quant": "quant", "gemm": "gemm", "rope": "rope", "attn": "attention",
-           "act": "activation", "fusedcuda": "norm_quant_fused", "inductor_norm": "norm", "inductor_quant": "quant"}
+           "act": "activation", "fusedcuda": "norm_quant_fused", "inductor_norm": "norm", "inductor_quant": "quant",
+           "ind_addnorm": "norm", "ind_silu": "activation", "ind_qknorm_rope": "norm"}
     for k, c in exp.items():
         assert A.classify(K[k]) == c, (k, A.classify(K[k]), c)
     assert A.classify(K["memcpy"], "gpu_memcpy") == "memory"
