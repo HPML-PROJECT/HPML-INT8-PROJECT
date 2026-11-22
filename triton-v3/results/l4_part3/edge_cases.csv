@@ -1,0 +1,521 @@
+case,variant,compared_to,dtype,num_tokens,hidden_size,residual,passed,note
+odd_T,V0,ref+V0,bf16,1,2048,1,True,lsb=0.98
+odd_T,V1,ref+V0,bf16,1,2048,1,True,lsb=1.06; vsV0 mism=5.6% maxdiff=1
+odd_T,V2,ref+V0,bf16,1,2048,1,True,lsb=0.50; vsV0 mism=4.1% maxdiff=1
+odd_T,V3_r1w8,ref+V0,bf16,1,2048,1,True,lsb=0.50; vsV0 mism=4.1% maxdiff=1
+odd_T,V3_r1w4,ref+V0,bf16,1,2048,1,True,lsb=0.50; vsV0 mism=4.1% maxdiff=1
+odd_T,V3_r1w2,ref+V0,bf16,1,2048,1,True,lsb=0.50; vsV0 mism=4.1% maxdiff=1
+odd_T,V3_r1w1,ref+V0,bf16,1,2048,1,True,lsb=0.50; vsV0 mism=4.1% maxdiff=1
+odd_T,V3_r2w2,ref+V0,bf16,1,2048,1,True,lsb=0.50; vsV0 mism=4.1% maxdiff=1
+odd_T,V3_r4w4,ref+V0,bf16,1,2048,1,True,lsb=0.50; vsV0 mism=4.1% maxdiff=1
+odd_T,V3_r1w4p,ref+V0,bf16,1,2048,1,True,lsb=0.50; vsV0 mism=4.1% maxdiff=1
+odd_T,V0,ref+V0,bf16,3,2048,1,True,lsb=1.03
+odd_T,V1,ref+V0,bf16,3,2048,1,True,lsb=1.00; vsV0 mism=10.0% maxdiff=1
+odd_T,V2,ref+V0,bf16,3,2048,1,True,lsb=0.50; vsV0 mism=6.3% maxdiff=1
+odd_T,V3_r1w8,ref+V0,bf16,3,2048,1,True,lsb=0.50; vsV0 mism=6.3% maxdiff=1
+odd_T,V3_r1w4,ref+V0,bf16,3,2048,1,True,lsb=0.50; vsV0 mism=6.3% maxdiff=1
+odd_T,V3_r1w2,ref+V0,bf16,3,2048,1,True,lsb=0.50; vsV0 mism=6.3% maxdiff=1
+odd_T,V3_r1w1,ref+V0,bf16,3,2048,1,True,lsb=0.50; vsV0 mism=6.3% maxdiff=1
+odd_T,V3_r2w2,ref+V0,bf16,3,2048,1,True,lsb=0.50; vsV0 mism=6.3% maxdiff=1
+odd_T,V3_r4w4,ref+V0,bf16,3,2048,1,True,lsb=0.50; vsV0 mism=6.3% maxdiff=1
+odd_T,V3_r1w4p,ref+V0,bf16,3,2048,1,True,lsb=0.50; vsV0 mism=6.3% maxdiff=1
+odd_T,V0,ref+V0,bf16,7,2048,1,True,lsb=1.07
+odd_T,V1,ref+V0,bf16,7,2048,1,True,lsb=1.56; vsV0 mism=12.8% maxdiff=2
+odd_T,V2,ref+V0,bf16,7,2048,1,True,lsb=0.50; vsV0 mism=4.9% maxdiff=1
+odd_T,V3_r1w8,ref+V0,bf16,7,2048,1,True,lsb=0.50; vsV0 mism=4.9% maxdiff=1
+odd_T,V3_r1w4,ref+V0,bf16,7,2048,1,True,lsb=0.50; vsV0 mism=4.9% maxdiff=1
+odd_T,V3_r1w2,ref+V0,bf16,7,2048,1,True,lsb=0.50; vsV0 mism=4.9% maxdiff=1
+odd_T,V3_r1w1,ref+V0,bf16,7,2048,1,True,lsb=0.50; vsV0 mism=4.9% maxdiff=1
+odd_T,V3_r2w2,ref+V0,bf16,7,2048,1,True,lsb=0.50; vsV0 mism=4.9% maxdiff=1
+odd_T,V3_r4w4,ref+V0,bf16,7,2048,1,True,lsb=0.50; vsV0 mism=4.9% maxdiff=1
+odd_T,V3_r1w4p,ref+V0,bf16,7,2048,1,True,lsb=0.50; vsV0 mism=4.9% maxdiff=1
+odd_T,V0,ref+V0,bf16,1000,2048,1,True,lsb=1.34
+odd_T,V1,ref+V0,bf16,1000,2048,1,True,lsb=1.68; vsV0 mism=8.7% maxdiff=2
+odd_T,V2,ref+V0,bf16,1000,2048,1,True,lsb=0.86; vsV0 mism=6.1% maxdiff=2
+odd_T,V3_r1w8,ref+V0,bf16,1000,2048,1,True,lsb=0.86; vsV0 mism=6.1% maxdiff=2
+odd_T,V3_r1w4,ref+V0,bf16,1000,2048,1,True,lsb=0.86; vsV0 mism=6.1% maxdiff=2
+odd_T,V3_r1w2,ref+V0,bf16,1000,2048,1,True,lsb=0.86; vsV0 mism=6.1% maxdiff=2
+odd_T,V3_r1w1,ref+V0,bf16,1000,2048,1,True,lsb=0.86; vsV0 mism=6.1% maxdiff=2
+odd_T,V3_r2w2,ref+V0,bf16,1000,2048,1,True,lsb=0.86; vsV0 mism=6.1% maxdiff=2
+odd_T,V3_r4w4,ref+V0,bf16,1000,2048,1,True,lsb=0.86; vsV0 mism=6.1% maxdiff=2
+odd_T,V3_r1w4p,ref+V0,bf16,1000,2048,1,True,lsb=0.86; vsV0 mism=6.1% maxdiff=2
+odd_T,V0,ref+V0,bf16,1023,2048,1,True,lsb=1.23
+odd_T,V1,ref+V0,bf16,1023,2048,1,True,lsb=1.66; vsV0 mism=9.2% maxdiff=2
+odd_T,V2,ref+V0,bf16,1023,2048,1,True,lsb=0.50; vsV0 mism=6.2% maxdiff=2
+odd_T,V3_r1w8,ref+V0,bf16,1023,2048,1,True,lsb=0.50; vsV0 mism=6.2% maxdiff=2
+odd_T,V3_r1w4,ref+V0,bf16,1023,2048,1,True,lsb=0.50; vsV0 mism=6.2% maxdiff=2
+odd_T,V3_r1w2,ref+V0,bf16,1023,2048,1,True,lsb=0.50; vsV0 mism=6.2% maxdiff=2
+odd_T,V3_r1w1,ref+V0,bf16,1023,2048,1,True,lsb=0.50; vsV0 mism=6.2% maxdiff=2
+odd_T,V3_r2w2,ref+V0,bf16,1023,2048,1,True,lsb=0.50; vsV0 mism=6.2% maxdiff=2
+odd_T,V3_r4w4,ref+V0,bf16,1023,2048,1,True,lsb=0.50; vsV0 mism=6.2% maxdiff=2
+odd_T,V3_r1w4p,ref+V0,bf16,1023,2048,1,True,lsb=0.50; vsV0 mism=6.2% maxdiff=2
+odd_H,V0,ref+V0,bf16,1,5120,1,True,lsb=1.03
+odd_H,V1,ref+V0,bf16,1,5120,1,True,lsb=1.47; vsV0 mism=6.0% maxdiff=1
+odd_H,V2,ref+V0,bf16,1,5120,1,True,lsb=0.50; vsV0 mism=4.1% maxdiff=1
+odd_H,V3_r1w8,ref+V0,bf16,1,5120,1,True,lsb=0.50; vsV0 mism=4.1% maxdiff=1
+odd_H,V3_r1w4,ref+V0,bf16,1,5120,1,True,lsb=0.50; vsV0 mism=4.1% maxdiff=1
+odd_H,V3_r1w2,ref+V0,bf16,1,5120,1,True,lsb=0.50; vsV0 mism=4.1% maxdiff=1
+odd_H,V3_r1w1,ref+V0,bf16,1,5120,1,True,lsb=0.50; vsV0 mism=4.1% maxdiff=1
+odd_H,V3_r2w2,ref+V0,bf16,1,5120,1,True,lsb=0.50; vsV0 mism=4.1% maxdiff=1
+odd_H,V3_r4w4,ref+V0,bf16,1,5120,1,True,lsb=0.50; vsV0 mism=4.1% maxdiff=1
+odd_H,V3_r1w4p,ref+V0,bf16,1,5120,1,True,lsb=0.50; vsV0 mism=4.1% maxdiff=1
+odd_H,V0,ref+V0,bf16,257,5120,1,True,lsb=1.30
+odd_H,V1,ref+V0,bf16,257,5120,1,True,lsb=1.63; vsV0 mism=7.9% maxdiff=2
+odd_H,V2,ref+V0,bf16,257,5120,1,True,lsb=0.62; vsV0 mism=5.7% maxdiff=2
+odd_H,V3_r1w8,ref+V0,bf16,257,5120,1,True,lsb=0.62; vsV0 mism=5.7% maxdiff=2
+odd_H,V3_r1w4,ref+V0,bf16,257,5120,1,True,lsb=0.50; vsV0 mism=5.7% maxdiff=2
+odd_H,V3_r1w2,ref+V0,bf16,257,5120,1,True,lsb=0.62; vsV0 mism=5.7% maxdiff=2
+odd_H,V3_r1w1,ref+V0,bf16,257,5120,1,True,lsb=0.50; vsV0 mism=5.7% maxdiff=2
+odd_H,V3_r2w2,ref+V0,bf16,257,5120,1,True,lsb=0.62; vsV0 mism=5.7% maxdiff=2
+odd_H,V3_r4w4,ref+V0,bf16,257,5120,1,True,lsb=0.50; vsV0 mism=5.7% maxdiff=2
+odd_H,V3_r1w4p,ref+V0,bf16,257,5120,1,True,lsb=0.50; vsV0 mism=5.7% maxdiff=2
+odd_H,V0,ref+V0,bf16,1,3000,1,True,lsb=1.00
+odd_H,V1,ref+V0,bf16,1,3000,1,True,lsb=1.38; vsV0 mism=10.5% maxdiff=1
+odd_H,V2,ref+V0,bf16,1,3000,1,True,lsb=0.50; vsV0 mism=3.9% maxdiff=1
+odd_H,V3_r1w8,ref+V0,bf16,1,3000,1,True,lsb=0.50; vsV0 mism=3.9% maxdiff=1
+odd_H,V3_r1w4,ref+V0,bf16,1,3000,1,True,lsb=0.50; vsV0 mism=3.9% maxdiff=1
+odd_H,V3_r1w2,ref+V0,bf16,1,3000,1,True,lsb=0.50; vsV0 mism=3.9% maxdiff=1
+odd_H,V3_r1w1,ref+V0,bf16,1,3000,1,True,lsb=0.50; vsV0 mism=3.9% maxdiff=1
+odd_H,V3_r2w2,ref+V0,bf16,1,3000,1,True,lsb=0.50; vsV0 mism=3.9% maxdiff=1
+odd_H,V3_r4w4,ref+V0,bf16,1,3000,1,True,lsb=0.50; vsV0 mism=3.9% maxdiff=1
+odd_H,V3_r1w4p,ref+V0,bf16,1,3000,1,True,lsb=0.50; vsV0 mism=3.9% maxdiff=1
+odd_H,V0,ref+V0,bf16,257,3000,1,True,lsb=1.11
+odd_H,V1,ref+V0,bf16,257,3000,1,True,lsb=1.63; vsV0 mism=8.1% maxdiff=2
+odd_H,V2,ref+V0,bf16,257,3000,1,True,lsb=0.54; vsV0 mism=5.7% maxdiff=2
+odd_H,V3_r1w8,ref+V0,bf16,257,3000,1,True,lsb=0.54; vsV0 mism=5.7% maxdiff=2
+odd_H,V3_r1w4,ref+V0,bf16,257,3000,1,True,lsb=0.50; vsV0 mism=5.7% maxdiff=2
+odd_H,V3_r1w2,ref+V0,bf16,257,3000,1,True,lsb=0.54; vsV0 mism=5.7% maxdiff=2
+odd_H,V3_r1w1,ref+V0,bf16,257,3000,1,True,lsb=0.54; vsV0 mism=5.7% maxdiff=2
+odd_H,V3_r2w2,ref+V0,bf16,257,3000,1,True,lsb=0.54; vsV0 mism=5.7% maxdiff=2
+odd_H,V3_r4w4,ref+V0,bf16,257,3000,1,True,lsb=0.50; vsV0 mism=5.7% maxdiff=2
+odd_H,V3_r1w4p,ref+V0,bf16,257,3000,1,True,lsb=0.50; vsV0 mism=5.7% maxdiff=2
+zero_rows,V0,ref+V0,bf16,64,2048,1,True,lsb=1.12
+zero_rows,V1,ref+V0,bf16,64,2048,1,True,lsb=1.76; vsV0 mism=7.7% maxdiff=2
+zero_rows,V2,ref+V0,bf16,64,2048,1,True,lsb=0.50; vsV0 mism=6.0% maxdiff=2
+zero_rows,V3_r1w8,ref+V0,bf16,64,2048,1,True,lsb=0.50; vsV0 mism=6.0% maxdiff=2
+zero_rows,V3_r1w4,ref+V0,bf16,64,2048,1,True,lsb=0.50; vsV0 mism=6.0% maxdiff=2
+zero_rows,V3_r1w2,ref+V0,bf16,64,2048,1,True,lsb=0.50; vsV0 mism=6.0% maxdiff=2
+zero_rows,V3_r1w1,ref+V0,bf16,64,2048,1,True,lsb=0.50; vsV0 mism=6.0% maxdiff=2
+zero_rows,V3_r2w2,ref+V0,bf16,64,2048,1,True,lsb=0.50; vsV0 mism=6.0% maxdiff=2
+zero_rows,V3_r4w4,ref+V0,bf16,64,2048,1,True,lsb=0.50; vsV0 mism=6.0% maxdiff=2
+zero_rows,V3_r1w4p,ref+V0,bf16,64,2048,1,True,lsb=0.50; vsV0 mism=6.0% maxdiff=2
+large_vals,V0,ref+V0,bf16,64,2048,1,True,lsb=0.58
+large_vals,V1,ref+V0,bf16,64,2048,1,True,lsb=0.58; vsV0 mism=0.5% maxdiff=1
+large_vals,V2,ref+V0,bf16,64,2048,1,True,lsb=0.50; vsV0 mism=0.5% maxdiff=1
+large_vals,V3_r1w8,ref+V0,bf16,64,2048,1,True,lsb=0.50; vsV0 mism=0.5% maxdiff=1
+large_vals,V3_r1w4,ref+V0,bf16,64,2048,1,True,lsb=0.50; vsV0 mism=0.5% maxdiff=1
+large_vals,V3_r1w2,ref+V0,bf16,64,2048,1,True,lsb=0.50; vsV0 mism=0.5% maxdiff=1
+large_vals,V3_r1w1,ref+V0,bf16,64,2048,1,True,lsb=0.50; vsV0 mism=0.5% maxdiff=1
+large_vals,V3_r2w2,ref+V0,bf16,64,2048,1,True,lsb=0.50; vsV0 mism=0.5% maxdiff=1
+large_vals,V3_r4w4,ref+V0,bf16,64,2048,1,True,lsb=0.50; vsV0 mism=0.5% maxdiff=1
+large_vals,V3_r1w4p,ref+V0,bf16,64,2048,1,True,lsb=0.50; vsV0 mism=0.5% maxdiff=1
+zero_rows,V0,ref+V0,bf16,64,4096,1,True,lsb=1.05
+zero_rows,V1,ref+V0,bf16,64,4096,1,True,lsb=1.48; vsV0 mism=8.4% maxdiff=2
+zero_rows,V2,ref+V0,bf16,64,4096,1,True,lsb=0.50; vsV0 mism=6.0% maxdiff=2
+zero_rows,V3_r1w8,ref+V0,bf16,64,4096,1,True,lsb=0.50; vsV0 mism=6.0% maxdiff=2
+zero_rows,V3_r1w4,ref+V0,bf16,64,4096,1,True,lsb=0.50; vsV0 mism=6.0% maxdiff=2
+zero_rows,V3_r1w2,ref+V0,bf16,64,4096,1,True,lsb=0.50; vsV0 mism=6.0% maxdiff=2
+zero_rows,V3_r1w1,ref+V0,bf16,64,4096,1,True,lsb=0.50; vsV0 mism=6.0% maxdiff=2
+zero_rows,V3_r2w2,ref+V0,bf16,64,4096,1,True,lsb=0.50; vsV0 mism=6.0% maxdiff=2
+zero_rows,V3_r4w4,ref+V0,bf16,64,4096,1,True,lsb=0.50; vsV0 mism=6.0% maxdiff=2
+zero_rows,V3_r1w4p,ref+V0,bf16,64,4096,1,True,lsb=0.50; vsV0 mism=6.0% maxdiff=2
+large_vals,V0,ref+V0,bf16,64,4096,1,True,lsb=0.68
+large_vals,V1,ref+V0,bf16,64,4096,1,True,lsb=0.62; vsV0 mism=0.9% maxdiff=1
+large_vals,V2,ref+V0,bf16,64,4096,1,True,lsb=0.50; vsV0 mism=0.9% maxdiff=1
+large_vals,V3_r1w8,ref+V0,bf16,64,4096,1,True,lsb=0.50; vsV0 mism=0.9% maxdiff=1
+large_vals,V3_r1w4,ref+V0,bf16,64,4096,1,True,lsb=0.50; vsV0 mism=0.9% maxdiff=1
+large_vals,V3_r1w2,ref+V0,bf16,64,4096,1,True,lsb=0.50; vsV0 mism=0.9% maxdiff=1
+large_vals,V3_r1w1,ref+V0,bf16,64,4096,1,True,lsb=0.50; vsV0 mism=0.9% maxdiff=1
+large_vals,V3_r2w2,ref+V0,bf16,64,4096,1,True,lsb=0.50; vsV0 mism=0.9% maxdiff=1
+large_vals,V3_r4w4,ref+V0,bf16,64,4096,1,True,lsb=0.50; vsV0 mism=0.9% maxdiff=1
+large_vals,V3_r1w4p,ref+V0,bf16,64,4096,1,True,lsb=0.50; vsV0 mism=0.9% maxdiff=1
+odd_T,V0,ref+V0,bf16,1,2048,0,True,lsb=0.93
+odd_T,V1,ref+V0,bf16,1,2048,0,True,lsb=0.50; vsV0 mism=4.3% maxdiff=1
+odd_T,V2,ref+V0,bf16,1,2048,0,True,lsb=0.50; vsV0 mism=4.3% maxdiff=1
+odd_T,V3_r1w8,ref+V0,bf16,1,2048,0,True,lsb=0.50; vsV0 mism=4.3% maxdiff=1
+odd_T,V3_r1w4,ref+V0,bf16,1,2048,0,True,lsb=0.50; vsV0 mism=4.3% maxdiff=1
+odd_T,V3_r1w2,ref+V0,bf16,1,2048,0,True,lsb=0.50; vsV0 mism=4.3% maxdiff=1
+odd_T,V3_r1w1,ref+V0,bf16,1,2048,0,True,lsb=0.50; vsV0 mism=4.3% maxdiff=1
+odd_T,V3_r2w2,ref+V0,bf16,1,2048,0,True,lsb=0.50; vsV0 mism=4.3% maxdiff=1
+odd_T,V3_r4w4,ref+V0,bf16,1,2048,0,True,lsb=0.50; vsV0 mism=4.3% maxdiff=1
+odd_T,V3_r1w4p,ref+V0,bf16,1,2048,0,True,lsb=0.50; vsV0 mism=4.3% maxdiff=1
+odd_T,V0,ref+V0,bf16,3,2048,0,True,lsb=1.03
+odd_T,V1,ref+V0,bf16,3,2048,0,True,lsb=0.50; vsV0 mism=6.6% maxdiff=1
+odd_T,V2,ref+V0,bf16,3,2048,0,True,lsb=0.50; vsV0 mism=6.6% maxdiff=1
+odd_T,V3_r1w8,ref+V0,bf16,3,2048,0,True,lsb=0.50; vsV0 mism=6.6% maxdiff=1
+odd_T,V3_r1w4,ref+V0,bf16,3,2048,0,True,lsb=0.50; vsV0 mism=6.6% maxdiff=1
+odd_T,V3_r1w2,ref+V0,bf16,3,2048,0,True,lsb=0.50; vsV0 mism=6.6% maxdiff=1
+odd_T,V3_r1w1,ref+V0,bf16,3,2048,0,True,lsb=0.50; vsV0 mism=6.6% maxdiff=1
+odd_T,V3_r2w2,ref+V0,bf16,3,2048,0,True,lsb=0.50; vsV0 mism=6.6% maxdiff=1
+odd_T,V3_r4w4,ref+V0,bf16,3,2048,0,True,lsb=0.50; vsV0 mism=6.6% maxdiff=1
+odd_T,V3_r1w4p,ref+V0,bf16,3,2048,0,True,lsb=0.50; vsV0 mism=6.6% maxdiff=1
+odd_T,V0,ref+V0,bf16,7,2048,0,True,lsb=1.15
+odd_T,V1,ref+V0,bf16,7,2048,0,True,lsb=0.50; vsV0 mism=7.1% maxdiff=1
+odd_T,V2,ref+V0,bf16,7,2048,0,True,lsb=0.50; vsV0 mism=7.1% maxdiff=1
+odd_T,V3_r1w8,ref+V0,bf16,7,2048,0,True,lsb=0.50; vsV0 mism=7.1% maxdiff=1
+odd_T,V3_r1w4,ref+V0,bf16,7,2048,0,True,lsb=0.50; vsV0 mism=7.1% maxdiff=1
+odd_T,V3_r1w2,ref+V0,bf16,7,2048,0,True,lsb=0.50; vsV0 mism=7.1% maxdiff=1
+odd_T,V3_r1w1,ref+V0,bf16,7,2048,0,True,lsb=0.50; vsV0 mism=7.1% maxdiff=1
+odd_T,V3_r2w2,ref+V0,bf16,7,2048,0,True,lsb=0.50; vsV0 mism=7.1% maxdiff=1
+odd_T,V3_r4w4,ref+V0,bf16,7,2048,0,True,lsb=0.50; vsV0 mism=7.1% maxdiff=1
+odd_T,V3_r1w4p,ref+V0,bf16,7,2048,0,True,lsb=0.50; vsV0 mism=7.1% maxdiff=1
+odd_T,V0,ref+V0,bf16,1000,2048,0,True,lsb=1.36
+odd_T,V1,ref+V0,bf16,1000,2048,0,True,lsb=0.55; vsV0 mism=5.9% maxdiff=2
+odd_T,V2,ref+V0,bf16,1000,2048,0,True,lsb=1.16; vsV0 mism=5.9% maxdiff=2
+odd_T,V3_r1w8,ref+V0,bf16,1000,2048,0,True,lsb=1.16; vsV0 mism=5.9% maxdiff=2
+odd_T,V3_r1w4,ref+V0,bf16,1000,2048,0,True,lsb=1.16; vsV0 mism=5.9% maxdiff=2
+odd_T,V3_r1w2,ref+V0,bf16,1000,2048,0,True,lsb=1.16; vsV0 mism=5.9% maxdiff=2
+odd_T,V3_r1w1,ref+V0,bf16,1000,2048,0,True,lsb=1.16; vsV0 mism=5.9% maxdiff=2
+odd_T,V3_r2w2,ref+V0,bf16,1000,2048,0,True,lsb=1.16; vsV0 mism=5.9% maxdiff=2
+odd_T,V3_r4w4,ref+V0,bf16,1000,2048,0,True,lsb=1.16; vsV0 mism=5.9% maxdiff=2
+odd_T,V3_r1w4p,ref+V0,bf16,1000,2048,0,True,lsb=1.16; vsV0 mism=5.9% maxdiff=2
+odd_T,V0,ref+V0,bf16,1023,2048,0,True,lsb=1.34
+odd_T,V1,ref+V0,bf16,1023,2048,0,True,lsb=0.50; vsV0 mism=6.0% maxdiff=2
+odd_T,V2,ref+V0,bf16,1023,2048,0,True,lsb=0.67; vsV0 mism=6.0% maxdiff=2
+odd_T,V3_r1w8,ref+V0,bf16,1023,2048,0,True,lsb=0.67; vsV0 mism=6.0% maxdiff=2
+odd_T,V3_r1w4,ref+V0,bf16,1023,2048,0,True,lsb=0.64; vsV0 mism=6.0% maxdiff=2
+odd_T,V3_r1w2,ref+V0,bf16,1023,2048,0,True,lsb=0.62; vsV0 mism=6.0% maxdiff=2
+odd_T,V3_r1w1,ref+V0,bf16,1023,2048,0,True,lsb=0.64; vsV0 mism=6.0% maxdiff=2
+odd_T,V3_r2w2,ref+V0,bf16,1023,2048,0,True,lsb=0.62; vsV0 mism=6.0% maxdiff=2
+odd_T,V3_r4w4,ref+V0,bf16,1023,2048,0,True,lsb=0.64; vsV0 mism=6.0% maxdiff=2
+odd_T,V3_r1w4p,ref+V0,bf16,1023,2048,0,True,lsb=0.64; vsV0 mism=6.0% maxdiff=2
+odd_H,V0,ref+V0,bf16,1,5120,0,True,lsb=0.91
+odd_H,V1,ref+V0,bf16,1,5120,0,True,lsb=0.50; vsV0 mism=2.7% maxdiff=1
+odd_H,V2,ref+V0,bf16,1,5120,0,True,lsb=0.50; vsV0 mism=2.7% maxdiff=1
+odd_H,V3_r1w8,ref+V0,bf16,1,5120,0,True,lsb=0.50; vsV0 mism=2.7% maxdiff=1
+odd_H,V3_r1w4,ref+V0,bf16,1,5120,0,True,lsb=0.50; vsV0 mism=2.7% maxdiff=1
+odd_H,V3_r1w2,ref+V0,bf16,1,5120,0,True,lsb=0.50; vsV0 mism=2.7% maxdiff=1
+odd_H,V3_r1w1,ref+V0,bf16,1,5120,0,True,lsb=0.50; vsV0 mism=2.7% maxdiff=1
+odd_H,V3_r2w2,ref+V0,bf16,1,5120,0,True,lsb=0.50; vsV0 mism=2.7% maxdiff=1
+odd_H,V3_r4w4,ref+V0,bf16,1,5120,0,True,lsb=0.50; vsV0 mism=2.7% maxdiff=1
+odd_H,V3_r1w4p,ref+V0,bf16,1,5120,0,True,lsb=0.50; vsV0 mism=2.7% maxdiff=1
+odd_H,V0,ref+V0,bf16,257,5120,0,True,lsb=1.34
+odd_H,V1,ref+V0,bf16,257,5120,0,True,lsb=0.50; vsV0 mism=5.4% maxdiff=2
+odd_H,V2,ref+V0,bf16,257,5120,0,True,lsb=0.50; vsV0 mism=5.4% maxdiff=2
+odd_H,V3_r1w8,ref+V0,bf16,257,5120,0,True,lsb=0.50; vsV0 mism=5.4% maxdiff=2
+odd_H,V3_r1w4,ref+V0,bf16,257,5120,0,True,lsb=0.50; vsV0 mism=5.4% maxdiff=2
+odd_H,V3_r1w2,ref+V0,bf16,257,5120,0,True,lsb=0.50; vsV0 mism=5.4% maxdiff=2
+odd_H,V3_r1w1,ref+V0,bf16,257,5120,0,True,lsb=0.50; vsV0 mism=5.4% maxdiff=2
+odd_H,V3_r2w2,ref+V0,bf16,257,5120,0,True,lsb=0.50; vsV0 mism=5.4% maxdiff=2
+odd_H,V3_r4w4,ref+V0,bf16,257,5120,0,True,lsb=0.50; vsV0 mism=5.4% maxdiff=2
+odd_H,V3_r1w4p,ref+V0,bf16,257,5120,0,True,lsb=0.50; vsV0 mism=5.4% maxdiff=2
+odd_H,V0,ref+V0,bf16,1,3000,0,True,lsb=0.97
+odd_H,V1,ref+V0,bf16,1,3000,0,True,lsb=0.50; vsV0 mism=0.4% maxdiff=1
+odd_H,V2,ref+V0,bf16,1,3000,0,True,lsb=0.50; vsV0 mism=0.4% maxdiff=1
+odd_H,V3_r1w8,ref+V0,bf16,1,3000,0,True,lsb=0.50; vsV0 mism=0.4% maxdiff=1
+odd_H,V3_r1w4,ref+V0,bf16,1,3000,0,True,lsb=0.50; vsV0 mism=0.4% maxdiff=1
+odd_H,V3_r1w2,ref+V0,bf16,1,3000,0,True,lsb=0.50; vsV0 mism=0.4% maxdiff=1
+odd_H,V3_r1w1,ref+V0,bf16,1,3000,0,True,lsb=0.50; vsV0 mism=0.4% maxdiff=1
+odd_H,V3_r2w2,ref+V0,bf16,1,3000,0,True,lsb=0.50; vsV0 mism=0.4% maxdiff=1
+odd_H,V3_r4w4,ref+V0,bf16,1,3000,0,True,lsb=0.50; vsV0 mism=0.4% maxdiff=1
+odd_H,V3_r1w4p,ref+V0,bf16,1,3000,0,True,lsb=0.50; vsV0 mism=0.4% maxdiff=1
+odd_H,V0,ref+V0,bf16,257,3000,0,True,lsb=1.19
+odd_H,V1,ref+V0,bf16,257,3000,0,True,lsb=0.67; vsV0 mism=6.3% maxdiff=2
+odd_H,V2,ref+V0,bf16,257,3000,0,True,lsb=0.50; vsV0 mism=6.3% maxdiff=2
+odd_H,V3_r1w8,ref+V0,bf16,257,3000,0,True,lsb=0.50; vsV0 mism=6.3% maxdiff=2
+odd_H,V3_r1w4,ref+V0,bf16,257,3000,0,True,lsb=0.50; vsV0 mism=6.3% maxdiff=2
+odd_H,V3_r1w2,ref+V0,bf16,257,3000,0,True,lsb=0.50; vsV0 mism=6.3% maxdiff=2
+odd_H,V3_r1w1,ref+V0,bf16,257,3000,0,True,lsb=0.50; vsV0 mism=6.3% maxdiff=2
+odd_H,V3_r2w2,ref+V0,bf16,257,3000,0,True,lsb=0.50; vsV0 mism=6.3% maxdiff=2
+odd_H,V3_r4w4,ref+V0,bf16,257,3000,0,True,lsb=0.50; vsV0 mism=6.3% maxdiff=2
+odd_H,V3_r1w4p,ref+V0,bf16,257,3000,0,True,lsb=0.50; vsV0 mism=6.3% maxdiff=2
+zero_rows,V0,ref+V0,bf16,64,2048,0,True,lsb=1.11
+zero_rows,V1,ref+V0,bf16,64,2048,0,True,lsb=0.50; vsV0 mism=6.0% maxdiff=2
+zero_rows,V2,ref+V0,bf16,64,2048,0,True,lsb=0.50; vsV0 mism=6.0% maxdiff=2
+zero_rows,V3_r1w8,ref+V0,bf16,64,2048,0,True,lsb=0.50; vsV0 mism=6.0% maxdiff=2
+zero_rows,V3_r1w4,ref+V0,bf16,64,2048,0,True,lsb=0.50; vsV0 mism=6.0% maxdiff=2
+zero_rows,V3_r1w2,ref+V0,bf16,64,2048,0,True,lsb=0.50; vsV0 mism=6.0% maxdiff=2
+zero_rows,V3_r1w1,ref+V0,bf16,64,2048,0,True,lsb=0.50; vsV0 mism=6.0% maxdiff=2
+zero_rows,V3_r2w2,ref+V0,bf16,64,2048,0,True,lsb=0.50; vsV0 mism=6.0% maxdiff=2
+zero_rows,V3_r4w4,ref+V0,bf16,64,2048,0,True,lsb=0.50; vsV0 mism=6.0% maxdiff=2
+zero_rows,V3_r1w4p,ref+V0,bf16,64,2048,0,True,lsb=0.50; vsV0 mism=6.0% maxdiff=2
+large_vals,V0,ref+V0,bf16,64,2048,0,True,lsb=0.58
+large_vals,V1,ref+V0,bf16,64,2048,0,True,lsb=0.50; vsV0 mism=0.5% maxdiff=1
+large_vals,V2,ref+V0,bf16,64,2048,0,True,lsb=0.50; vsV0 mism=0.5% maxdiff=1
+large_vals,V3_r1w8,ref+V0,bf16,64,2048,0,True,lsb=0.50; vsV0 mism=0.5% maxdiff=1
+large_vals,V3_r1w4,ref+V0,bf16,64,2048,0,True,lsb=0.50; vsV0 mism=0.5% maxdiff=1
+large_vals,V3_r1w2,ref+V0,bf16,64,2048,0,True,lsb=0.50; vsV0 mism=0.5% maxdiff=1
+large_vals,V3_r1w1,ref+V0,bf16,64,2048,0,True,lsb=0.50; vsV0 mism=0.5% maxdiff=1
+large_vals,V3_r2w2,ref+V0,bf16,64,2048,0,True,lsb=0.50; vsV0 mism=0.5% maxdiff=1
+large_vals,V3_r4w4,ref+V0,bf16,64,2048,0,True,lsb=0.50; vsV0 mism=0.5% maxdiff=1
+large_vals,V3_r1w4p,ref+V0,bf16,64,2048,0,True,lsb=0.50; vsV0 mism=0.5% maxdiff=1
+zero_rows,V0,ref+V0,bf16,64,4096,0,True,lsb=1.07
+zero_rows,V1,ref+V0,bf16,64,4096,0,True,lsb=0.50; vsV0 mism=6.0% maxdiff=2
+zero_rows,V2,ref+V0,bf16,64,4096,0,True,lsb=0.50; vsV0 mism=6.0% maxdiff=2
+zero_rows,V3_r1w8,ref+V0,bf16,64,4096,0,True,lsb=0.50; vsV0 mism=6.0% maxdiff=2
+zero_rows,V3_r1w4,ref+V0,bf16,64,4096,0,True,lsb=0.50; vsV0 mism=6.0% maxdiff=2
+zero_rows,V3_r1w2,ref+V0,bf16,64,4096,0,True,lsb=0.50; vsV0 mism=6.0% maxdiff=2
+zero_rows,V3_r1w1,ref+V0,bf16,64,4096,0,True,lsb=0.50; vsV0 mism=6.0% maxdiff=2
+zero_rows,V3_r2w2,ref+V0,bf16,64,4096,0,True,lsb=0.50; vsV0 mism=6.0% maxdiff=2
+zero_rows,V3_r4w4,ref+V0,bf16,64,4096,0,True,lsb=0.50; vsV0 mism=6.0% maxdiff=2
+zero_rows,V3_r1w4p,ref+V0,bf16,64,4096,0,True,lsb=0.50; vsV0 mism=6.0% maxdiff=2
+large_vals,V0,ref+V0,bf16,64,4096,0,True,lsb=0.68
+large_vals,V1,ref+V0,bf16,64,4096,0,True,lsb=0.50; vsV0 mism=0.9% maxdiff=1
+large_vals,V2,ref+V0,bf16,64,4096,0,True,lsb=0.50; vsV0 mism=0.9% maxdiff=1
+large_vals,V3_r1w8,ref+V0,bf16,64,4096,0,True,lsb=0.50; vsV0 mism=0.9% maxdiff=1
+large_vals,V3_r1w4,ref+V0,bf16,64,4096,0,True,lsb=0.50; vsV0 mism=0.9% maxdiff=1
+large_vals,V3_r1w2,ref+V0,bf16,64,4096,0,True,lsb=0.50; vsV0 mism=0.9% maxdiff=1
+large_vals,V3_r1w1,ref+V0,bf16,64,4096,0,True,lsb=0.50; vsV0 mism=0.9% maxdiff=1
+large_vals,V3_r2w2,ref+V0,bf16,64,4096,0,True,lsb=0.50; vsV0 mism=0.9% maxdiff=1
+large_vals,V3_r4w4,ref+V0,bf16,64,4096,0,True,lsb=0.50; vsV0 mism=0.9% maxdiff=1
+large_vals,V3_r1w4p,ref+V0,bf16,64,4096,0,True,lsb=0.50; vsV0 mism=0.9% maxdiff=1
+odd_T,V0,ref+V0,fp16,1,2048,1,True,lsb=0.55
+odd_T,V1,ref+V0,fp16,1,2048,1,True,lsb=0.57; vsV0 mism=1.6% maxdiff=1
+odd_T,V2,ref+V0,fp16,1,2048,1,True,lsb=0.50; vsV0 mism=1.4% maxdiff=1
+odd_T,V3_r1w8,ref+V0,fp16,1,2048,1,True,lsb=0.50; vsV0 mism=1.4% maxdiff=1
+odd_T,V3_r1w4,ref+V0,fp16,1,2048,1,True,lsb=0.50; vsV0 mism=1.4% maxdiff=1
+odd_T,V3_r1w2,ref+V0,fp16,1,2048,1,True,lsb=0.50; vsV0 mism=1.4% maxdiff=1
+odd_T,V3_r1w1,ref+V0,fp16,1,2048,1,True,lsb=0.50; vsV0 mism=1.4% maxdiff=1
+odd_T,V3_r2w2,ref+V0,fp16,1,2048,1,True,lsb=0.50; vsV0 mism=1.4% maxdiff=1
+odd_T,V3_r4w4,ref+V0,fp16,1,2048,1,True,lsb=0.50; vsV0 mism=1.4% maxdiff=1
+odd_T,V3_r1w4p,ref+V0,fp16,1,2048,1,True,lsb=0.50; vsV0 mism=1.4% maxdiff=1
+odd_T,V0,ref+V0,fp16,3,2048,1,True,lsb=0.56
+odd_T,V1,ref+V0,fp16,3,2048,1,True,lsb=0.55; vsV0 mism=1.1% maxdiff=1
+odd_T,V2,ref+V0,fp16,3,2048,1,True,lsb=0.50; vsV0 mism=0.4% maxdiff=1
+odd_T,V3_r1w8,ref+V0,fp16,3,2048,1,True,lsb=0.50; vsV0 mism=0.4% maxdiff=1
+odd_T,V3_r1w4,ref+V0,fp16,3,2048,1,True,lsb=0.50; vsV0 mism=0.4% maxdiff=1
+odd_T,V3_r1w2,ref+V0,fp16,3,2048,1,True,lsb=0.50; vsV0 mism=0.4% maxdiff=1
+odd_T,V3_r1w1,ref+V0,fp16,3,2048,1,True,lsb=0.50; vsV0 mism=0.4% maxdiff=1
+odd_T,V3_r2w2,ref+V0,fp16,3,2048,1,True,lsb=0.50; vsV0 mism=0.4% maxdiff=1
+odd_T,V3_r4w4,ref+V0,fp16,3,2048,1,True,lsb=0.50; vsV0 mism=0.4% maxdiff=1
+odd_T,V3_r1w4p,ref+V0,fp16,3,2048,1,True,lsb=0.50; vsV0 mism=0.4% maxdiff=1
+odd_T,V0,ref+V0,fp16,7,2048,1,True,lsb=0.57
+odd_T,V1,ref+V0,fp16,7,2048,1,True,lsb=0.56; vsV0 mism=0.9% maxdiff=1
+odd_T,V2,ref+V0,fp16,7,2048,1,True,lsb=0.50; vsV0 mism=0.8% maxdiff=1
+odd_T,V3_r1w8,ref+V0,fp16,7,2048,1,True,lsb=0.50; vsV0 mism=0.8% maxdiff=1
+odd_T,V3_r1w4,ref+V0,fp16,7,2048,1,True,lsb=0.50; vsV0 mism=0.8% maxdiff=1
+odd_T,V3_r1w2,ref+V0,fp16,7,2048,1,True,lsb=0.50; vsV0 mism=0.8% maxdiff=1
+odd_T,V3_r1w1,ref+V0,fp16,7,2048,1,True,lsb=0.50; vsV0 mism=0.8% maxdiff=1
+odd_T,V3_r2w2,ref+V0,fp16,7,2048,1,True,lsb=0.50; vsV0 mism=0.8% maxdiff=1
+odd_T,V3_r4w4,ref+V0,fp16,7,2048,1,True,lsb=0.50; vsV0 mism=0.8% maxdiff=1
+odd_T,V3_r1w4p,ref+V0,fp16,7,2048,1,True,lsb=0.50; vsV0 mism=0.8% maxdiff=1
+odd_T,V0,ref+V0,fp16,1000,2048,1,True,lsb=0.57
+odd_T,V1,ref+V0,fp16,1000,2048,1,True,lsb=0.65; vsV0 mism=1.1% maxdiff=1
+odd_T,V2,ref+V0,fp16,1000,2048,1,True,lsb=0.53; vsV0 mism=0.8% maxdiff=1
+odd_T,V3_r1w8,ref+V0,fp16,1000,2048,1,True,lsb=0.53; vsV0 mism=0.8% maxdiff=1
+odd_T,V3_r1w4,ref+V0,fp16,1000,2048,1,True,lsb=0.53; vsV0 mism=0.8% maxdiff=1
+odd_T,V3_r1w2,ref+V0,fp16,1000,2048,1,True,lsb=0.53; vsV0 mism=0.8% maxdiff=1
+odd_T,V3_r1w1,ref+V0,fp16,1000,2048,1,True,lsb=0.53; vsV0 mism=0.8% maxdiff=1
+odd_T,V3_r2w2,ref+V0,fp16,1000,2048,1,True,lsb=0.53; vsV0 mism=0.8% maxdiff=1
+odd_T,V3_r4w4,ref+V0,fp16,1000,2048,1,True,lsb=0.53; vsV0 mism=0.8% maxdiff=1
+odd_T,V3_r1w4p,ref+V0,fp16,1000,2048,1,True,lsb=0.53; vsV0 mism=0.8% maxdiff=1
+odd_T,V0,ref+V0,fp16,1023,2048,1,True,lsb=0.58
+odd_T,V1,ref+V0,fp16,1023,2048,1,True,lsb=0.65; vsV0 mism=1.1% maxdiff=1
+odd_T,V2,ref+V0,fp16,1023,2048,1,True,lsb=0.51; vsV0 mism=0.8% maxdiff=1
+odd_T,V3_r1w8,ref+V0,fp16,1023,2048,1,True,lsb=0.51; vsV0 mism=0.8% maxdiff=1
+odd_T,V3_r1w4,ref+V0,fp16,1023,2048,1,True,lsb=0.51; vsV0 mism=0.8% maxdiff=1
+odd_T,V3_r1w2,ref+V0,fp16,1023,2048,1,True,lsb=0.51; vsV0 mism=0.8% maxdiff=1
+odd_T,V3_r1w1,ref+V0,fp16,1023,2048,1,True,lsb=0.51; vsV0 mism=0.8% maxdiff=1
+odd_T,V3_r2w2,ref+V0,fp16,1023,2048,1,True,lsb=0.51; vsV0 mism=0.8% maxdiff=1
+odd_T,V3_r4w4,ref+V0,fp16,1023,2048,1,True,lsb=0.51; vsV0 mism=0.8% maxdiff=1
+odd_T,V3_r1w4p,ref+V0,fp16,1023,2048,1,True,lsb=0.51; vsV0 mism=0.8% maxdiff=1
+odd_H,V0,ref+V0,fp16,1,5120,1,True,lsb=0.53
+odd_H,V1,ref+V0,fp16,1,5120,1,True,lsb=0.53; vsV0 mism=0.6% maxdiff=1
+odd_H,V2,ref+V0,fp16,1,5120,1,True,lsb=0.50; vsV0 mism=0.4% maxdiff=1
+odd_H,V3_r1w8,ref+V0,fp16,1,5120,1,True,lsb=0.50; vsV0 mism=0.4% maxdiff=1
+odd_H,V3_r1w4,ref+V0,fp16,1,5120,1,True,lsb=0.50; vsV0 mism=0.4% maxdiff=1
+odd_H,V3_r1w2,ref+V0,fp16,1,5120,1,True,lsb=0.50; vsV0 mism=0.4% maxdiff=1
+odd_H,V3_r1w1,ref+V0,fp16,1,5120,1,True,lsb=0.50; vsV0 mism=0.4% maxdiff=1
+odd_H,V3_r2w2,ref+V0,fp16,1,5120,1,True,lsb=0.50; vsV0 mism=0.4% maxdiff=1
+odd_H,V3_r4w4,ref+V0,fp16,1,5120,1,True,lsb=0.50; vsV0 mism=0.4% maxdiff=1
+odd_H,V3_r1w4p,ref+V0,fp16,1,5120,1,True,lsb=0.50; vsV0 mism=0.4% maxdiff=1
+odd_H,V0,ref+V0,fp16,257,5120,1,True,lsb=0.59
+odd_H,V1,ref+V0,fp16,257,5120,1,True,lsb=0.62; vsV0 mism=1.0% maxdiff=1
+odd_H,V2,ref+V0,fp16,257,5120,1,True,lsb=0.50; vsV0 mism=0.8% maxdiff=1
+odd_H,V3_r1w8,ref+V0,fp16,257,5120,1,True,lsb=0.50; vsV0 mism=0.8% maxdiff=1
+odd_H,V3_r1w4,ref+V0,fp16,257,5120,1,True,lsb=0.50; vsV0 mism=0.8% maxdiff=1
+odd_H,V3_r1w2,ref+V0,fp16,257,5120,1,True,lsb=0.50; vsV0 mism=0.8% maxdiff=1
+odd_H,V3_r1w1,ref+V0,fp16,257,5120,1,True,lsb=0.53; vsV0 mism=0.8% maxdiff=1
+odd_H,V3_r2w2,ref+V0,fp16,257,5120,1,True,lsb=0.50; vsV0 mism=0.8% maxdiff=1
+odd_H,V3_r4w4,ref+V0,fp16,257,5120,1,True,lsb=0.50; vsV0 mism=0.8% maxdiff=1
+odd_H,V3_r1w4p,ref+V0,fp16,257,5120,1,True,lsb=0.50; vsV0 mism=0.8% maxdiff=1
+odd_H,V0,ref+V0,fp16,1,3000,1,True,lsb=0.56
+odd_H,V1,ref+V0,fp16,1,3000,1,True,lsb=0.56; vsV0 mism=1.5% maxdiff=1
+odd_H,V2,ref+V0,fp16,1,3000,1,True,lsb=0.50; vsV0 mism=0.9% maxdiff=1
+odd_H,V3_r1w8,ref+V0,fp16,1,3000,1,True,lsb=0.50; vsV0 mism=0.9% maxdiff=1
+odd_H,V3_r1w4,ref+V0,fp16,1,3000,1,True,lsb=0.50; vsV0 mism=0.9% maxdiff=1
+odd_H,V3_r1w2,ref+V0,fp16,1,3000,1,True,lsb=0.50; vsV0 mism=0.9% maxdiff=1
+odd_H,V3_r1w1,ref+V0,fp16,1,3000,1,True,lsb=0.50; vsV0 mism=0.9% maxdiff=1
+odd_H,V3_r2w2,ref+V0,fp16,1,3000,1,True,lsb=0.50; vsV0 mism=0.9% maxdiff=1
+odd_H,V3_r4w4,ref+V0,fp16,1,3000,1,True,lsb=0.50; vsV0 mism=0.9% maxdiff=1
+odd_H,V3_r1w4p,ref+V0,fp16,1,3000,1,True,lsb=0.50; vsV0 mism=0.9% maxdiff=1
+odd_H,V0,ref+V0,fp16,257,3000,1,True,lsb=0.57
+odd_H,V1,ref+V0,fp16,257,3000,1,True,lsb=0.64; vsV0 mism=1.1% maxdiff=1
+odd_H,V2,ref+V0,fp16,257,3000,1,True,lsb=0.50; vsV0 mism=0.8% maxdiff=1
+odd_H,V3_r1w8,ref+V0,fp16,257,3000,1,True,lsb=0.50; vsV0 mism=0.8% maxdiff=1
+odd_H,V3_r1w4,ref+V0,fp16,257,3000,1,True,lsb=0.50; vsV0 mism=0.8% maxdiff=1
+odd_H,V3_r1w2,ref+V0,fp16,257,3000,1,True,lsb=0.50; vsV0 mism=0.8% maxdiff=1
+odd_H,V3_r1w1,ref+V0,fp16,257,3000,1,True,lsb=0.50; vsV0 mism=0.8% maxdiff=1
+odd_H,V3_r2w2,ref+V0,fp16,257,3000,1,True,lsb=0.50; vsV0 mism=0.8% maxdiff=1
+odd_H,V3_r4w4,ref+V0,fp16,257,3000,1,True,lsb=0.50; vsV0 mism=0.8% maxdiff=1
+odd_H,V3_r1w4p,ref+V0,fp16,257,3000,1,True,lsb=0.50; vsV0 mism=0.8% maxdiff=1
+zero_rows,V0,ref+V0,fp16,64,2048,1,True,lsb=0.58
+zero_rows,V1,ref+V0,fp16,64,2048,1,True,lsb=0.63; vsV0 mism=1.1% maxdiff=1
+zero_rows,V2,ref+V0,fp16,64,2048,1,True,lsb=0.50; vsV0 mism=0.8% maxdiff=1
+zero_rows,V3_r1w8,ref+V0,fp16,64,2048,1,True,lsb=0.50; vsV0 mism=0.8% maxdiff=1
+zero_rows,V3_r1w4,ref+V0,fp16,64,2048,1,True,lsb=0.50; vsV0 mism=0.8% maxdiff=1
+zero_rows,V3_r1w2,ref+V0,fp16,64,2048,1,True,lsb=0.50; vsV0 mism=0.8% maxdiff=1
+zero_rows,V3_r1w1,ref+V0,fp16,64,2048,1,True,lsb=0.50; vsV0 mism=0.8% maxdiff=1
+zero_rows,V3_r2w2,ref+V0,fp16,64,2048,1,True,lsb=0.50; vsV0 mism=0.8% maxdiff=1
+zero_rows,V3_r4w4,ref+V0,fp16,64,2048,1,True,lsb=0.50; vsV0 mism=0.8% maxdiff=1
+zero_rows,V3_r1w4p,ref+V0,fp16,64,2048,1,True,lsb=0.50; vsV0 mism=0.8% maxdiff=1
+large_vals,V0,ref+V0,fp16,64,2048,1,True,lsb=0.50
+large_vals,V1,ref+V0,fp16,64,2048,1,True,lsb=0.51; vsV0 mism=0.1% maxdiff=1
+large_vals,V2,ref+V0,fp16,64,2048,1,True,lsb=0.50; vsV0 mism=0.1% maxdiff=1
+large_vals,V3_r1w8,ref+V0,fp16,64,2048,1,True,lsb=0.50; vsV0 mism=0.1% maxdiff=1
+large_vals,V3_r1w4,ref+V0,fp16,64,2048,1,True,lsb=0.50; vsV0 mism=0.1% maxdiff=1
+large_vals,V3_r1w2,ref+V0,fp16,64,2048,1,True,lsb=0.50; vsV0 mism=0.1% maxdiff=1
+large_vals,V3_r1w1,ref+V0,fp16,64,2048,1,True,lsb=0.50; vsV0 mism=0.1% maxdiff=1
+large_vals,V3_r2w2,ref+V0,fp16,64,2048,1,True,lsb=0.50; vsV0 mism=0.1% maxdiff=1
+large_vals,V3_r4w4,ref+V0,fp16,64,2048,1,True,lsb=0.50; vsV0 mism=0.1% maxdiff=1
+large_vals,V3_r1w4p,ref+V0,fp16,64,2048,1,True,lsb=0.50; vsV0 mism=0.1% maxdiff=1
+zero_rows,V0,ref+V0,fp16,64,4096,1,True,lsb=0.57
+zero_rows,V1,ref+V0,fp16,64,4096,1,True,lsb=0.62; vsV0 mism=0.9% maxdiff=1
+zero_rows,V2,ref+V0,fp16,64,4096,1,True,lsb=0.50; vsV0 mism=0.8% maxdiff=1
+zero_rows,V3_r1w8,ref+V0,fp16,64,4096,1,True,lsb=0.50; vsV0 mism=0.8% maxdiff=1
+zero_rows,V3_r1w4,ref+V0,fp16,64,4096,1,True,lsb=0.50; vsV0 mism=0.8% maxdiff=1
+zero_rows,V3_r1w2,ref+V0,fp16,64,4096,1,True,lsb=0.50; vsV0 mism=0.8% maxdiff=1
+zero_rows,V3_r1w1,ref+V0,fp16,64,4096,1,True,lsb=0.50; vsV0 mism=0.8% maxdiff=1
+zero_rows,V3_r2w2,ref+V0,fp16,64,4096,1,True,lsb=0.50; vsV0 mism=0.8% maxdiff=1
+zero_rows,V3_r4w4,ref+V0,fp16,64,4096,1,True,lsb=0.50; vsV0 mism=0.8% maxdiff=1
+zero_rows,V3_r1w4p,ref+V0,fp16,64,4096,1,True,lsb=0.50; vsV0 mism=0.8% maxdiff=1
+large_vals,V0,ref+V0,fp16,64,4096,1,True,lsb=0.50
+large_vals,V1,ref+V0,fp16,64,4096,1,True,lsb=0.51; vsV0 mism=0.1% maxdiff=1
+large_vals,V2,ref+V0,fp16,64,4096,1,True,lsb=0.50; vsV0 mism=0.1% maxdiff=1
+large_vals,V3_r1w8,ref+V0,fp16,64,4096,1,True,lsb=0.50; vsV0 mism=0.1% maxdiff=1
+large_vals,V3_r1w4,ref+V0,fp16,64,4096,1,True,lsb=0.50; vsV0 mism=0.1% maxdiff=1
+large_vals,V3_r1w2,ref+V0,fp16,64,4096,1,True,lsb=0.50; vsV0 mism=0.1% maxdiff=1
+large_vals,V3_r1w1,ref+V0,fp16,64,4096,1,True,lsb=0.50; vsV0 mism=0.1% maxdiff=1
+large_vals,V3_r2w2,ref+V0,fp16,64,4096,1,True,lsb=0.50; vsV0 mism=0.1% maxdiff=1
+large_vals,V3_r4w4,ref+V0,fp16,64,4096,1,True,lsb=0.50; vsV0 mism=0.1% maxdiff=1
+large_vals,V3_r1w4p,ref+V0,fp16,64,4096,1,True,lsb=0.50; vsV0 mism=0.1% maxdiff=1
+odd_T,V0,ref+V0,fp16,1,2048,0,True,lsb=0.53
+odd_T,V1,ref+V0,fp16,1,2048,0,True,lsb=0.50; vsV0 mism=0.6% maxdiff=1
+odd_T,V2,ref+V0,fp16,1,2048,0,True,lsb=0.50; vsV0 mism=0.6% maxdiff=1
+odd_T,V3_r1w8,ref+V0,fp16,1,2048,0,True,lsb=0.50; vsV0 mism=0.6% maxdiff=1
+odd_T,V3_r1w4,ref+V0,fp16,1,2048,0,True,lsb=0.50; vsV0 mism=0.6% maxdiff=1
+odd_T,V3_r1w2,ref+V0,fp16,1,2048,0,True,lsb=0.50; vsV0 mism=0.6% maxdiff=1
+odd_T,V3_r1w1,ref+V0,fp16,1,2048,0,True,lsb=0.50; vsV0 mism=0.6% maxdiff=1
+odd_T,V3_r2w2,ref+V0,fp16,1,2048,0,True,lsb=0.50; vsV0 mism=0.6% maxdiff=1
+odd_T,V3_r4w4,ref+V0,fp16,1,2048,0,True,lsb=0.50; vsV0 mism=0.6% maxdiff=1
+odd_T,V3_r1w4p,ref+V0,fp16,1,2048,0,True,lsb=0.50; vsV0 mism=0.6% maxdiff=1
+odd_T,V0,ref+V0,fp16,3,2048,0,True,lsb=0.53
+odd_T,V1,ref+V0,fp16,3,2048,0,True,lsb=0.50; vsV0 mism=0.4% maxdiff=1
+odd_T,V2,ref+V0,fp16,3,2048,0,True,lsb=0.50; vsV0 mism=0.4% maxdiff=1
+odd_T,V3_r1w8,ref+V0,fp16,3,2048,0,True,lsb=0.50; vsV0 mism=0.4% maxdiff=1
+odd_T,V3_r1w4,ref+V0,fp16,3,2048,0,True,lsb=0.50; vsV0 mism=0.4% maxdiff=1
+odd_T,V3_r1w2,ref+V0,fp16,3,2048,0,True,lsb=0.50; vsV0 mism=0.4% maxdiff=1
+odd_T,V3_r1w1,ref+V0,fp16,3,2048,0,True,lsb=0.50; vsV0 mism=0.4% maxdiff=1
+odd_T,V3_r2w2,ref+V0,fp16,3,2048,0,True,lsb=0.50; vsV0 mism=0.4% maxdiff=1
+odd_T,V3_r4w4,ref+V0,fp16,3,2048,0,True,lsb=0.50; vsV0 mism=0.4% maxdiff=1
+odd_T,V3_r1w4p,ref+V0,fp16,3,2048,0,True,lsb=0.50; vsV0 mism=0.4% maxdiff=1
+odd_T,V0,ref+V0,fp16,7,2048,0,True,lsb=0.56
+odd_T,V1,ref+V0,fp16,7,2048,0,True,lsb=0.50; vsV0 mism=0.9% maxdiff=1
+odd_T,V2,ref+V0,fp16,7,2048,0,True,lsb=0.50; vsV0 mism=0.9% maxdiff=1
+odd_T,V3_r1w8,ref+V0,fp16,7,2048,0,True,lsb=0.50; vsV0 mism=0.9% maxdiff=1
+odd_T,V3_r1w4,ref+V0,fp16,7,2048,0,True,lsb=0.50; vsV0 mism=0.9% maxdiff=1
+odd_T,V3_r1w2,ref+V0,fp16,7,2048,0,True,lsb=0.50; vsV0 mism=0.9% maxdiff=1
+odd_T,V3_r1w1,ref+V0,fp16,7,2048,0,True,lsb=0.50; vsV0 mism=0.9% maxdiff=1
+odd_T,V3_r2w2,ref+V0,fp16,7,2048,0,True,lsb=0.50; vsV0 mism=0.9% maxdiff=1
+odd_T,V3_r4w4,ref+V0,fp16,7,2048,0,True,lsb=0.50; vsV0 mism=0.9% maxdiff=1
+odd_T,V3_r1w4p,ref+V0,fp16,7,2048,0,True,lsb=0.50; vsV0 mism=0.9% maxdiff=1
+odd_T,V0,ref+V0,fp16,1000,2048,0,True,lsb=0.58
+odd_T,V1,ref+V0,fp16,1000,2048,0,True,lsb=0.51; vsV0 mism=0.8% maxdiff=1
+odd_T,V2,ref+V0,fp16,1000,2048,0,True,lsb=0.50; vsV0 mism=0.8% maxdiff=1
+odd_T,V3_r1w8,ref+V0,fp16,1000,2048,0,True,lsb=0.50; vsV0 mism=0.8% maxdiff=1
+odd_T,V3_r1w4,ref+V0,fp16,1000,2048,0,True,lsb=0.52; vsV0 mism=0.8% maxdiff=1
+odd_T,V3_r1w2,ref+V0,fp16,1000,2048,0,True,lsb=0.52; vsV0 mism=0.8% maxdiff=1
+odd_T,V3_r1w1,ref+V0,fp16,1000,2048,0,True,lsb=0.50; vsV0 mism=0.8% maxdiff=1
+odd_T,V3_r2w2,ref+V0,fp16,1000,2048,0,True,lsb=0.52; vsV0 mism=0.8% maxdiff=1
+odd_T,V3_r4w4,ref+V0,fp16,1000,2048,0,True,lsb=0.52; vsV0 mism=0.8% maxdiff=1
+odd_T,V3_r1w4p,ref+V0,fp16,1000,2048,0,True,lsb=0.52; vsV0 mism=0.8% maxdiff=1
+odd_T,V0,ref+V0,fp16,1023,2048,0,True,lsb=0.58
+odd_T,V1,ref+V0,fp16,1023,2048,0,True,lsb=0.52; vsV0 mism=0.8% maxdiff=1
+odd_T,V2,ref+V0,fp16,1023,2048,0,True,lsb=0.55; vsV0 mism=0.8% maxdiff=1
+odd_T,V3_r1w8,ref+V0,fp16,1023,2048,0,True,lsb=0.55; vsV0 mism=0.8% maxdiff=1
+odd_T,V3_r1w4,ref+V0,fp16,1023,2048,0,True,lsb=0.55; vsV0 mism=0.8% maxdiff=1
+odd_T,V3_r1w2,ref+V0,fp16,1023,2048,0,True,lsb=0.55; vsV0 mism=0.8% maxdiff=1
+odd_T,V3_r1w1,ref+V0,fp16,1023,2048,0,True,lsb=0.53; vsV0 mism=0.8% maxdiff=1
+odd_T,V3_r2w2,ref+V0,fp16,1023,2048,0,True,lsb=0.55; vsV0 mism=0.8% maxdiff=1
+odd_T,V3_r4w4,ref+V0,fp16,1023,2048,0,True,lsb=0.55; vsV0 mism=0.8% maxdiff=1
+odd_T,V3_r1w4p,ref+V0,fp16,1023,2048,0,True,lsb=0.55; vsV0 mism=0.8% maxdiff=1
+odd_H,V0,ref+V0,fp16,1,5120,0,True,lsb=0.55
+odd_H,V1,ref+V0,fp16,1,5120,0,True,lsb=0.50; vsV0 mism=0.6% maxdiff=1
+odd_H,V2,ref+V0,fp16,1,5120,0,True,lsb=0.50; vsV0 mism=0.5% maxdiff=1
+odd_H,V3_r1w8,ref+V0,fp16,1,5120,0,True,lsb=0.50; vsV0 mism=0.5% maxdiff=1
+odd_H,V3_r1w4,ref+V0,fp16,1,5120,0,True,lsb=0.50; vsV0 mism=0.5% maxdiff=1
+odd_H,V3_r1w2,ref+V0,fp16,1,5120,0,True,lsb=0.50; vsV0 mism=0.5% maxdiff=1
+odd_H,V3_r1w1,ref+V0,fp16,1,5120,0,True,lsb=0.50; vsV0 mism=0.5% maxdiff=1
+odd_H,V3_r2w2,ref+V0,fp16,1,5120,0,True,lsb=0.50; vsV0 mism=0.5% maxdiff=1
+odd_H,V3_r4w4,ref+V0,fp16,1,5120,0,True,lsb=0.50; vsV0 mism=0.5% maxdiff=1
+odd_H,V3_r1w4p,ref+V0,fp16,1,5120,0,True,lsb=0.50; vsV0 mism=0.5% maxdiff=1
+odd_H,V0,ref+V0,fp16,257,5120,0,True,lsb=0.57
+odd_H,V1,ref+V0,fp16,257,5120,0,True,lsb=0.52; vsV0 mism=0.7% maxdiff=1
+odd_H,V2,ref+V0,fp16,257,5120,0,True,lsb=0.52; vsV0 mism=0.7% maxdiff=1
+odd_H,V3_r1w8,ref+V0,fp16,257,5120,0,True,lsb=0.52; vsV0 mism=0.7% maxdiff=1
+odd_H,V3_r1w4,ref+V0,fp16,257,5120,0,True,lsb=0.52; vsV0 mism=0.7% maxdiff=1
+odd_H,V3_r1w2,ref+V0,fp16,257,5120,0,True,lsb=0.52; vsV0 mism=0.7% maxdiff=1
+odd_H,V3_r1w1,ref+V0,fp16,257,5120,0,True,lsb=0.52; vsV0 mism=0.7% maxdiff=1
+odd_H,V3_r2w2,ref+V0,fp16,257,5120,0,True,lsb=0.52; vsV0 mism=0.7% maxdiff=1
+odd_H,V3_r4w4,ref+V0,fp16,257,5120,0,True,lsb=0.52; vsV0 mism=0.7% maxdiff=1
+odd_H,V3_r1w4p,ref+V0,fp16,257,5120,0,True,lsb=0.52; vsV0 mism=0.7% maxdiff=1
+odd_H,V0,ref+V0,fp16,1,3000,0,True,lsb=0.54
+odd_H,V1,ref+V0,fp16,1,3000,0,True,lsb=0.50; vsV0 mism=1.9% maxdiff=1
+odd_H,V2,ref+V0,fp16,1,3000,0,True,lsb=0.50; vsV0 mism=1.9% maxdiff=1
+odd_H,V3_r1w8,ref+V0,fp16,1,3000,0,True,lsb=0.50; vsV0 mism=1.9% maxdiff=1
+odd_H,V3_r1w4,ref+V0,fp16,1,3000,0,True,lsb=0.50; vsV0 mism=1.9% maxdiff=1
+odd_H,V3_r1w2,ref+V0,fp16,1,3000,0,True,lsb=0.50; vsV0 mism=1.9% maxdiff=1
+odd_H,V3_r1w1,ref+V0,fp16,1,3000,0,True,lsb=0.50; vsV0 mism=1.9% maxdiff=1
+odd_H,V3_r2w2,ref+V0,fp16,1,3000,0,True,lsb=0.50; vsV0 mism=1.9% maxdiff=1
+odd_H,V3_r4w4,ref+V0,fp16,1,3000,0,True,lsb=0.50; vsV0 mism=1.9% maxdiff=1
+odd_H,V3_r1w4p,ref+V0,fp16,1,3000,0,True,lsb=0.50; vsV0 mism=1.9% maxdiff=1
+odd_H,V0,ref+V0,fp16,257,3000,0,True,lsb=0.57
+odd_H,V1,ref+V0,fp16,257,3000,0,True,lsb=0.51; vsV0 mism=0.7% maxdiff=1
+odd_H,V2,ref+V0,fp16,257,3000,0,True,lsb=0.51; vsV0 mism=0.7% maxdiff=1
+odd_H,V3_r1w8,ref+V0,fp16,257,3000,0,True,lsb=0.51; vsV0 mism=0.7% maxdiff=1
+odd_H,V3_r1w4,ref+V0,fp16,257,3000,0,True,lsb=0.51; vsV0 mism=0.7% maxdiff=1
+odd_H,V3_r1w2,ref+V0,fp16,257,3000,0,True,lsb=0.51; vsV0 mism=0.7% maxdiff=1
+odd_H,V3_r1w1,ref+V0,fp16,257,3000,0,True,lsb=0.51; vsV0 mism=0.7% maxdiff=1
+odd_H,V3_r2w2,ref+V0,fp16,257,3000,0,True,lsb=0.51; vsV0 mism=0.7% maxdiff=1
+odd_H,V3_r4w4,ref+V0,fp16,257,3000,0,True,lsb=0.51; vsV0 mism=0.7% maxdiff=1
+odd_H,V3_r1w4p,ref+V0,fp16,257,3000,0,True,lsb=0.51; vsV0 mism=0.7% maxdiff=1
+zero_rows,V0,ref+V0,fp16,64,2048,0,True,lsb=0.57
+zero_rows,V1,ref+V0,fp16,64,2048,0,True,lsb=0.50; vsV0 mism=0.7% maxdiff=1
+zero_rows,V2,ref+V0,fp16,64,2048,0,True,lsb=0.50; vsV0 mism=0.7% maxdiff=1
+zero_rows,V3_r1w8,ref+V0,fp16,64,2048,0,True,lsb=0.50; vsV0 mism=0.7% maxdiff=1
+zero_rows,V3_r1w4,ref+V0,fp16,64,2048,0,True,lsb=0.50; vsV0 mism=0.7% maxdiff=1
+zero_rows,V3_r1w2,ref+V0,fp16,64,2048,0,True,lsb=0.50; vsV0 mism=0.7% maxdiff=1
+zero_rows,V3_r1w1,ref+V0,fp16,64,2048,0,True,lsb=0.50; vsV0 mism=0.7% maxdiff=1
+zero_rows,V3_r2w2,ref+V0,fp16,64,2048,0,True,lsb=0.50; vsV0 mism=0.7% maxdiff=1
+zero_rows,V3_r4w4,ref+V0,fp16,64,2048,0,True,lsb=0.50; vsV0 mism=0.7% maxdiff=1
+zero_rows,V3_r1w4p,ref+V0,fp16,64,2048,0,True,lsb=0.50; vsV0 mism=0.7% maxdiff=1
+large_vals,V0,ref+V0,fp16,64,2048,0,True,lsb=0.50
+large_vals,V1,ref+V0,fp16,64,2048,0,True,lsb=0.50; vsV0 mism=0.1% maxdiff=1
+large_vals,V2,ref+V0,fp16,64,2048,0,True,lsb=0.50; vsV0 mism=0.1% maxdiff=1
+large_vals,V3_r1w8,ref+V0,fp16,64,2048,0,True,lsb=0.50; vsV0 mism=0.1% maxdiff=1
+large_vals,V3_r1w4,ref+V0,fp16,64,2048,0,True,lsb=0.50; vsV0 mism=0.1% maxdiff=1
+large_vals,V3_r1w2,ref+V0,fp16,64,2048,0,True,lsb=0.50; vsV0 mism=0.1% maxdiff=1
+large_vals,V3_r1w1,ref+V0,fp16,64,2048,0,True,lsb=0.50; vsV0 mism=0.1% maxdiff=1
+large_vals,V3_r2w2,ref+V0,fp16,64,2048,0,True,lsb=0.50; vsV0 mism=0.1% maxdiff=1
+large_vals,V3_r4w4,ref+V0,fp16,64,2048,0,True,lsb=0.50; vsV0 mism=0.1% maxdiff=1
+large_vals,V3_r1w4p,ref+V0,fp16,64,2048,0,True,lsb=0.50; vsV0 mism=0.1% maxdiff=1
+zero_rows,V0,ref+V0,fp16,64,4096,0,True,lsb=0.57
+zero_rows,V1,ref+V0,fp16,64,4096,0,True,lsb=0.50; vsV0 mism=0.8% maxdiff=1
+zero_rows,V2,ref+V0,fp16,64,4096,0,True,lsb=0.50; vsV0 mism=0.8% maxdiff=1
+zero_rows,V3_r1w8,ref+V0,fp16,64,4096,0,True,lsb=0.50; vsV0 mism=0.8% maxdiff=1
+zero_rows,V3_r1w4,ref+V0,fp16,64,4096,0,True,lsb=0.50; vsV0 mism=0.8% maxdiff=1
+zero_rows,V3_r1w2,ref+V0,fp16,64,4096,0,True,lsb=0.50; vsV0 mism=0.8% maxdiff=1
+zero_rows,V3_r1w1,ref+V0,fp16,64,4096,0,True,lsb=0.50; vsV0 mism=0.8% maxdiff=1
+zero_rows,V3_r2w2,ref+V0,fp16,64,4096,0,True,lsb=0.50; vsV0 mism=0.8% maxdiff=1
+zero_rows,V3_r4w4,ref+V0,fp16,64,4096,0,True,lsb=0.50; vsV0 mism=0.8% maxdiff=1
+zero_rows,V3_r1w4p,ref+V0,fp16,64,4096,0,True,lsb=0.50; vsV0 mism=0.8% maxdiff=1
+large_vals,V0,ref+V0,fp16,64,4096,0,True,lsb=0.50
+large_vals,V1,ref+V0,fp16,64,4096,0,True,lsb=0.50; vsV0 mism=0.1% maxdiff=1
+large_vals,V2,ref+V0,fp16,64,4096,0,True,lsb=0.50; vsV0 mism=0.1% maxdiff=1
+large_vals,V3_r1w8,ref+V0,fp16,64,4096,0,True,lsb=0.50; vsV0 mism=0.1% maxdiff=1
+large_vals,V3_r1w4,ref+V0,fp16,64,4096,0,True,lsb=0.50; vsV0 mism=0.1% maxdiff=1
+large_vals,V3_r1w2,ref+V0,fp16,64,4096,0,True,lsb=0.50; vsV0 mism=0.1% maxdiff=1
+large_vals,V3_r1w1,ref+V0,fp16,64,4096,0,True,lsb=0.50; vsV0 mism=0.1% maxdiff=1
+large_vals,V3_r2w2,ref+V0,fp16,64,4096,0,True,lsb=0.50; vsV0 mism=0.1% maxdiff=1
+large_vals,V3_r4w4,ref+V0,fp16,64,4096,0,True,lsb=0.50; vsV0 mism=0.1% maxdiff=1
+large_vals,V3_r1w4p,ref+V0,fp16,64,4096,0,True,lsb=0.50; vsV0 mism=0.1% maxdiff=1
