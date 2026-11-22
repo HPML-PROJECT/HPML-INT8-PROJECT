@@ -70,6 +70,24 @@ Work toward the midpoint report is split into four workstreams:
 2. **GPU profiling and bottleneck analysis:** analyze memory traffic, occupancy and performance bottlenecks.
 3. **Custom Triton kernel and optimization:** implement our fused kernel (V3), validate its correctness and test first optimizations.
 4. **vLLM model-level evaluation:** run Qwen3 inference benchmarks, measure how much RMSNorm and quantization affect end-to-end time, and identify where a fused kernel can be integrated.
+## Midpoint results (NVIDIA L4)
+
+All numbers are BF16 with residual on and a warm cache unless stated. The research question and hypotheses above are the proposal's wording; the results below update them.
+
+| Part | Main result | Findings |
+|---|---|---|
+| WS1 Baseline | vLLM's fused kernel (V1) is **2.1–2.3× slower** than the unfused pair (V0) at H=2048, T=1024–2048, but **faster** (0.67–0.68× V0's time) at T ≥ 8192. A 200-sample rerun kept 31/32 V1 ratios on the same side of 1. | [WS1 write-up](baseline-benchmark/results/l4_20261121/README.md), [rerun](baseline-benchmark/results/l4_nearL2/README.md) |
+| WS2 Profiling | V1 executes ~2.3× more instructions than V0, uses 1024-thread blocks (66.7% occupancy) and stalls mostly at barriers, with ~99% L2 hit rate. The slowdown is instruction and synchronization overhead, not DRAM traffic. | [WS2 bottleneck analysis](<gpu profling - bottleneck/results/l4_20261121/README.md>) |
+| WS3 Triton V3 | Our fused kernel is **1.3–2.0× faster than V0** and up to **5.3× faster than V1**; it matches the baseline Triton kernel (V2) but does not beat it. 880/880 correctness and 364/364 edge-case checks passed. | [WS3 findings](triton-v3/results/l4_part3/README.md) |
+| WS4 vLLM end to end | W8A8 is 1.30–1.34× faster than BF16 at prefill and 1.20–1.42× at decode. vLLM still launches **112 separate INT8 quant kernels** per prefill. The fusable norm→quant share is 7.6% (prefill) and 2.1–2.9% (decode), so the expected end-to-end gain is **~1.7–3.9% (prefill)** and **~1.0–1.4% (decode)**. | [WS4 findings](part4_results_20261122_004608/README.md) |
+
+**What this means for the hypotheses**
+- **H1 is contradicted as stated.** The fused kernel is slow at *medium* token counts with a warm cache, not at large ones. At large token counts it is faster.
+- **H2 is supported on the L4.** The slowdown appears only while the data fits in the 48 MB L2. The cross-GPU test (A6000, L40S) is still to do.
+- **H3 is open.** It needs the other GPUs.
+- **H4 is supported.** Kernel gains of 1.5–2× shrink to a few percent end to end, because INT8 GEMMs take 74–91% of the time.
+
+**Caveats:** V2 is our built-in Triton kernel, not yet the issue author's. The WS1 timings ran at 2040 MHz, where the L4 hits its power cap; WS3 and WS4 used a 1200 MHz lock. W8A8 perplexity (16.40) is lower than BF16 (16.70); we are checking whether the two checkpoints come from the same base model.
 
 ## Methodology
 
@@ -158,6 +176,15 @@ Results cover one operation, one serving system, one main model and up to three 
 │   └── results/l4_20261121/           tables, 5 plots incl. roofline, Nsight Systems reports,
 │                                      Nsight Compute manifest, logs, bottleneck write-up
 │
+├── triton-v3/                         WS3: our fused Triton kernel (V3) and initial optimizations
+│   ├── README.md                      V3 design, configs, how to run
+│   ├── bench_rmsnorm_int8.py          WS1 benchmark plus V3
+│   ├── test_edge_cases.py             V3 edge-case correctness
+│   ├── run_part3_l4.sh, summarize_v3.py, plot_results.py, requirements.txt
+│   └── results/l4_part3/              V3 runs at 1200 MHz, edge cases, plots, write-up
+│
+├── part4_results_20261122_004608/     WS4 L4 results: benchmarks, perplexity, profiles, Amdahl, write-up
+│
 └── vllm-evaluation/                   WS4: model-level evaluation and integration feasibility
     ├── README.md                      setup, run, and how to read each step
     ├── INTEGRATION_PROPOSAL.md        where and how a fused kernel would plug into vLLM
@@ -176,6 +203,9 @@ Generated outputs of new runs (`logs/`, `reports/`, `tables/`, `results/` in the
 | Understand the problem and plan | [Overview](#overview), [Hypotheses](#hypotheses-to-be-tested-not-assumed), [Plan](#plan) above |
 | See the kernel-level numbers | [WS1 main-run write-up](baseline-benchmark/results/l4_20261121/README.md) |
 | See why V1 is slow | [WS2 bottleneck analysis](<gpu profling - bottleneck/results/l4_20261121/README.md>) |
+| See our fused kernel (V3) results | [WS3 findings](triton-v3/results/l4_part3/README.md) |
+| See the end-to-end results | [WS4 findings](part4_results_20261122_004608/README.md) |
+| Rerun the V3 benchmark | `cd triton-v3 && bash run_part3_l4.sh` (`QUICK=1` for a smoke test; see its [README](triton-v3/README.md)) |
 | Rerun the kernel benchmark | `cd baseline-benchmark && VLLM_VERSION=0.34.0 bash run_l4.sh` (`--quick` for a smoke test; see its [README](baseline-benchmark/README.md)) |
 | Rerun the profiling | `cd "gpu profling - bottleneck" && bash run_l4_vm.sh` (see its [README](<gpu profling - bottleneck/README.md>)) |
 | Run the end-to-end evaluation | `cd vllm-evaluation && bash run_l4_vm.sh` (`QUICK=1` for a smoke test; reuses the Part 1 venv. See its [README](vllm-evaluation/README.md)) |
