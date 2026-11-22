@@ -99,7 +99,7 @@ Known issue being investigated (vLLM #60499): V1 beats V0 at decode sizes but is
 ### 4a. Create the VM (once per team)
 
 - **Machine type:** a `g2-standard-*` instance. G2 is the GCP machine family that comes with an NVIDIA L4. `g2-standard-8` is enough for this toolkit.
-- **Boot image:** a GCP Deep Learning VM image with CUDA 12.x, so the NVIDIA driver and CUDA toolkit are preinstalled. With a plain Ubuntu image, install the driver yourself.
+- **Boot image:** an image with the NVIDIA driver and a CUDA 13 toolkit. Our results came from a Debian 13 VM with driver 620.70.06, Nsight Compute 2026.1 and Nsight Systems 2025.6. With a plain image, install the driver and toolkit with Google's CUDA installer.
 - **Disk:** at least 100 GB. vLLM, PyTorch and the CUDA toolkit are large.
 - **Cost:** stop the VM when you're not using it. A stopped VM costs only its disk.
 
@@ -116,13 +116,14 @@ nvidia-smi --query-gpu=name,driver_version,compute_cap --format=csv
 # 2. Make ncu and nsys available. pip-installed vLLM/PyTorch do NOT include them.
 export PATH=/usr/local/cuda/bin:$PATH        # add to ~/.bashrc
 ncu --version && nsys --version
-# If either is missing (pick the CUDA 12.x version that matches your driver):
-#   sudo apt-get install -y cuda-nsight-compute-12-4 nsight-systems
+# If either is missing, install the CUDA toolkit (it includes ncu) with Google's installer:
+#   sudo python3 cuda_installer.pyz install_cuda
+# and add the Nsight Systems bin folder to PATH:  ls -d /usr/local/cuda*/nsight-systems*/bin /opt/nvidia/nsight-systems/*/bin
 # ncu must be 2022.3 or newer to support sm_89.
 
-# 3. Create the pinned vLLM environment (use the team's pinned version)
+# 3. Create the vLLM environment (the team's pinned version, as in the WS1 results)
 python3 -m venv ~/venvs/vllm && source ~/venvs/vllm/bin/activate
-pip install "vllm==<pinned-version>"
+pip install "vllm==0.34.0"
 
 # 4. Get the code with git, not by copying files from a Windows laptop
 #    (Windows copies can have CRLF line endings, which break the bash scripts)

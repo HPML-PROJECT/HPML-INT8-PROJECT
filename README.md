@@ -48,8 +48,8 @@ Why is the fused RMSNorm + INT8 kernel slow at large token counts? Does this hol
 |---|---|
 | V0 | Unfused pair: `fused_add_rms_norm`, then `scaled_int8_quant` |
 | V1 | vLLM's fused CUDA kernel (`rms_norm_dynamic_per_token_quant`) |
-| V2 | The issue author's Triton kernel ([AshrithaG/int8-linear](https://github.com/AshrithaG/int8-linear)) |
-| V3 | Our tuned Triton variants (this repo) |
+| V2 | The team's baseline Triton kernel (one row per program), built into `baseline-benchmark/bench_rmsnorm_int8.py`. The issue author's kernel ([AshrithaG/int8-linear](https://github.com/AshrithaG/int8-linear)) can be benchmarked in its place with `--v2-impl` |
+| V3 | Our tuned Triton kernel family (WS3): rows per program, warps per row, persistent grid |
 
 ## Plan
 
@@ -80,11 +80,14 @@ We follow a **benchmark → profile → change → re-benchmark** loop and chang
 ### Timing protocols (reported separately)
 
 - **Warm cache:** median time over CUDA-graph replays after warm-up.
-- **Cold cache:** rotate through complete working sets (input, residual, norm weights, INT8 output and scales) whose total size is far larger than L2. No eviction work happens inside the timed region.
+- **Cold cache:** before every call, write a buffer of at least 8 × L2 (384 MB on the L4) to evict L2, then time that single call. The eviction is outside the timed region. In Nsight Compute, cold means `--cache-control all` (caches flushed before each replay pass).
 
 We confirm cache state with measured L2 hit rates and DRAM traffic rather than inferring it from buffer sizes.
 
-### Metrics (logged to Weights & Biases)
+### Metrics
+
+Saved as CSV and JSON in each workstream's `results/` folder (a Weights & Biases dashboard is planned):
+
 
 - Time per call (µs)
 - Three bandwidth figures, kept separate:
@@ -98,12 +101,12 @@ We confirm cache state with measured L2 hit rates and DRAM traffic rather than i
 
 ## Setup
 
-- **Hardware:** NVIDIA L4 on Google Cloud Platform (Ada, sm_89; 24 GB GDDR6, ~300 GB/s, 48 MB L2, 58 SMs, 72 W). It has the same architecture as the RTX 4090 in vLLM #60499, so the kernel code paths match, but its memory bandwidth is about 3× lower. We therefore compare fused/unfused ratios and break-even token counts with the issue, not absolute µs. Roofline and %-of-peak figures use the L4's own peak bandwidth. The L4 is power-limited (72 W), so we record SM clocks and power during runs. All variants are compared on the same GPU. Other generations (e.g. A6000 sm_86, L40S sm_89, H100 sm_90) are added for cross-GPU comparison if available.
-- **Software:** vLLM (pinned version), PyTorch 2, Triton, CUDA, PyTorch Profiler, Nsight Systems, Nsight Compute, Weights & Biases.
-- **Models:** the Qwen3-1.7B W8A8 INT8 checkpoint used in vLLM #60499 ([`nytopop/Qwen3-1.7B.w8a8`](https://huggingface.co/nytopop/Qwen3-1.7B.w8a8)), so our results are directly comparable, and the BF16 base model ([`Qwen/Qwen3-1.7B`](https://huggingface.co/Qwen/Qwen3-1.7B)) for the precision comparison. Secondary, if compatible and time allows: an 8B-class W8A8 model with hidden size 4096 (e.g. Llama-3.1-8B-Instruct-quantized.w8a8).
+- **Hardware:** NVIDIA L4 on Google Cloud Platform (Ada, sm_89; 24 GB GDDR6, ~300 GB/s, 48 MB L2, 58 SMs, 72 W power limit). It has the same architecture as the RTX 4090 in vLLM #60499, so the kernel code paths match, but its memory bandwidth is about 3× lower. We therefore compare fused/unfused ratios and break-even token counts with the issue, not absolute µs. Roofline and %-of-peak figures use the L4's own peak bandwidth. The L4 is power-limited (72 W): at its 2040 MHz boost clock it hits the power cap under load, so clock locks at 2040 MHz do not hold. Runs log the SM clock and power; the steadiest timings come from a clock below the power limit (1200 MHz, used for WS3 and WS4). All variants are compared on the same GPU. Other generations (e.g. A6000 sm_86, L40S sm_89, H100 sm_90) are added for cross-GPU comparison if available.
+- **Software:** vLLM 0.34.0, PyTorch 2.14.0 (CUDA 13.0 build), Triton 3.8.0, Python 3.13; PyTorch Profiler, Nsight Systems 2025.6, Nsight Compute 2026.1. Weights & Biases is planned for the dashboard.
+- **Models:** the Qwen3-1.7B W8A8 INT8 checkpoint used in vLLM #60499 ([`nytopop/Qwen3-1.7B.w8a8`](https://huggingface.co/nytopop/Qwen3-1.7B.w8a8)), so our results are directly comparable, and the BF16 model ([`Qwen/Qwen3-1.7B`](https://huggingface.co/Qwen/Qwen3-1.7B)) for the precision comparison. Secondary, if compatible and time allows: an 8B-class W8A8 model with hidden size 4096 (e.g. Llama-3.1-8B-Instruct-quantized.w8a8).
 - **Workloads:** offline, non-concurrent runs.
   - Prefill: 8 prompts of 512 tokens, and 1 prompt of 2,048 tokens.
-  - Decode: batch sizes 1, 8 and 64, with 128 output tokens.
+  - Decode: batch sizes 1, 8 and 64, with 128-token prompts and 128 output tokens.
   - We make no claims about concurrent serving.
 - **Accuracy:** WikiText-2 perplexity.
 
@@ -129,44 +132,57 @@ Results cover one operation, one serving system, one main model and up to three 
 
 ```
 .
-├── README.md
+├── README.md                          project overview and guide (this file)
 ├── .gitignore
-├── gpu profling - bottleneck/   Nsight profiling of the fused and unfused kernels
-│   └── results/l4_20261121/     WS2 results on the L4: tables, Nsight Systems reports, bottleneck analysis
-└── vllm-evaluation/             end-to-end vLLM benchmark and integration notes
-    ├── README.md
-    ├── INTEGRATION_PROPOSAL.md
-    ├── run_all.sh
-    ├── setup_env.sh
-    ├── requirements.txt
-    ├── vllm_eval/               bench, profile, reporting, integration
-    ├── results/                 generated measurements (gitignored)
-    └── logs/                    per-step logs (gitignored)
+│
+├── baseline-benchmark/                WS1: baseline implementation and benchmarking
+│   ├── README.md                      variants, how to run, timing method, tolerances, CSV format
+│   ├── bench_rmsnorm_int8.py          V0/V1/V2 wrappers, cross-check, warm/cold CUDA-graph timing
+│   ├── run_l4.sh                      VM driver (venv, optional clock lock, GPU clock/power log)
+│   ├── plot_results.py                latency and speedup plots per dtype / residual / cache mode
+│   ├── plot_l2_crossover.py           one-figure summary: V1/V0 vs. working set
+│   ├── summarize_ws1.py               crossover tables and run-to-run comparison
+│   ├── requirements.txt
+│   └── results/
+│       ├── l4_20261121/               main run: full grid, 1,440 timing rows, 17 plots, write-up
+│       ├── l4_nearL2/                 200-sample rerun near the L2 limit, with GPU clock/power log
+│       └── ws1_summary.md
+│
+├── gpu profling - bottleneck/         WS2: GPU profiling and bottleneck analysis (Nsight Compute / Systems)
+│   ├── README.md                      setup on the L4 VM, the sweep, how to read the tables
+│   ├── run_all.sh, run_l4_vm.sh       end-to-end drivers (counter check → verify → nsys → ncu → tables)
+│   ├── harness/profile_target.py      independent V0/V1 calls (profile, verify, bench)
+│   ├── scripts/                       counter check, Nsight Systems run, Nsight Compute sweep
+│   ├── analysis/                      parse reports, bottleneck note, plots, roofline, Part 1 comparison
+│   ├── slurm/job.sbatch               optional, for a Slurm cluster
+│   └── results/l4_20261121/           tables, 5 plots incl. roofline, Nsight Systems reports,
+│                                      Nsight Compute manifest, logs, bottleneck write-up
+│
+└── vllm-evaluation/                   WS4: model-level evaluation and integration feasibility
+    ├── README.md                      setup, run, and how to read each step
+    ├── INTEGRATION_PROPOSAL.md        where and how a fused kernel would plug into vLLM
+    ├── setup_env.sh, run_all.sh, requirements.txt
+    └── vllm_eval/                     bench (throughput, latency, perplexity), profile (time breakdown),
+                                       reporting (Amdahl, report), integration (scan of installed vLLM)
 ```
 
-## Profiling
+Generated outputs of new runs (`logs/`, `reports/`, `tables/`, `results/` in the toolkit folders) are gitignored; finished runs are archived under each workstream's `results/` folder.
 
-Compare the unfused path (V0) with the fused vLLM kernel (V1) using Nsight Systems and Nsight Compute.
+### Where to start
 
-Guide: [gpu profling - bottleneck/README.md](<gpu profling - bottleneck/README.md>).
+| If you want to… | Read or run |
+|---|---|
+| Understand the problem and plan | [Overview](#overview), [Hypotheses](#hypotheses-to-be-tested-not-assumed), [Plan](#plan) above |
+| See the kernel-level numbers | [WS1 main-run write-up](baseline-benchmark/results/l4_20261121/README.md) |
+| See why V1 is slow | [WS2 bottleneck analysis](<gpu profling - bottleneck/results/l4_20261121/README.md>) |
+| Rerun the kernel benchmark | `cd baseline-benchmark && VLLM_VERSION=0.34.0 bash run_l4.sh` (`--quick` for a smoke test; see its [README](baseline-benchmark/README.md)) |
+| Rerun the profiling | `cd "gpu profling - bottleneck" && bash run_l4_vm.sh` (see its [README](<gpu profling - bottleneck/README.md>)) |
+| Run the end-to-end evaluation | `cd vllm-evaluation && VLLM_VERSION=0.34.0 ./setup_env.sh && source .venv/bin/activate && ./run_all.sh` (`QUICK=1` for a smoke test; see its [README](vllm-evaluation/README.md)) |
+| Regenerate plots from committed data (no GPU) | `python baseline-benchmark/plot_l2_crossover.py baseline-benchmark/results/l4_20261121`, `python "gpu profling - bottleneck/analysis/make_plots.py"`, `python "gpu profling - bottleneck/analysis/make_roofline.py"` |
 
-**Results (L4, 2026-11-21):** [bottleneck analysis and tables](<gpu profling - bottleneck/results/l4_20261121/README.md>). V1 is 1.4–2.35× slower than V0 only when the data is already in L2; when data comes from DRAM it is 0.59–0.85× (faster), because it moves about 35% fewer bytes. Its slowdown comes from narrower loads, about 2.3× the instructions, a 66.7% occupancy cap from 1024-thread blocks, and block-wide barrier stalls.
+### Running on the L4 VM
 
-```bash
-cd "gpu profling - bottleneck"
-./run_all.sh
-```
-
-## vLLM evaluation
-
-Measure how much of Qwen3-1.7B inference on an NVIDIA L4 is RMSNorm and activation quantization, bound the end-to-end gain with Amdahl's law, and map where a fused kernel would plug into vLLM.
-
-Guide: [vllm-evaluation/README.md](vllm-evaluation/README.md).
-
-```bash
-cd vllm-evaluation
-VLLM_VERSION=<team-pinned-version> ./setup_env.sh
-source .venv/bin/activate
-python -m vllm_eval.reporting.selftest
-QUICK=1 ./run_all.sh
-```
+1. Create a Google Cloud `g2-standard-*` VM (one L4) from a Deep Learning VM image with CUDA, and at least 100 GB of disk.
+2. `git clone` this repository on the VM, so the shell scripts keep their Linux line endings.
+3. Each workstream's README has the exact setup. The kernel benchmark and the profiling share one vLLM environment; profiling also needs Nsight Compute and Nsight Systems and permission to read GPU counters (run with `sudo`, or set `NVreg_RestrictProfilingToAdminUsers=0`).
+4. Stop the VM when done; a stopped VM only costs its disk.

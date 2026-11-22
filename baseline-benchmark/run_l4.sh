@@ -7,7 +7,8 @@
 # Env knobs:
 #   VLLM_VERSION=0.x.y   pin vLLM (recommended: whole team uses the same one)
 #   USE_VENV=0           use the current python env instead of ./.venv (e.g. a conda env that already has vllm)
-#   LOCK_CLOCKS=1        lock SM clocks with sudo nvidia-smi for steadier numbers
+#   LOCK_CLOCKS=1        request the max SM clock with sudo nvidia-smi. On the L4 the 72 W power cap still lowers it
+#                        under load; for steady timings lock a clock below the power limit (e.g. 1200 MHz)
 #   OUT=dir              output dir (default results_l4)
 # Any extra args go to bench_rmsnorm_int8.py (see: python bench_rmsnorm_int8.py --help).
 set -euo pipefail

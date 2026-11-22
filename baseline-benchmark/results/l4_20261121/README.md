@@ -38,6 +38,10 @@ Command: `python bench_rmsnorm_int8.py --residual both --out-dir results_l4` (al
 
 ## Performance (`bench_results.csv`, plots in `plots/`)
 
+![V1/V0 vs. working set](plots/l2_crossover.png)
+
+Plotted against the working set of one call (5 bytes × T × H), all four hidden sizes follow the same pattern: V1 is slower only for working sets of roughly 1–48 MB. Below about 1 MB (T ≤ 32), V1 is faster because a single fused launch beats two small ones. Above 48 MB, the data no longer fits in L2 and V1 is faster because it moves fewer bytes. Regenerate with `python plot_l2_crossover.py results/l4_20261121`.
+
 **V1 / V0 time, BF16, residual add (>1 means V1 is slower):**
 
 | Cache | H | T=1 | 64 | 128 | 256 | 1024 | 2048 | 4096 | 8192 | 16384 |
@@ -89,4 +93,4 @@ The largest slowdown is V1 at 2.82× V0's time (BF16, no residual, warm, H=2048,
 | `correctness.csv` | 1,440 correctness comparisons |
 | `env.json` | GPU, software versions, all arguments and tolerances |
 | `run.log` | Console log of the runs on the VM, including environment setup |
-| `plots/` | Latency vs. tokens and speedup vs. V0, per dtype × residual × cache mode (16 PNGs) |
+| `plots/` | Latency vs. tokens and speedup vs. V0, per dtype × residual × cache mode (16 PNGs), plus `l2_crossover.png` |
