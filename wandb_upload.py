@@ -13,7 +13,7 @@ Each run gets: config (from env.json), every CSV as a W&B Table, every PNG as an
 run summary, a few native line charts, and the whole folder as a versioned artifact.
 
 Usage (from the repo root, on any machine; no GPU needed):
-  pip install wandb pandas
+  pip install wandb pandas pillow
   wandb login                      # paste your API key from https://wandb.ai/authorize
   python wandb_upload.py --entity <team-or-username> --project hpml-int8
   python wandb_upload.py --dry-run # show what would be logged, without W&B
@@ -142,6 +142,7 @@ def main():
     if not a.dry_run:
         import wandb
 
+    project_url = None
     for name, group, rel in FOLDERS:
         if a.only and name not in a.only:
             continue
@@ -186,9 +187,10 @@ def main():
                 art.add_file(f, name=os.path.relpath(f, folder))
         run.log_artifact(art)
         print(f"    -> {run.url}")
+        project_url = run.url.split("/runs/")[0]
         run.finish()
-    if not a.dry_run:
-        print(f"\nProject: https://wandb.ai/{a.entity or '<your-entity>'}/{a.project}")
+    if project_url:
+        print(f"\nProject: {project_url}")
 
 
 if __name__ == "__main__":
