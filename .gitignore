@@ -56,3 +56,5 @@ slurm-*.out
 !gpu profling - bottleneck/results/**/*.kern_sum.csv
 !gpu profling - bottleneck/results/**/*.log
 !baseline-benchmark/results/**/*.log
+wandb/
+.wbenv/
