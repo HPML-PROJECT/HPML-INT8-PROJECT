@@ -79,12 +79,7 @@ gains of 1.5–2× (Parts 1 and 3) shrink to a few percent end to end, because I
 - Validation: the kernel-count check (2 fewer launches per layer), PPL, and prefill/decode speed with and without it.
 
 ## Caveats
-- **W8A8 PPL is lower than BF16 (16.40 vs 16.70).** That is unexpected, since quantization usually adds error. The
-  evaluation itself is consistent: same tokens, same 146 windows, same scoring. The most likely cause is that **the
-  two checkpoints are not the same model**, for example the W8A8 one quantized from `Qwen3-1.7B-Base` rather than the
-  post-trained `Qwen3-1.7B`. Calibration data close to WikiText is another possibility. **Check `base_model` on the
-  W8A8 checkpoint's Hugging Face page before claiming "no accuracy loss".** Until then, report the two PPLs without
-  attributing the difference to quantization.
+- **W8A8 PPL is lower than BF16 (16.40 vs 16.70, −1.8%).** That is unexpected, since quantization usually adds error. The evaluation itself is consistent: same tokens, same 146 windows, same scoring. The checkpoints are not mismatched: the Hugging Face model tree shows the W8A8 checkpoint is quantized from `Qwen/Qwen3-1.7B`, the same post-trained model used for BF16. A possible cause is calibration data close to WikiText's style; we did not verify this. Report the two PPLs as measured, and do not claim that INT8 improves accuracy.
 - **The end-to-end baseline is not WS1's V0.** In compiled mode, vLLM's CUDA RMSNorm kernel is replaced by an
   Inductor Triton kernel (residual add + RMSNorm). Only the INT8 quant kernel is the same as in V0 (112 launches per
   forward pass, 4 per layer). Kernel-level speedups from WS1/WS3 therefore do not transfer one-to-one. The eager-mode
